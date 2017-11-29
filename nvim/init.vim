@@ -7,6 +7,8 @@ endif
 let s:dein_dir = expand('~/.cache/dein')
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
+set runtimepath+=~/.cache/dein/github.com/nixprime/cpsm
+
 " なければgit clone
 if !isdirectory(s:dein_repo_dir)
 	execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
@@ -20,17 +22,29 @@ if dein#load_state(s:dein_dir)
 	call dein#add('Shougo/dein.vim')
 	call dein#add('Shougo/deoplete.nvim')
 	call dein#add('Shougo/denite.nvim')
+	call dein#add('nixprime/cpsm', {'build' : 'env PY3=ON ./install.sh'})
+
 	call dein#add('Shougo/neomru.vim')
 	call dein#add('Shougo/neoyank.vim')
 
-	call dein#add('carlitux/deoplete-ternjs', {'depends': ['deoplete.nvim'], 'build': { 'mac': 'npm install -g tern', 'unix': 'npm install -g tern' }})
+	call dein#add('Shougo/neosnippet.vim')
+	call dein#add('Shougo/neosnippet-snippets')
+
+	call dein#add('ternjs/tern_for_vim', {'build': 'npm install'})
+	call dein#add('carlitux/deoplete-ternjs', {'depends': ['deoplete.nvim']})
+
+	call dein#add('lvht/phpcd.vim', {'build': 'composer install'})
+
+	" call dein#add('tpope/vim-fugitive')
+
 	call dein#add('kana/vim-textobj-user')
 	call dein#add('kana/vim-operator-user')
+	call dein#add('thinca/vim-zenspace')
 
 	call dein#add('rhysd/vim-textobj-anyblock')
 	call dein#add('rhysd/vim-operator-surround')
 	call dein#add('rhysd/clever-f.vim')
-	call dein#add('ctrlpvim/ctrlp.vim')
+
 	call dein#add('Shougo/neco-syntax')
 	call dein#add('Shougo/context_filetype.vim')
 	call dein#add('tomtom/tcomment_vim')
@@ -41,7 +55,9 @@ if dein#load_state(s:dein_dir)
 	call dein#add('haya14busa/incsearch.vim')
 
 	call dein#add('itchyny/lightline.vim')
-	call dein#add('mgee/lightline-bufferline')
+	" call dein#add('mgee/lightline-bufferline')
+	call dein#add('taohex/lightline-buffer')
+
 	call dein#add('othree/html5.vim')
 	call dein#add('othree/yajs.vim')
 	call dein#add('dag/vim-fish')
@@ -70,21 +86,30 @@ set background=dark
 set t_Co=256
 colorscheme spring-night
 
+
+" deoplete 
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#auto_complete_delay = 0
-let g:deoplete#auto_complete_start_length = 1
-let g:deoplete#enable_camel_case = 0
-let g:deoplete#enable_ignore_case = 0
-let g:deoplete#enable_refresh_always = 0
-let g:deoplete#enable_smart_case = 1
-let g:deoplete#file#enable_buffer_path = 1
-let g:deoplete#max_list = 10000
+" let g:deoplete#auto_complete_delay = 0
+" let g:deoplete#auto_complete_start_length = 1
+" let g:deoplete#enable_camel_case = 0
+" let g:deoplete#enable_ignore_case = 0
+" let g:deoplete#enable_refresh_always = 0
+" let g:deoplete#enable_smart_case = 1
+" let g:deoplete#file#enable_buffer_path = 1
+" let g:deoplete#max_list = 10000
+
+let g:deoplete#ignore_sources = get(g:, 'deoplete#ignore_sources', {})
+let g:deoplete#ignore_sources.php = ['phpcd', 'omni']
 
 " <TAB>: completion.
-inoremap <silent><expr> <TAB>
+inoremap <expr> <TAB>
 			\ pumvisible() ? "\<C-n>" :
 			\ <SID>check_back_space() ? "\<TAB>" :
 			\ deoplete#manual_complete()
+
+" \ neosnippet#expandable_or_jumpable() ? 
+" \ "\<Plug>(neosnippet_expand_or_jump)" : 
+
 function! s:check_back_space() abort "{{{
 	let col = col('.') - 1
 	return !col || getline('.')[col - 1]  =~ '\s'
@@ -96,6 +121,8 @@ inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<C-h>"
 " <BS>: close popup and delete backword char.
 inoremap <expr><BS> deoplete#smart_close_popup()."\<C-h>"
 
+" inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
 " multiple cursor and deoplete
 function! Multiple_cursors_before()
 	let b:deoplete_disable_auto_complete = 1
@@ -104,6 +131,21 @@ endfunction
 function! Multiple_cursors_after()
 	let b:deoplete_disable_auto_complete = 0
 endfunction
+
+" Snipppets -----------------------------------------------------------------{{{
+" Enable snipMate compatibility feature.
+" let g:neosnippet#enable_completed_snippet = 1
+" let g:neosnippet#enable_snipmate_compatibility = 1
+" let g:neosnippet#expand_word_boundary = 1
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" For conceal markers.
+" if has('conceal')
+"   set conceallevel=2 concealcursor=niv
+" endif
+"}}}
 
 " Leader to space key 
 let mapleader = "\<Space>"
@@ -116,6 +158,8 @@ set noexpandtab
 set noundofile
 set showmatch
 set matchtime=1
+
+set clipboard=unnamed
 
 "" insertモードrを抜ける 
 inoremap <silent> jj <ESC>
@@ -156,16 +200,77 @@ map <silent>sd <Plug>(operator-surround-delete)
 map <silent>sr <Plug>(operator-surround-replace)
 
 " lineline-bufferline 
-let g:lightline#bufferline#show_number  = 1
-let g:lightline#bufferline#shorten_path = 0
-let g:lightline#bufferline#unnamed      = '[No Name]'
+" let g:lightline#bufferline#show_number  = 1
+" let g:lightline#bufferline#shorten_path = 0
+" let g:lightline#bufferline#unnamed      = '[No Name]'
+" let g:lightline                  = {}
+" let g:lightline.tabline          = {'left': [['buffers']], 'right': [['close']]}
+" let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
+" let g:lightline.component_type   = {'buffers': 'tabsel'}
 
-let g:lightline                  = {}
-let g:lightline.tabline          = {'left': [['buffers']], 'right': [['close']]}
-let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
-let g:lightline.component_type   = {'buffers': 'tabsel'}
+set hidden  " allow buffer switching without saving
+set showtabline=2  " always show tabline
+
+" use lightline-buffer in lightline
+let g:lightline = {
+    \ 'tabline': {
+    \   'left': [ [ 'bufferinfo' ],
+    \             [ 'separator' ],
+    \             [ 'bufferbefore', 'buffercurrent', 'bufferafter' ], ],
+    \   'right': [ [ 'close' ], ],
+    \ },
+    \ 'component_expand': {
+    \   'buffercurrent': 'lightline#buffer#buffercurrent',
+    \   'bufferbefore': 'lightline#buffer#bufferbefore',
+    \   'bufferafter': 'lightline#buffer#bufferafter',
+    \ },
+    \ 'component_type': {
+    \   'buffercurrent': 'tabsel',
+    \   'bufferbefore': 'raw',
+    \   'bufferafter': 'raw',
+    \ },
+    \ 'component_function': {
+    \   'bufferinfo': 'lightline#buffer#bufferinfo',
+    \ },
+    \ 'component': {
+    \   'separator': '',
+    \ },
+    \ }
+
+" remap arrow keys
+nnoremap <Left> :bprev<CR>
+nnoremap <Right> :bnext<CR>
+
+" lightline-buffer ui settings
+" replace these symbols with ascii characters if your environment does not support unicode
+let g:lightline_buffer_logo = ' '
+let g:lightline_buffer_readonly_icon = ''
+let g:lightline_buffer_modified_icon = '✭'
+let g:lightline_buffer_git_icon = ' '
+let g:lightline_buffer_ellipsis_icon = '..'
+let g:lightline_buffer_expand_left_icon = '◀ '
+let g:lightline_buffer_expand_right_icon = ' ▶'
+let g:lightline_buffer_active_buffer_left_icon = ''
+let g:lightline_buffer_active_buffer_right_icon = ''
+let g:lightline_buffer_separator_icon = '  '
+
+" lightline-buffer function settings
+let g:lightline_buffer_show_bufnr = 1
+let g:lightline_buffer_rotate = 0
+let g:lightline_buffer_fname_mod = ':t'
+let g:lightline_buffer_excludes = ['vimfiler']
+
+let g:lightline_buffer_maxflen = 30
+let g:lightline_buffer_maxfextlen = 3
+let g:lightline_buffer_minflen = 16
+let g:lightline_buffer_minfextlen = 3
+let g:lightline_buffer_reservelen = 20
+
 
 " :h g:incsearch#auto_nohlsearch
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
 set hlsearch
 let g:incsearch#auto_nohlsearch = 1
 map n  <Plug>(incsearch-nohl-n)
@@ -174,6 +279,27 @@ map *  <Plug>(incsearch-nohl-*)
 map #  <Plug>(incsearch-nohl-#)
 map g* <Plug>(incsearch-nohl-g*)
 map g# <Plug>(incsearch-nohl-g#)
+
+" Denite 
+" call denite#custom#var('file_rec', 'command', ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+call denite#custom#source('file_rec', 'matchers', ['matcher_cpsm'])
+" call denite#custom#var('grep', 'command', ['ag'])
+" call denite#custom#var('grep', 'recursive_opts', [])
+" call denite#custom#var('grep', 'pattern_opt', [])
+" call denite#custom#var('grep', 'default_opts', ['--follow', '--no-group', '--no-color'])
+nmap <silent> <C-u><C-t> :<C-u>Denite filetype<CR>
+nmap <silent> <C-u><C-p> :<C-u>Denite -default-action=vsplit file_rec<CR>
+nmap <silent> <C-u><C-j> :<C-u>Denite line<CR>
+nmap <silent> <C-u><C-g> :<C-u>Denite grep<CR>
+nmap <silent> <C-u><C-]> :<C-u>DeniteCursorWord grep<CR>
+nmap <silent> <C-u><C-u> :<C-u>Denite file_mru<CR>
+nmap <silent> <C-u><C-y> :<C-u>Denite neoyank<CR>
+nmap <silent> <C-u><C-r> :<C-u>Denite -resume<CR>
+nmap <silent> <C-u>; :<C-u>Denite -resume -immediately -select=+1<CR>
+nmap <silent> <C-u>- :<C-u>Denite -resume -immediately -select=-1<CR>
+nmap <silent> <C-u><C-d> :<C-u>call denite#start([{'name': 'file_rec', 'args': ['~/dotfiles']}])<CR>
+nnoremap ml :<C-u>call denite#start([{'name': 'file_rec', 'args': [g:memolist_path]}])<CR>
+
 
 "" 日本語エンコード関連
 if &encoding !=# 'utf-8'
