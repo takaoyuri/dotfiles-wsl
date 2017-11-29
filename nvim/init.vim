@@ -27,15 +27,10 @@ if dein#load_state(s:dein_dir)
 	call dein#add('Shougo/neomru.vim')
 	call dein#add('Shougo/neoyank.vim')
 
-	call dein#add('Shougo/neosnippet.vim')
-	call dein#add('Shougo/neosnippet-snippets')
-
 	call dein#add('ternjs/tern_for_vim', {'build': 'npm install'})
 	call dein#add('carlitux/deoplete-ternjs', {'depends': ['deoplete.nvim']})
 
 	call dein#add('lvht/phpcd.vim', {'build': 'composer install'})
-
-	" call dein#add('tpope/vim-fugitive')
 
 	call dein#add('kana/vim-textobj-user')
 	call dein#add('kana/vim-operator-user')
@@ -55,7 +50,6 @@ if dein#load_state(s:dein_dir)
 	call dein#add('haya14busa/incsearch.vim')
 
 	call dein#add('itchyny/lightline.vim')
-	" call dein#add('mgee/lightline-bufferline')
 	call dein#add('taohex/lightline-buffer')
 
 	call dein#add('othree/html5.vim')
