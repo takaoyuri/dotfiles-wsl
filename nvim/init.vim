@@ -27,10 +27,18 @@ if dein#load_state(s:dein_dir)
 	call dein#add('Shougo/neomru.vim')
 	call dein#add('Shougo/neoyank.vim')
 
+	call dein#add('Shougo/deol.nvim')
+
+	call dein#add('Shougo/vimproc.vim', {'build': 'make'})
+
 	call dein#add('ternjs/tern_for_vim', {'build': 'npm install'})
 	call dein#add('carlitux/deoplete-ternjs', {'depends': ['deoplete.nvim']})
+	call dein#add('othree/jspc.vim')
 
 	call dein#add('lvht/phpcd.vim', {'build': 'composer install'})
+
+	call dein#add('SirVer/ultisnips')
+	call dein#add('honza/vim-snippets')
 
 	call dein#add('kana/vim-textobj-user')
 	call dein#add('kana/vim-operator-user')
@@ -81,28 +89,35 @@ set t_Co=256
 colorscheme spring-night
 
 
+" Ultisnip
+let g:UltiSnipsExpandTrigger="<C-j>"
+
 " deoplete 
+set completeopt=longest,preview
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#auto_complete_start_length = 1
 " let g:deoplete#auto_complete_delay = 0
-" let g:deoplete#auto_complete_start_length = 1
 " let g:deoplete#enable_camel_case = 0
 " let g:deoplete#enable_ignore_case = 0
 " let g:deoplete#enable_refresh_always = 0
 " let g:deoplete#enable_smart_case = 1
 " let g:deoplete#file#enable_buffer_path = 1
 " let g:deoplete#max_list = 10000
+" let g:deoplete#ignore_sources = get(g:, 'deoplete#ignore_sources', {})
+" let g:deoplete#ignore_sources.php = ['phpcd', 'omni']
+" let g:deoplete#sources = {}
+" let g:deoplete#sources['javascript'] = ['file', 'ultisnips', 'ternjs']
+"
+let g:tern#command = ['tern']
+let g:tern#arguments = ['--persistent']
 
-let g:deoplete#ignore_sources = get(g:, 'deoplete#ignore_sources', {})
-let g:deoplete#ignore_sources.php = ['phpcd', 'omni']
+call deoplete#custom#set('ultisnips', 'matchers', ['matcher_fuzzy'])
 
 " <TAB>: completion.
 inoremap <expr> <TAB>
 			\ pumvisible() ? "\<C-n>" :
 			\ <SID>check_back_space() ? "\<TAB>" :
 			\ deoplete#manual_complete()
-
-" \ neosnippet#expandable_or_jumpable() ? 
-" \ "\<Plug>(neosnippet_expand_or_jump)" : 
 
 function! s:check_back_space() abort "{{{
 	let col = col('.') - 1
