@@ -88,7 +88,6 @@ set background=dark
 set t_Co=256
 colorscheme spring-night
 
-
 " Ultisnip
 let g:UltiSnipsExpandTrigger="<C-j>"
 
@@ -130,8 +129,6 @@ inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<C-h>"
 " <BS>: close popup and delete backword char.
 inoremap <expr><BS> deoplete#smart_close_popup()."\<C-h>"
 
-" inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
 " multiple cursor and deoplete
 function! Multiple_cursors_before()
 	let b:deoplete_disable_auto_complete = 1
@@ -140,21 +137,6 @@ endfunction
 function! Multiple_cursors_after()
 	let b:deoplete_disable_auto_complete = 0
 endfunction
-
-" Snipppets -----------------------------------------------------------------{{{
-" Enable snipMate compatibility feature.
-" let g:neosnippet#enable_completed_snippet = 1
-" let g:neosnippet#enable_snipmate_compatibility = 1
-" let g:neosnippet#expand_word_boundary = 1
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-" For conceal markers.
-" if has('conceal')
-"   set conceallevel=2 concealcursor=niv
-" endif
-"}}}
 
 " Leader to space key 
 let mapleader = "\<Space>"
@@ -208,19 +190,9 @@ map <silent>sa <Plug>(operator-surround-append)
 map <silent>sd <Plug>(operator-surround-delete)
 map <silent>sr <Plug>(operator-surround-replace)
 
-" lineline-bufferline 
-" let g:lightline#bufferline#show_number  = 1
-" let g:lightline#bufferline#shorten_path = 0
-" let g:lightline#bufferline#unnamed      = '[No Name]'
-" let g:lightline                  = {}
-" let g:lightline.tabline          = {'left': [['buffers']], 'right': [['close']]}
-" let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
-" let g:lightline.component_type   = {'buffers': 'tabsel'}
-
 set hidden  " allow buffer switching without saving
 set showtabline=2  " always show tabline
 
-" use lightline-buffer in lightline
 let g:lightline = {
 			\ 'tabline': {
 			\   'left': [ [ 'bufferinfo' ],
