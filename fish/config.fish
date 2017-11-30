@@ -10,8 +10,8 @@ if [ -f $HOME/.config/fish/aliases.fish ]
 	. $HOME/.config/fish/aliases.fish
 end
 
-eval (thefuck --alias | tr '
-' ';')
+#eval (thefuck --alias | tr '
+#' ';')
 
 function fish_prompt
 	if [ $status -eq 0 ]
