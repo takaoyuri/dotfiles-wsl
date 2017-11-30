@@ -222,29 +222,29 @@ set showtabline=2  " always show tabline
 
 " use lightline-buffer in lightline
 let g:lightline = {
-    \ 'tabline': {
-    \   'left': [ [ 'bufferinfo' ],
-    \             [ 'separator' ],
-    \             [ 'bufferbefore', 'buffercurrent', 'bufferafter' ], ],
-    \   'right': [ [ 'close' ], ],
-    \ },
-    \ 'component_expand': {
-    \   'buffercurrent': 'lightline#buffer#buffercurrent',
-    \   'bufferbefore': 'lightline#buffer#bufferbefore',
-    \   'bufferafter': 'lightline#buffer#bufferafter',
-    \ },
-    \ 'component_type': {
-    \   'buffercurrent': 'tabsel',
-    \   'bufferbefore': 'raw',
-    \   'bufferafter': 'raw',
-    \ },
-    \ 'component_function': {
-    \   'bufferinfo': 'lightline#buffer#bufferinfo',
-    \ },
-    \ 'component': {
-    \   'separator': '',
-    \ },
-    \ }
+			\ 'tabline': {
+			\   'left': [ [ 'bufferinfo' ],
+			\             [ 'separator' ],
+			\             [ 'bufferbefore', 'buffercurrent', 'bufferafter' ], ],
+			\   'right': [ [ 'close' ], ],
+			\ },
+			\ 'component_expand': {
+			\   'buffercurrent': 'lightline#buffer#buffercurrent',
+			\   'bufferbefore': 'lightline#buffer#bufferbefore',
+			\   'bufferafter': 'lightline#buffer#bufferafter',
+			\ },
+			\ 'component_type': {
+			\   'buffercurrent': 'tabsel',
+			\   'bufferbefore': 'raw',
+			\   'bufferafter': 'raw',
+			\ },
+			\ 'component_function': {
+			\   'bufferinfo': 'lightline#buffer#bufferinfo',
+			\ },
+			\ 'component': {
+			\   'separator': '',
+			\ },
+			\ }
 
 " remap arrow keys
 nnoremap <Left> :bprev<CR>
@@ -291,11 +291,12 @@ map g# <Plug>(incsearch-nohl-g#)
 
 " Denite 
 " call denite#custom#var('file_rec', 'command', ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
-call denite#custom#source('file_rec', 'matchers', ['matcher_cpsm'])
 " call denite#custom#var('grep', 'command', ['ag'])
 " call denite#custom#var('grep', 'recursive_opts', [])
 " call denite#custom#var('grep', 'pattern_opt', [])
 " call denite#custom#var('grep', 'default_opts', ['--follow', '--no-group', '--no-color'])
+"
+call denite#custom#source('file_rec', 'matchers', ['matcher_cpsm'])
 nmap <silent> <C-u><C-t> :<C-u>Denite filetype<CR>
 nmap <silent> <C-u><C-p> :<C-u>Denite -default-action=vsplit file_rec<CR>
 nmap <silent> <C-u><C-j> :<C-u>Denite line<CR>
@@ -308,7 +309,6 @@ nmap <silent> <C-u>; :<C-u>Denite -resume -immediately -select=+1<CR>
 nmap <silent> <C-u>- :<C-u>Denite -resume -immediately -select=-1<CR>
 nmap <silent> <C-u><C-d> :<C-u>call denite#start([{'name': 'file_rec', 'args': ['~/dotfiles']}])<CR>
 nnoremap ml :<C-u>call denite#start([{'name': 'file_rec', 'args': [g:memolist_path]}])<CR>
-
 
 "" 日本語エンコード関連
 if &encoding !=# 'utf-8'
