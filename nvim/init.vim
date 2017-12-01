@@ -86,9 +86,6 @@ endif
 filetype plugin indent on
 syntax enable
 
-set background=dark
-set t_Co=256
-colorscheme spring-night
 
 " Ultisnip
 let g:UltiSnipsExpandTrigger="<C-j>"
@@ -143,6 +140,11 @@ endfunction
 " Leader to space key 
 let mapleader = "\<Space>"
 
+set background=dark
+set t_Co=256
+set termguicolors
+colorscheme spring-night
+
 set number
 set tabstop=2
 set softtabstop=2
@@ -151,6 +153,9 @@ set noexpandtab
 set noundofile
 set showmatch
 set matchtime=1
+set cursorline
+set cursorcolumn
+set smartindent
 
 set clipboard=unnamed
 
