@@ -6,6 +6,7 @@ set --export EDITOR "nvim"
 # make Vim usable with git
 set --export GIT_EDITOR "nvim"
 
+# alias
 if [ -f $HOME/.config/fish/aliases.fish ]
 	. $HOME/.config/fish/aliases.fish
 end
@@ -15,9 +16,6 @@ if [ -f $HOME/.pyenv/bin ]
 	set -x PATH $HOME/.pyenv/bin $PATH
 	. (pyenv init -l psub)
 end
-
-#eval (thefuck --alias | tr '
-#' ';')
 
 function fish_prompt
 	if [ $status -eq 0 ]
