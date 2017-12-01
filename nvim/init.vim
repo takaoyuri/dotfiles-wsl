@@ -63,13 +63,15 @@ if dein#load_state(s:dein_dir)
 	call dein#add('othree/html5.vim')
 	call dein#add('othree/yajs.vim')
 	call dein#add('dag/vim-fish')
-	call dein#add('neomake/neomake')
+	" call dein#add('neomake/neomake')
 	call dein#add('cohama/lexima.vim')
 	call dein#add('chrisbra/Colorizer')
 	call dein#add('yuttie/comfortable-motion.vim')
 	call dein#add('osyo-manga/vim-over')
 
 	call dein#add('lambdalisue/gina.vim')
+
+	call dein#add('w0rp/ale')
 
 	"" color
 	call dein#add('rhysd/vim-color-spring-night')
@@ -188,8 +190,8 @@ let g:indentLine_concealcursor="nc"
 set list lcs=tab:\|\ 
 
 " neomake 
-autocmd! BufWritePost * Neomake
-let g:neomake_php_enabled_makers = ['php']
+" autocmd! BufWritePost * Neomake
+" let g:neomake_php_enabled_makers = ['php']
 
 " vim operator-surround 
 " operator mappings
