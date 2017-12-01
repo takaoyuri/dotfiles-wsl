@@ -11,8 +11,10 @@ if [ -f $HOME/.config/fish/aliases.fish ]
 end
 
 # pyenv 
-set -x PATH $HOME/.pyenv/bin $PATH
-. (pyenv init -l psub)
+if [ -f $HOME/.pyenv/bin ]
+	set -x PATH $HOME/.pyenv/bin $PATH
+	. (pyenv init -l psub)
+end
 
 #eval (thefuck --alias | tr '
 #' ';')
