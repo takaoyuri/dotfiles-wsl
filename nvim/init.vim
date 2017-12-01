@@ -69,6 +69,8 @@ if dein#load_state(s:dein_dir)
 	call dein#add('yuttie/comfortable-motion.vim')
 	call dein#add('osyo-manga/vim-over')
 
+	call dein#add('lambdalisue/gina.vim')
+
 	"" color
 	call dein#add('rhysd/vim-color-spring-night')
 
