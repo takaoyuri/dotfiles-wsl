@@ -153,8 +153,8 @@ set noexpandtab
 set noundofile
 set showmatch
 set matchtime=1
-set cursorline
-set cursorcolumn
+" set cursorline
+" set cursorcolumn
 set smartindent
 
 set clipboard=unnamed
