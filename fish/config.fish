@@ -17,6 +17,9 @@ if [ -f $HOME/.pyenv/bin ]
 	. (pyenv init -l psub)
 end
 
+# $DISPLAY
+set -x DISPLAY localhost:0.0
+
 function fish_prompt
 	if [ $status -eq 0 ]
 		set status_face (set_color green -b black)"_・)< "(set_color -b normal)
