@@ -29,7 +29,7 @@ if dein#load_state(s:dein_dir)
 
 	call dein#add('Shougo/deol.nvim')
 
-	call dein#add('Shougo/vimproc.vim', {'build': 'make'})
+	" call dein#add('Shougo/vimproc.vim', {'build': 'make'})
 
 	call dein#add('ternjs/tern_for_vim', {'build': 'npm install'})
 	call dein#add('carlitux/deoplete-ternjs', {'depends': ['deoplete.nvim']})
@@ -271,7 +271,7 @@ map g* <Plug>(incsearch-nohl-g*)
 map g# <Plug>(incsearch-nohl-g#)
 
 " Denite 
-call denite#custom#option('default', 'prompt', '>')
+" call denite#custom#option('default', 'prompt', '>')
 call denite#custom#source('file_rec', 'matchers', ['matcher_cpsm'])
 
 call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>')
@@ -294,7 +294,7 @@ nmap <silent> <C-u><C-t> :<C-u>Denite filetype<CR>
 nmap <silent> <C-u><C-p> :<C-u>Denite file_rec<CR>
 nmap <silent> <C-u><C-j> :<C-u>Denite line<CR>
 nmap <silent> <C-u><C-g> :<C-u>Denite grep<CR>
-nmap <silent> <C-u><C-c><C-g> :<C-u>DeniteCursorWord grep<CR>
+nmap <silent> <C-u><C-c> :<C-u>DeniteCursorWord grep<CR>
 nmap <silent> <C-u><C-u> :<C-u>Denite file_mru<CR>
 nmap <silent> <C-u><C-y> :<C-u>Denite neoyank<CR>
 nmap <silent> <C-u><C-r> :<C-u>Denite -resume<CR>
