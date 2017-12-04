@@ -271,18 +271,30 @@ map g* <Plug>(incsearch-nohl-g*)
 map g# <Plug>(incsearch-nohl-g#)
 
 " Denite 
-" call denite#custom#var('file_rec', 'command', ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
-" call denite#custom#var('grep', 'command', ['ag'])
-" call denite#custom#var('grep', 'recursive_opts', [])
-" call denite#custom#var('grep', 'pattern_opt', [])
-" call denite#custom#var('grep', 'default_opts', ['--follow', '--no-group', '--no-color'])
-"
+call denite#custom#option('default', 'prompt', '>')
 call denite#custom#source('file_rec', 'matchers', ['matcher_cpsm'])
+
+call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>')
+call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>')
+
+call denite#custom#map('insert', '<C-t>', '<denite:do_action:tabopen>')
+call denite#custom#map('insert', '<C-v>', '<denite:do_action:vsplit>')
+call denite#custom#map('normal', 'v', '<denite:do_action:vsplit>')
+
+call denite#custom#map('insert', 'jj', '<denite:enter_mode:normal>')
+
+" ctrlp
+nnoremap <silent> <C-p> :<C-u>Denite file_rec<CR>
+" cursor word grep
+nnoremap <silent> ;cg :<C-u>DeniteCursorWord grep -buffer-name=search line<CR><C-R><C-W><CR>
+" grep
+nnoremap <silent> ;g :<C-u>Denite -buffer-name=search -mode=normal grep<CR>
+
 nmap <silent> <C-u><C-t> :<C-u>Denite filetype<CR>
-nmap <silent> <C-u><C-p> :<C-u>Denite -default-action=vsplit file_rec<CR>
+nmap <silent> <C-u><C-p> :<C-u>Denite file_rec<CR>
 nmap <silent> <C-u><C-j> :<C-u>Denite line<CR>
 nmap <silent> <C-u><C-g> :<C-u>Denite grep<CR>
-nmap <silent> <C-u><C-]> :<C-u>DeniteCursorWord grep<CR>
+nmap <silent> <C-u><C-c><C-g> :<C-u>DeniteCursorWord grep<CR>
 nmap <silent> <C-u><C-u> :<C-u>Denite file_mru<CR>
 nmap <silent> <C-u><C-y> :<C-u>Denite neoyank<CR>
 nmap <silent> <C-u><C-r> :<C-u>Denite -resume<CR>
