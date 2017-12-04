@@ -88,7 +88,6 @@ endif
 filetype plugin indent on
 syntax enable
 
-
 " Ultisnip
 let g:UltiSnipsExpandTrigger="<C-j>"
 
@@ -147,6 +146,7 @@ set t_Co=256
 set termguicolors
 colorscheme spring-night
 
+set hidden  " allow buffer switching without saving
 set number
 set tabstop=2
 set softtabstop=2
@@ -154,9 +154,8 @@ set shiftwidth=2
 set noexpandtab
 set noundofile
 set showmatch
+set showtabline=2  " always show tabline
 set matchtime=1
-" set cursorline
-" set cursorcolumn
 set smartindent
 
 set clipboard=unnamed
@@ -189,18 +188,12 @@ let g:indentLine_setColors=111
 let g:indentLine_concealcursor="nc"
 set list lcs=tab:\|\ 
 
-" neomake 
-" autocmd! BufWritePost * Neomake
-" let g:neomake_php_enabled_makers = ['php']
-
 " vim operator-surround 
 " operator mappings
 map <silent>sa <Plug>(operator-surround-append)
 map <silent>sd <Plug>(operator-surround-delete)
 map <silent>sr <Plug>(operator-surround-replace)
 
-set hidden  " allow buffer switching without saving
-set showtabline=2  " always show tabline
 
 let g:lightline = {
 			\ 'tabline': {
@@ -255,7 +248,6 @@ let g:lightline_buffer_maxfextlen = 3
 let g:lightline_buffer_minflen = 16
 let g:lightline_buffer_minfextlen = 3
 let g:lightline_buffer_reservelen = 20
-
 
 " :h g:incsearch#auto_nohlsearch
 map /  <Plug>(incsearch-forward)
