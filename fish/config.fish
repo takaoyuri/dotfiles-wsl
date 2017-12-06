@@ -22,9 +22,9 @@ set -x DISPLAY localhost:0.0
 
 function fish_prompt
 	if [ $status -eq 0 ]
-		set status_face (set_color green -b black)">"(set_color -b normal)
+		set status_face (set_color green -b black)" > "(set_color -b normal)
 	else
-		set status_face (set_color red -b black)">>"(set_color -b normal)
+		set status_face (set_color red -b black)" >> "(set_color -b normal)
 	end
 
 	set prompt (set_color yellow)(prompt_pwd)
