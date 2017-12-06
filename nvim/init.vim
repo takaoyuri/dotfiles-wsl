@@ -194,7 +194,7 @@ let g:indentLine_newVersion = 0
 let g:indentLine_faster = 0
 let g:indentLine_setColors=111
 let g:indentLine_concealcursor="nc"
-set list lcs=tab:\|\
+set list lcs=tab:\|\ 
 
 " vim operator-surround
 " operator mappings
@@ -303,15 +303,15 @@ nmap <silent> <C-u><C-d> :<C-u>call denite#start([{'name': 'file_rec', 'args': [
 " nnoremap ml :<C-u>call denite#start([{'name': 'file_rec', 'args': [g:memolist_path]}])<CR>
 
 " lsp
-let g:LanguageClient_serverCommands = {
-    \ 'javascript': ['language-server-stdio'],
-    \ }
-" Automatically start language servers.
-let g:LanguageClient_autoStart = 1
-
-nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+" let g:LanguageClient_serverCommands = {
+"     \ 'javascript': ['javascript-typescript-stdio'],
+"     \ }
+" " Automatically start language servers.
+" let g:LanguageClient_autoStart = 1
+"
+" nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+" nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+" nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 
 "" 日本語エンコード関連
 if &encoding !=# 'utf-8'
