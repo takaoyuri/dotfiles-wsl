@@ -32,7 +32,7 @@ if dein#load_state(s:dein_dir)
 	call dein#add('SirVer/ultisnips')
 	call dein#add('honza/vim-snippets')
 
-	call dein#add('autozimu/LanguageClient-neovim')
+	" call dein#add('autozimu/LanguageClient-neovim')
 
 	" textobj operator
 	call dein#add('kana/vim-textobj-user')
@@ -47,10 +47,10 @@ if dein#load_state(s:dein_dir)
 	call dein#add('w0rp/ale')
 
 	" javascript
-	call dein#add('ternjs/tern_for_vim', {'build': 'npm install', 'on_ft': 'javascript'})
-	call dein#add('carlitux/deoplete-ternjs', {'depends': ['deoplete.nvim'], 'on_ft': 'javascript'})
-	call dein#add('othree/jspc.vim', {'on_ft': 'javascript'})
-	call dein#add('othree/yajs.vim', {'on_ft': 'javascript'})
+	call dein#add('ternjs/tern_for_vim', {'build': 'npm install'})
+	call dein#add('carlitux/deoplete-ternjs', {'depends': ['deoplete.nvim']})
+	call dein#add('othree/jspc.vim')
+	call dein#add('othree/yajs.vim')
 
 	" php
 	call dein#add('lvht/phpcd.vim', {'build': 'composer install', 'on_ft': 'php'})
