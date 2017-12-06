@@ -32,6 +32,8 @@ if dein#load_state(s:dein_dir)
 	call dein#add('SirVer/ultisnips')
 	call dein#add('honza/vim-snippets')
 
+	call dein#add('autozimu/LanguageClient-neovim')
+
 	" textobj operator
 	call dein#add('kana/vim-textobj-user')
 	call dein#add('rhysd/vim-textobj-anyblock')
@@ -45,23 +47,25 @@ if dein#load_state(s:dein_dir)
 	call dein#add('w0rp/ale')
 
 	" javascript
-	call dein#add('ternjs/tern_for_vim', {'build': 'npm install'})
-	call dein#add('carlitux/deoplete-ternjs', {'depends': ['deoplete.nvim']})
-	call dein#add('othree/jspc.vim')
-	call dein#add('othree/yajs.vim')
+	call dein#add('ternjs/tern_for_vim', {'build': 'npm install', 'on_ft': 'javascript'})
+	call dein#add('carlitux/deoplete-ternjs', {'depends': ['deoplete.nvim'], 'on_ft': 'javascript'})
+	call dein#add('othree/jspc.vim', {'on_ft': 'javascript'})
+	call dein#add('othree/yajs.vim', {'on_ft': 'javascript'})
 
-	" php 
-	call dein#add('lvht/phpcd.vim', {'build': 'composer install'})
+	" php
+	call dein#add('lvht/phpcd.vim', {'build': 'composer install', 'on_ft': 'php'})
 
 	" html css
-	call dein#add('mattn/emmet-vim')
-	call dein#add('othree/html5.vim')
+	call dein#add('mattn/emmet-vim', {'on_ft': ['html']})
+	call dein#add('othree/html5.vim', {'on_ft': ['html']})
 
 	" fish shell
-	call dein#add('dag/vim-fish')
+	call dein#add('dag/vim-fish', {'on_ft' : 'fish'})
 
 	" UI etc
 	call dein#add('thinca/vim-zenspace')
+	call dein#add('ntpeters/vim-better-whitespace')
+
 	call dein#add('haya14busa/incsearch.vim')
 	call dein#add('tomtom/tcomment_vim')
 	call dein#add('terryma/vim-multiple-cursors')
@@ -95,7 +99,7 @@ syntax enable
 " Ultisnip
 let g:UltiSnipsExpandTrigger="<C-j>"
 
-" deoplete 
+" deoplete
 set completeopt=longest,preview
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#auto_complete_start_length = 1
@@ -142,7 +146,7 @@ function! Multiple_cursors_after()
 	let b:deoplete_disable_auto_complete = 0
 endfunction
 
-" Leader to space key 
+" Leader to space key
 let mapleader = "\<Space>"
 
 set background=dark
@@ -164,11 +168,11 @@ set smartindent
 
 set clipboard=unnamed
 
-"" insertモードrを抜ける 
+"" insertモードrを抜ける
 inoremap <silent> jj <ESC>
 inoremap <silent> <C-j> j
 
-"" insertモードでカーソル移動 
+"" insertモードでカーソル移動
 inoremap <C-j> <Down>
 inoremap <C-k> <Up>
 inoremap <C-h> <Left>
@@ -186,13 +190,13 @@ au BufRead,BufNewFile *.ihtml set filetype=html
 
 " indentLine
 let g:indentLine_enable = 1
-let g:indentLine_newVersion = 0 
-let g:indentLine_faster = 0 
+let g:indentLine_newVersion = 0
+let g:indentLine_faster = 0
 let g:indentLine_setColors=111
 let g:indentLine_concealcursor="nc"
-set list lcs=tab:\|\ 
+set list lcs=tab:\|\
 
-" vim operator-surround 
+" vim operator-surround
 " operator mappings
 map <silent>sa <Plug>(operator-surround-append)
 map <silent>sd <Plug>(operator-surround-delete)
@@ -265,7 +269,7 @@ map #  <Plug>(incsearch-nohl-#)
 map g* <Plug>(incsearch-nohl-g*)
 map g# <Plug>(incsearch-nohl-g#)
 
-" Denite 
+" Denite
 " call denite#custom#option('default', 'prompt', '>')
 call denite#custom#source('file_rec', 'matchers', ['matcher_cpsm'])
 
@@ -285,18 +289,29 @@ nnoremap <silent> ;cg :<C-u>DeniteCursorWord grep -buffer-name=search line<CR><C
 " grep
 nnoremap <silent> ;g :<C-u>Denite -buffer-name=search -mode=normal grep<CR>
 
-" nmap <silent> <C-u><C-t> :<C-u>Denite filetype<CR>
+nmap <silent> <C-u><C-t> :<C-u>Denite filetype<CR>
+nmap <silent> <C-u><C-c> :<C-u>DeniteCursorWord grep<CR>
+nmap <silent> <C-u><C-g> :<C-u>Denite grep<CR>
+nmap <silent> <C-u><C-y> :<C-u>Denite neoyank<CR>
+nmap <silent> <C-u><C-r> :<C-u>Denite -resume<CR>
+nmap <silent> <C-u><C-d> :<C-u>call denite#start([{'name': 'file_rec', 'args': ['~/dotfiles']}])<CR>
 " nmap <silent> <C-u><C-p> :<C-u>Denite file_rec<CR>
 " nmap <silent> <C-u><C-j> :<C-u>Denite line<CR>
-" nmap <silent> <C-u><C-g> :<C-u>Denite grep<CR>
-" nmap <silent> <C-u><C-c> :<C-u>DeniteCursorWord grep<CR>
 " nmap <silent> <C-u><C-u> :<C-u>Denite file_mru<CR>
-" nmap <silent> <C-u><C-y> :<C-u>Denite neoyank<CR>
-" nmap <silent> <C-u><C-r> :<C-u>Denite -resume<CR>
 " nmap <silent> <C-u>; :<C-u>Denite -resume -immediately -select=+1<CR>
 " nmap <silent> <C-u>- :<C-u>Denite -resume -immediately -select=-1<CR>
-" nmap <silent> <C-u><C-d> :<C-u>call denite#start([{'name': 'file_rec', 'args': ['~/dotfiles']}])<CR>
 " nnoremap ml :<C-u>call denite#start([{'name': 'file_rec', 'args': [g:memolist_path]}])<CR>
+
+" lsp
+let g:LanguageClient_serverCommands = {
+    \ 'javascript': ['language-server-stdio'],
+    \ }
+" Automatically start language servers.
+let g:LanguageClient_autoStart = 1
+
+nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 
 "" 日本語エンコード関連
 if &encoding !=# 'utf-8'
