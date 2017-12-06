@@ -22,59 +22,63 @@ if dein#load_state(s:dein_dir)
 	call dein#add('Shougo/dein.vim')
 	call dein#add('Shougo/deoplete.nvim')
 	call dein#add('Shougo/denite.nvim')
-	call dein#add('nixprime/cpsm', {'build' : 'env PY3=ON ./install.sh'})
-
 	call dein#add('Shougo/neomru.vim')
 	call dein#add('Shougo/neoyank.vim')
-
 	call dein#add('Shougo/deol.nvim')
+	call dein#add('Shougo/context_filetype.vim')
+	call dein#add('Shougo/neco-syntax')
 
-	" call dein#add('Shougo/vimproc.vim', {'build': 'make'})
-
-	call dein#add('ternjs/tern_for_vim', {'build': 'npm install'})
-	call dein#add('carlitux/deoplete-ternjs', {'depends': ['deoplete.nvim']})
-	call dein#add('othree/jspc.vim')
-
-	call dein#add('lvht/phpcd.vim', {'build': 'composer install'})
-
+	" snippets
 	call dein#add('SirVer/ultisnips')
 	call dein#add('honza/vim-snippets')
 
+	" textobj operator
 	call dein#add('kana/vim-textobj-user')
-	call dein#add('kana/vim-operator-user')
-	call dein#add('thinca/vim-zenspace')
-
 	call dein#add('rhysd/vim-textobj-anyblock')
+	call dein#add('kana/vim-operator-user')
 	call dein#add('rhysd/vim-operator-surround')
-	call dein#add('rhysd/clever-f.vim')
 
-	call dein#add('Shougo/neco-syntax')
-	call dein#add('Shougo/context_filetype.vim')
-	call dein#add('tomtom/tcomment_vim')
-	call dein#add('mattn/emmet-vim')
-	call dein#add('terryma/vim-multiple-cursors')
-
-	call dein#add('Yggdroot/indentLine')
-	call dein#add('haya14busa/incsearch.vim')
-
-	call dein#add('itchyny/lightline.vim')
-	call dein#add('taohex/lightline-buffer')
-
-	call dein#add('othree/html5.vim')
-	call dein#add('othree/yajs.vim')
-	call dein#add('dag/vim-fish')
-	" call dein#add('neomake/neomake')
-	call dein#add('cohama/lexima.vim')
-	call dein#add('chrisbra/Colorizer')
-	call dein#add('yuttie/comfortable-motion.vim')
-	call dein#add('osyo-manga/vim-over')
-
+	" git
 	call dein#add('lambdalisue/gina.vim')
 
+	" syntax check
 	call dein#add('w0rp/ale')
 
-	"" color
+	" javascript
+	call dein#add('ternjs/tern_for_vim', {'build': 'npm install'})
+	call dein#add('carlitux/deoplete-ternjs', {'depends': ['deoplete.nvim']})
+	call dein#add('othree/jspc.vim')
+	call dein#add('othree/yajs.vim')
+
+	" php 
+	call dein#add('lvht/phpcd.vim', {'build': 'composer install'})
+
+	" html css
+	call dein#add('mattn/emmet-vim')
+	call dein#add('othree/html5.vim')
+
+	" fish shell
+	call dein#add('dag/vim-fish')
+
+	" UI etc
+	call dein#add('thinca/vim-zenspace')
+	call dein#add('haya14busa/incsearch.vim')
+	call dein#add('tomtom/tcomment_vim')
+	call dein#add('terryma/vim-multiple-cursors')
+	call dein#add('Yggdroot/indentLine')
+	call dein#add('yuttie/comfortable-motion.vim')
+	call dein#add('rhysd/clever-f.vim')
+	call dein#add('itchyny/lightline.vim')
+	call dein#add('taohex/lightline-buffer')
+	call dein#add('cohama/lexima.vim')
+	call dein#add('chrisbra/Colorizer')
+	call dein#add('osyo-manga/vim-over')
+
+	" colorscheme
 	call dein#add('rhysd/vim-color-spring-night')
+
+	" matcher
+	call dein#add('nixprime/cpsm', {'build' : 'env PY3=ON ./install.sh'})
 
 	call dein#end()
 	call dein#save_state()
@@ -193,7 +197,6 @@ set list lcs=tab:\|\
 map <silent>sa <Plug>(operator-surround-append)
 map <silent>sd <Plug>(operator-surround-delete)
 map <silent>sr <Plug>(operator-surround-replace)
-
 
 let g:lightline = {
 			\ 'tabline': {
