@@ -32,8 +32,6 @@ if dein#load_state(s:dein_dir)
 	call dein#add('SirVer/ultisnips')
 	call dein#add('honza/vim-snippets')
 
-	" call dein#add('autozimu/LanguageClient-neovim')
-
 	" textobj operator
 	call dein#add('kana/vim-textobj-user')
 	call dein#add('rhysd/vim-textobj-anyblock')
@@ -56,17 +54,19 @@ if dein#load_state(s:dein_dir)
 	call dein#add('lvht/phpcd.vim', {'build': 'composer install', 'on_ft': 'php'})
 
 	" html css
-	call dein#add('mattn/emmet-vim', {'on_ft': ['html']})
+	call dein#add('mattn/emmet-vim', {'on_ft': ['html', 'php']})
 	call dein#add('othree/html5.vim', {'on_ft': ['html']})
+	call dein#add('ap/vim-css-color')
 
 	" fish shell
 	call dein#add('dag/vim-fish', {'on_ft' : 'fish'})
 
 	" UI etc
+	call dein#add('haya14busa/vim-asterisk')
+	call dein#add('easymotion/vim-easymotion')
+	call dein#add('haya14busa/incsearch.vim')
 	call dein#add('thinca/vim-zenspace')
 	call dein#add('ntpeters/vim-better-whitespace')
-
-	call dein#add('haya14busa/incsearch.vim')
 	call dein#add('tomtom/tcomment_vim')
 	call dein#add('terryma/vim-multiple-cursors')
 	call dein#add('Yggdroot/indentLine')
@@ -80,6 +80,8 @@ if dein#load_state(s:dein_dir)
 
 	" colorscheme
 	call dein#add('rhysd/vim-color-spring-night')
+	call dein#add('rakr/vim-one')
+	call dein#add('itchyny/landscape.vim')
 
 	" matcher
 	call dein#add('nixprime/cpsm', {'build' : 'env PY3=ON ./install.sh'})
@@ -152,7 +154,8 @@ let mapleader = "\<Space>"
 set background=dark
 set t_Co=256
 set termguicolors
-colorscheme spring-night
+" colorscheme spring-night
+colorscheme landscape
 
 set hidden  " allow buffer switching without saving
 set number
@@ -165,6 +168,7 @@ set showmatch
 set showtabline=2  " always show tabline
 set matchtime=1
 set smartindent
+set hlsearch
 
 set clipboard=unnamed
 
@@ -256,21 +260,22 @@ let g:lightline_buffer_minflen = 16
 let g:lightline_buffer_minfextlen = 3
 let g:lightline_buffer_reservelen = 20
 
-" :h g:incsearch#auto_nohlsearch
+" incsearch
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
-set hlsearch
-let g:incsearch#auto_nohlsearch = 1
-map n  <Plug>(incsearch-nohl-n)
-map N  <Plug>(incsearch-nohl-N)
-map *  <Plug>(incsearch-nohl-*)
-map #  <Plug>(incsearch-nohl-#)
-map g* <Plug>(incsearch-nohl-g*)
-map g# <Plug>(incsearch-nohl-g#)
+
+" vim-asterisk
+map *   <Plug>(asterisk-*)
+" map #   <Plug>(asterisk-#)
+" map g*  <Plug>(asterisk-g*)
+" map g#  <Plug>(asterisk-g#)
+" map z*  <Plug>(asterisk-z*)
+" map gz* <Plug>(asterisk-gz*)
+" map z#  <Plug>(asterisk-z#)
+" map gz# <Plug>(asterisk-gz#)
 
 " Denite
-" call denite#custom#option('default', 'prompt', '>')
 call denite#custom#source('file_rec', 'matchers', ['matcher_cpsm'])
 
 call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>')
