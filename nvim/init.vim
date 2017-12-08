@@ -82,6 +82,8 @@ if dein#load_state(s:dein_dir)
 	call dein#add('rhysd/vim-color-spring-night')
 	call dein#add('rakr/vim-one')
 	call dein#add('itchyny/landscape.vim')
+	call dein#add('cocopon/iceberg.vim')
+	call dein#add('joshdick/onedark.vim')
 
 	" matcher
 	call dein#add('nixprime/cpsm', {'build' : 'env PY3=ON ./install.sh'})
@@ -155,7 +157,7 @@ set background=dark
 set t_Co=256
 set termguicolors
 " colorscheme spring-night
-colorscheme landscape
+colorscheme onedark
 
 set hidden  " allow buffer switching without saving
 set number
@@ -193,12 +195,15 @@ set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr
 au BufRead,BufNewFile *.ihtml set filetype=html
 
 " indentLine
+set list lcs=tab:\|\ 
 let g:indentLine_enable = 1
 let g:indentLine_newVersion = 0
 let g:indentLine_faster = 0
-let g:indentLine_setColors=111
+let g:indentLine_setColors= 111
+" let g:indentLine_color_term = 254
+" let g:indentLine_color_term = 111
+" let g:indentLine_color_gui = '#708090'
 let g:indentLine_concealcursor="nc"
-set list lcs=tab:\|\ 
 
 " vim operator-surround
 " operator mappings
@@ -277,15 +282,13 @@ map *   <Plug>(asterisk-*)
 
 " Denite
 call denite#custom#source('file_rec', 'matchers', ['matcher_cpsm'])
-
+call denite#custom#map('insert', 'jj', '<denite:enter_mode:normal>')
 call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>')
 call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>')
-
-call denite#custom#map('insert', '<C-t>', '<denite:do_action:tabopen>')
+" call denite#custom#map('insert', '<C-t>', '<denite:do_action:tabopen>')
+" call denite#custom#map('normal', 'v', '<denite:do_action:vsplit>')
 call denite#custom#map('insert', '<C-v>', '<denite:do_action:vsplit>')
-call denite#custom#map('normal', 'v', '<denite:do_action:vsplit>')
-
-call denite#custom#map('insert', 'jj', '<denite:enter_mode:normal>')
+call denite#custom#map('normal', '<C-v>', '<denite:do_action:vsplit>')
 
 " ctrlp
 nnoremap <silent> <C-p> :<C-u>Denite file_rec<CR>
@@ -307,16 +310,11 @@ nmap <silent> <C-u><C-d> :<C-u>call denite#start([{'name': 'file_rec', 'args': [
 " nmap <silent> <C-u>- :<C-u>Denite -resume -immediately -select=-1<CR>
 " nnoremap ml :<C-u>call denite#start([{'name': 'file_rec', 'args': [g:memolist_path]}])<CR>
 
-" lsp
-" let g:LanguageClient_serverCommands = {
-"     \ 'javascript': ['javascript-typescript-stdio'],
-"     \ }
-" " Automatically start language servers.
-" let g:LanguageClient_autoStart = 1
-"
-" nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-" nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-" nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+"syntax check
+let g:ale_set_loclist = 1
+let g:ale_open_list = 1
+let g:ale_keep_list_window_open = 1
+let g:ale_list_window_size = 2
 
 "" 日本語エンコード関連
 if &encoding !=# 'utf-8'
