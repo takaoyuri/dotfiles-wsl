@@ -15,8 +15,6 @@ if !isdirectory(s:dein_repo_dir)
 endif
 execute 'set runtimepath^=' . s:dein_repo_dir
 
-let g:loaded_matchparen = 1
-
 if dein#load_state(s:dein_dir)
 	call dein#begin(s:dein_dir)
 	call dein#add('Shougo/dein.vim')
@@ -34,9 +32,11 @@ if dein#load_state(s:dein_dir)
 
 	" textobj operator
 	call dein#add('kana/vim-textobj-user')
-	call dein#add('rhysd/vim-textobj-anyblock')
+	" call dein#add('rhysd/vim-textobj-anyblock')
+	call dein#add('machakann/vim-textobj-delimited')
 	call dein#add('kana/vim-operator-user')
-	call dein#add('rhysd/vim-operator-surround')
+	" call dein#add('rhysd/vim-operator-surround')
+	call dein#add('machakann/vim-sandwich')
 
 	" git
 	call dein#add('lambdalisue/gina.vim')
@@ -61,6 +61,9 @@ if dein#load_state(s:dein_dir)
 	" fish shell
 	call dein#add('dag/vim-fish', {'on_ft' : 'fish'})
 
+	" toml
+	call dein#add('cespare/vim-toml')
+
 	" UI etc
 	call dein#add('haya14busa/vim-asterisk')
 	call dein#add('easymotion/vim-easymotion')
@@ -77,6 +80,9 @@ if dein#load_state(s:dein_dir)
 	call dein#add('cohama/lexima.vim')
 	call dein#add('chrisbra/Colorizer')
 	call dein#add('osyo-manga/vim-over')
+	call dein#add('machakann/vim-highlightedyank')
+
+	call dein#add('mhinz/vim-startify')
 
 	" colorscheme
 	call dein#add('rhysd/vim-color-spring-night')
@@ -84,6 +90,9 @@ if dein#load_state(s:dein_dir)
 	call dein#add('itchyny/landscape.vim')
 	call dein#add('cocopon/iceberg.vim')
 	call dein#add('joshdick/onedark.vim')
+	call dein#add('ajmwagar/vim-deus')
+	call dein#add('nanotech/jellybeans.vim')
+	call dein#add('chriskempson/base16-vim')
 
 	" matcher
 	call dein#add('nixprime/cpsm', {'build' : 'env PY3=ON ./install.sh'})
@@ -155,9 +164,11 @@ let mapleader = "\<Space>"
 
 set background=dark
 set t_Co=256
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 set termguicolors
-" colorscheme spring-night
-colorscheme onedark
+colorscheme spring-night
+let g:deus_termcolors=256
 
 set hidden  " allow buffer switching without saving
 set number
@@ -191,6 +202,15 @@ let &t_te.="\e[0 q"
 
 set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
 
+if has('vim_starting')
+	" インサートモード時に非点滅の縦棒タイプのカーソル
+	let &t_SI .= "\e[6 q"
+	" ノーマルモード時に非点滅のブロックタイプのカーソル
+	let &t_EI .= "\e[2 q"
+	" 置換モード時に非点滅の下線タイプのカーソル
+	let &t_SR .= "\e[4 q"
+endif
+
 " ihtml
 au BufRead,BufNewFile *.ihtml set filetype=html
 
@@ -199,7 +219,7 @@ set list lcs=tab:\|\
 let g:indentLine_enable = 1
 let g:indentLine_newVersion = 0
 let g:indentLine_faster = 0
-let g:indentLine_setColors= 111
+let g:indentLine_setColors= 100
 " let g:indentLine_color_term = 254
 " let g:indentLine_color_term = 111
 " let g:indentLine_color_gui = '#708090'
@@ -207,9 +227,9 @@ let g:indentLine_concealcursor="nc"
 
 " vim operator-surround
 " operator mappings
-map <silent>sa <Plug>(operator-surround-append)
-map <silent>sd <Plug>(operator-surround-delete)
-map <silent>sr <Plug>(operator-surround-replace)
+" map <silent>sa <Plug>(operator-surround-append)
+" map <silent>sd <Plug>(operator-surround-delete)
+" map <silent>sr <Plug>(operator-surround-replace)
 
 let g:lightline = {
 			\ 'tabline': {
@@ -310,11 +330,14 @@ nmap <silent> <C-u><C-d> :<C-u>call denite#start([{'name': 'file_rec', 'args': [
 " nmap <silent> <C-u>- :<C-u>Denite -resume -immediately -select=-1<CR>
 " nnoremap ml :<C-u>call denite#start([{'name': 'file_rec', 'args': [g:memolist_path]}])<CR>
 
-"syntax check
+" syntax check
 let g:ale_set_loclist = 1
 let g:ale_open_list = 1
 let g:ale_keep_list_window_open = 1
 let g:ale_list_window_size = 2
+
+" php
+let php_sql_query = 1
 
 "" 日本語エンコード関連
 if &encoding !=# 'utf-8'
