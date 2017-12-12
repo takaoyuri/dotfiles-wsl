@@ -225,12 +225,7 @@ let g:indentLine_setColors= 100
 " let g:indentLine_color_gui = '#708090'
 let g:indentLine_concealcursor="nc"
 
-" vim operator-surround
-" operator mappings
-" map <silent>sa <Plug>(operator-surround-append)
-" map <silent>sd <Plug>(operator-surround-delete)
-" map <silent>sr <Plug>(operator-surround-replace)
-
+" lightline
 let g:lightline = {
 			\ 'tabline': {
 			\   'left': [ [ 'bufferinfo' ],
@@ -292,13 +287,6 @@ map g/ <Plug>(incsearch-stay)
 
 " vim-asterisk
 map *   <Plug>(asterisk-*)
-" map #   <Plug>(asterisk-#)
-" map g*  <Plug>(asterisk-g*)
-" map g#  <Plug>(asterisk-g#)
-" map z*  <Plug>(asterisk-z*)
-" map gz* <Plug>(asterisk-gz*)
-" map z#  <Plug>(asterisk-z#)
-" map gz# <Plug>(asterisk-gz#)
 
 " Denite
 call denite#custom#source('file_rec', 'matchers', ['matcher_cpsm'])
