@@ -76,12 +76,11 @@ if dein#load_state(s:dein_dir)
 	call dein#add('yuttie/comfortable-motion.vim')
 	call dein#add('rhysd/clever-f.vim')
 	call dein#add('itchyny/lightline.vim')
-	call dein#add('taohex/lightline-buffer')
+	call dein#add('mgee/lightline-bufferline')
 	call dein#add('cohama/lexima.vim')
 	call dein#add('chrisbra/Colorizer')
 	call dein#add('osyo-manga/vim-over')
 	call dein#add('machakann/vim-highlightedyank')
-
 	call dein#add('mhinz/vim-startify')
 
 	" colorscheme
@@ -93,6 +92,7 @@ if dein#load_state(s:dein_dir)
 	call dein#add('ajmwagar/vim-deus')
 	call dein#add('nanotech/jellybeans.vim')
 	call dein#add('chriskempson/base16-vim')
+	call dein#add('NLKNguyen/papercolor-theme')
 
 	" matcher
 	call dein#add('nixprime/cpsm', {'build' : 'env PY3=ON ./install.sh'})
@@ -163,14 +163,11 @@ endfunction
 let mapleader = "\<Space>"
 
 set background=dark
-set t_Co=256
-let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 set termguicolors
-colorscheme spring-night
-let g:deus_termcolors=256
+colorscheme PaperColor
 
-set hidden  " allow buffer switching without saving
+" allow buffer switching without saving
+set hidden
 set number
 set tabstop=2
 set softtabstop=2
@@ -178,11 +175,12 @@ set shiftwidth=2
 set noexpandtab
 set noundofile
 set showmatch
-set showtabline=2  " always show tabline
+" always show tabline
+set showtabline=2
 set matchtime=1
 set smartindent
 set hlsearch
-
+" use clipboard
 set clipboard=unnamed
 
 "" insertモードrを抜ける
@@ -220,65 +218,31 @@ let g:indentLine_enable = 1
 let g:indentLine_newVersion = 0
 let g:indentLine_faster = 0
 let g:indentLine_setColors= 100
+let g:indentLine_concealcursor="nc"
 " let g:indentLine_color_term = 254
 " let g:indentLine_color_term = 111
 " let g:indentLine_color_gui = '#708090'
-let g:indentLine_concealcursor="nc"
 
 " lightline
+let g:lightline#bufferline#show_number  = 1
+let g:lightline#bufferline#shorten_path = 0
+let g:lightline#bufferline#unnamed      = '[No Name]'
 let g:lightline = {
+			\ 'colorscheme': 'PaperColor',
 			\ 'tabline': {
-			\   'left': [ [ 'bufferinfo' ],
-			\             [ 'separator' ],
-			\             [ 'bufferbefore', 'buffercurrent', 'bufferafter' ], ],
-			\   'right': [ [ 'close' ], ],
-			\ },
-			\ 'component_expand': {
-			\   'buffercurrent': 'lightline#buffer#buffercurrent',
-			\   'bufferbefore': 'lightline#buffer#bufferbefore',
-			\   'bufferafter': 'lightline#buffer#bufferafter',
-			\ },
-			\ 'component_type': {
-			\   'buffercurrent': 'tabsel',
-			\   'bufferbefore': 'raw',
-			\   'bufferafter': 'raw',
-			\ },
-			\ 'component_function': {
-			\   'bufferinfo': 'lightline#buffer#bufferinfo',
-			\ },
-			\ 'component': {
-			\   'separator': '',
-			\ },
-			\ }
+			\ 'left': [['buffers']], 'right': [['close']]
+			\},
+			\ 'component_expand' : {
+			\ 'buffers': 'lightline#bufferline#buffers'
+			\},
+			\ 'component_type' : {
+			\ 'buffers': 'tabsel'
+			\}
+			\}
 
 " remap arrow keys
 nnoremap <Left> :bprev<CR>
 nnoremap <Right> :bnext<CR>
-
-" lightline-buffer ui settings
-" replace these symbols with ascii characters if your environment does not support unicode
-let g:lightline_buffer_logo = ' '
-let g:lightline_buffer_readonly_icon = ''
-let g:lightline_buffer_modified_icon = '✭'
-let g:lightline_buffer_git_icon = ' '
-let g:lightline_buffer_ellipsis_icon = '..'
-let g:lightline_buffer_expand_left_icon = '◀ '
-let g:lightline_buffer_expand_right_icon = ' ▶'
-let g:lightline_buffer_active_buffer_left_icon = ''
-let g:lightline_buffer_active_buffer_right_icon = ''
-let g:lightline_buffer_separator_icon = '  '
-
-" lightline-buffer function settings
-let g:lightline_buffer_show_bufnr = 1
-let g:lightline_buffer_rotate = 0
-let g:lightline_buffer_fname_mod = ':t'
-let g:lightline_buffer_excludes = ['vimfiler']
-
-let g:lightline_buffer_maxflen = 30
-let g:lightline_buffer_maxfextlen = 3
-let g:lightline_buffer_minflen = 16
-let g:lightline_buffer_minfextlen = 3
-let g:lightline_buffer_reservelen = 20
 
 " incsearch
 map /  <Plug>(incsearch-forward)
