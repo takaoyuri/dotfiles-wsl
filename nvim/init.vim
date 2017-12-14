@@ -58,6 +58,10 @@ if dein#load_state(s:dein_dir)
 	call dein#add('othree/html5.vim', {'on_ft': ['html']})
 	call dein#add('ap/vim-css-color')
 
+	" golang
+	call dein#add('zchee/nvim-go', {'build': 'make'})
+	call dein#add('zchee/deoplete-go', {'build': 'make'})
+
 	" fish shell
 	call dein#add('dag/vim-fish', {'on_ft' : 'fish'})
 
