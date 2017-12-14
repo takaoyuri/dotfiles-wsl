@@ -19,7 +19,9 @@ end
 
 # goenv
 if [ -d $HOME/.goenv/bin ]
-	set -x GOENV_ROOT $HOME/.goenv
+	set -gx GOPATH $HOME/go
+	set -gx GOENV_ROOT $HOME/.goenv
+	set -gx PATH $GOPATH/bin $PATH
 	set -gx PATH $GOENV_ROOT/bin $PATH
 	. (goenv init -|psub)
 end

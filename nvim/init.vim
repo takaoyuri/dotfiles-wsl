@@ -57,8 +57,9 @@ if dein#load_state(s:dein_dir)
 	call dein#add('ap/vim-css-color')
 
 	" golang
-	call dein#add('zchee/nvim-go', {'build': 'make'})
-	call dein#add('zchee/deoplete-go', {'build': 'make'})
+	" call dein#add('zchee/nvim-go', {'build': 'make'})
+	call dein#add('zchee/deoplete-go', {'build': 'make', 'on_ft': 'go'})
+	call dein#add('fatih/vim-go', {'on_ft': 'go'})
 
 	" fish shell
 	call dein#add('dag/vim-fish', {'on_ft' : 'fish'})
@@ -72,7 +73,8 @@ if dein#load_state(s:dein_dir)
 	call dein#add('haya14busa/incsearch.vim')
 	call dein#add('thinca/vim-zenspace')
 	call dein#add('ntpeters/vim-better-whitespace')
-	call dein#add('tomtom/tcomment_vim')
+	" call dein#add('tomtom/tcomment_vim')
+	call dein#add('tyru/caw.vim')
 	call dein#add('terryma/vim-multiple-cursors')
 	call dein#add('Yggdroot/indentLine')
 	call dein#add('yuttie/comfortable-motion.vim')
@@ -254,6 +256,10 @@ map g/ <Plug>(incsearch-stay)
 " vim-asterisk
 map *   <Plug>(asterisk-*)
 
+" caw.vim
+nmap <C-_><C-_> <Plug>(caw:hatpos:toggle)
+vmap <C-_><C-_> <Plug>(caw:hatpos:toggle)
+
 " Denite
 call denite#custom#source('file_rec', 'matchers', ['matcher_cpsm'])
 call denite#custom#map('insert', 'jj', '<denite:enter_mode:normal>')
@@ -280,8 +286,8 @@ nmap <silent> <C-u><C-d> :<C-u>call denite#start([{'name': 'file_rec', 'args': [
 " nmap <silent> <C-u><C-p> :<C-u>Denite file_rec<CR>
 " nmap <silent> <C-u><C-j> :<C-u>Denite line<CR>
 " nmap <silent> <C-u><C-u> :<C-u>Denite file_mru<CR>
-" nmap <silent> <C-u>; :<C-u>Denite -resume -immediately -select=+1<CR>
-" nmap <silent> <C-u>- :<C-u>Denite -resume -immediately -select=-1<CR>
+nmap <silent> <C-u>; :<C-u>Denite -resume -immediately -select=+1<CR>
+nmap <silent> <C-u>- :<C-u>Denite -resume -immediately -select=-1<CR>
 " nnoremap ml :<C-u>call denite#start([{'name': 'file_rec', 'args': [g:memolist_path]}])<CR>
 
 " syntax check
@@ -289,6 +295,8 @@ let g:ale_set_loclist = 1
 let g:ale_open_list = 1
 let g:ale_keep_list_window_open = 1
 let g:ale_list_window_size = 2
+let g:ale_sign_column_always = 1
+
 
 " php
 let php_sql_query = 1
