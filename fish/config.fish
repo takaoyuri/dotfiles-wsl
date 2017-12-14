@@ -11,10 +11,17 @@ if [ -f $HOME/.config/fish/aliases.fish ]
 	. $HOME/.config/fish/aliases.fish
 end
 
-# pyenv 
-if [ -f $HOME/.pyenv/bin ]
-	set -x PATH $HOME/.pyenv/bin $PATH
+# pyenv
+if [ -d $HOME/.pyenv/bin/ ]
+	set -x PATH $HOME/.pyenv/bin/ $PATH
 	. (pyenv init -l psub)
+end
+
+# goenv
+if [ -d $HOME/.goenv/bin ]
+	set -x GOENV_ROOT $HOME/.goenv
+	set -gx PATH $GOENV_ROOT/bin $PATH
+	. (goenv init -|psub)
 end
 
 # $DISPLAY
