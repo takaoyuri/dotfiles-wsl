@@ -32,10 +32,8 @@ if dein#load_state(s:dein_dir)
 
 	" textobj operator
 	call dein#add('kana/vim-textobj-user')
-	" call dein#add('rhysd/vim-textobj-anyblock')
 	call dein#add('machakann/vim-textobj-delimited')
 	call dein#add('kana/vim-operator-user')
-	" call dein#add('rhysd/vim-operator-surround')
 	call dein#add('machakann/vim-sandwich')
 
 	" git
@@ -300,6 +298,7 @@ if &encoding !=# 'utf-8'
 	set encoding=japan
 	set fileencoding=japan
 endif
+
 if has('iconv')
 	let s:enc_euc = 'euc-jp'
 	let s:enc_jis = 'iso-2022-jp'
@@ -336,13 +335,12 @@ if has('iconv')
 	unlet s:enc_euc
 	unlet s:enc_jis
 endif
+
 " 日本語を含まない場合は fileencoding に encoding を使うようにする
-if has('autocmd')
-	function! AU_ReCheck_FENC()
-		if &fileencoding =~# 'iso-2022-jp' && search("[^\x01-\x7e]", 'n') == 0
-			let &fileencoding=&encoding
-		endif
-	endfunction
-	autocmd BufReadPost * call AU_ReCheck_FENC()
-endif
+function! AU_ReCheck_FENC()
+	if &fileencoding =~# 'iso-2022-jp' && search("[^\x01-\x7e]", 'n') == 0
+		let &fileencoding=&encoding
+	endif
+endfunction
+autocmd BufReadPost * call AU_ReCheck_FENC()
 
