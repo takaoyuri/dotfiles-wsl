@@ -25,6 +25,7 @@ if dein#load_state(s:dein_dir)
 	call dein#add('Shougo/deol.nvim')
 	call dein#add('Shougo/context_filetype.vim')
 	call dein#add('Shougo/neco-syntax')
+	call dein#add('thinca/vim-quickrun')
 
 	" snippets
 	call dein#add('SirVer/ultisnips')
@@ -43,10 +44,10 @@ if dein#load_state(s:dein_dir)
 	call dein#add('w0rp/ale')
 
 	" javascript
-	call dein#add('ternjs/tern_for_vim', {'build': 'npm install'})
-	call dein#add('carlitux/deoplete-ternjs', {'depends': ['deoplete.nvim']})
-	call dein#add('othree/jspc.vim')
-	call dein#add('othree/yajs.vim')
+	call dein#add('ternjs/tern_for_vim', {'build': 'npm install', 'on_ft': ['javascript', 'html']})
+	call dein#add('carlitux/deoplete-ternjs', {'depends': ['deoplete.nvim'], 'on_ft': ['javascript', 'html']})
+	call dein#add('othree/jspc.vim', {'on_ft': ['javascript', 'html']})
+	call dein#add('othree/yajs.vim', {'on_ft': ['javascript', 'html']})
 
 	" php
 	call dein#add('lvht/phpcd.vim', {'build': 'composer install', 'on_ft': 'php'})
@@ -57,7 +58,6 @@ if dein#load_state(s:dein_dir)
 	call dein#add('ap/vim-css-color')
 
 	" golang
-	" call dein#add('zchee/nvim-go', {'build': 'make'})
 	call dein#add('zchee/deoplete-go', {'build': 'make', 'on_ft': 'go'})
 	call dein#add('fatih/vim-go', {'on_ft': 'go'})
 
@@ -65,7 +65,7 @@ if dein#load_state(s:dein_dir)
 	call dein#add('dag/vim-fish', {'on_ft' : 'fish'})
 
 	" toml
-	call dein#add('cespare/vim-toml')
+	call dein#add('cespare/vim-toml', {'on_ft': 'toml'})
 
 	" UI etc
 	call dein#add('haya14busa/vim-asterisk')
@@ -73,7 +73,6 @@ if dein#load_state(s:dein_dir)
 	call dein#add('haya14busa/incsearch.vim')
 	call dein#add('thinca/vim-zenspace')
 	call dein#add('ntpeters/vim-better-whitespace')
-	" call dein#add('tomtom/tcomment_vim')
 	call dein#add('tyru/caw.vim')
 	call dein#add('terryma/vim-multiple-cursors')
 	call dein#add('Yggdroot/indentLine')
@@ -97,6 +96,7 @@ if dein#load_state(s:dein_dir)
 	call dein#add('nanotech/jellybeans.vim')
 	call dein#add('chriskempson/base16-vim')
 	call dein#add('NLKNguyen/papercolor-theme')
+	call dein#add('nightsense/seabird')
 
 	" matcher
 	call dein#add('nixprime/cpsm', {'build' : 'env PY3=ON ./install.sh'})
@@ -168,7 +168,8 @@ let mapleader = "\<Space>"
 
 set background=dark
 set termguicolors
-colorscheme PaperColor
+" colorscheme PaperColor
+colorscheme seagull
 
 " allow buffer switching without saving
 set hidden

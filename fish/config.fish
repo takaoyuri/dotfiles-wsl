@@ -29,6 +29,11 @@ end
 # $DISPLAY
 set -x DISPLAY localhost:0.0
 
+function upgrade
+	sudo apt update
+	sudo apt upgrade
+end
+
 function fish_prompt
 	if [ $status -eq 0 ]
 		set status_face (set_color green -b black)" > "(set_color -b normal)
