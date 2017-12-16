@@ -7,7 +7,7 @@ endif
 let s:dein_dir = expand('~/.cache/dein')
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
-set runtimepath+=~/.cache/dein/github.com/nixprime/cpsm
+" set runtimepath+=~/.cache/dein/github.com/nixprime/cpsm
 
 " なければgit clone
 if !isdirectory(s:dein_repo_dir)
@@ -55,7 +55,7 @@ if dein#load_state(s:dein_dir)
 	" html css
 	call dein#add('mattn/emmet-vim', {'on_ft': ['html', 'php']})
 	call dein#add('othree/html5.vim', {'on_ft': ['html']})
-	call dein#add('ap/vim-css-color')
+	call dein#add('ap/vim-css-color', {'on_ft': ['html', 'css', 'javascript']})
 
 	" golang
 	call dein#add('zchee/deoplete-go', {'build': 'make', 'on_ft': 'go'})
@@ -68,9 +68,11 @@ if dein#load_state(s:dein_dir)
 	call dein#add('cespare/vim-toml', {'on_ft': 'toml'})
 
 	" UI etc
+	call dein#add('cohama/lexima.vim')
+	call dein#add('chrisbra/Colorizer')
 	call dein#add('haya14busa/vim-asterisk')
-	call dein#add('easymotion/vim-easymotion')
 	call dein#add('haya14busa/incsearch.vim')
+	call dein#add('easymotion/vim-easymotion')
 	call dein#add('thinca/vim-zenspace')
 	call dein#add('ntpeters/vim-better-whitespace')
 	call dein#add('tyru/caw.vim')
@@ -80,26 +82,24 @@ if dein#load_state(s:dein_dir)
 	call dein#add('rhysd/clever-f.vim')
 	call dein#add('itchyny/lightline.vim')
 	call dein#add('mgee/lightline-bufferline')
-	call dein#add('cohama/lexima.vim')
-	call dein#add('chrisbra/Colorizer')
-	call dein#add('osyo-manga/vim-over')
 	call dein#add('machakann/vim-highlightedyank')
 	call dein#add('mhinz/vim-startify')
+	call dein#add('osyo-manga/vim-over')
 
 	" colorscheme
-	call dein#add('rhysd/vim-color-spring-night')
-	call dein#add('rakr/vim-one')
-	call dein#add('itchyny/landscape.vim')
-	call dein#add('cocopon/iceberg.vim')
-	call dein#add('joshdick/onedark.vim')
-	call dein#add('ajmwagar/vim-deus')
-	call dein#add('nanotech/jellybeans.vim')
-	call dein#add('chriskempson/base16-vim')
+	" call dein#add('rhysd/vim-color-spring-night')
+	" call dein#add('rakr/vim-one')
+	" call dein#add('itchyny/landscape.vim')
+	" call dein#add('cocopon/iceberg.vim')
+	" call dein#add('joshdick/onedark.vim')
+	" call dein#add('ajmwagar/vim-deus')
+	" call dein#add('nanotech/jellybeans.vim')
+	" call dein#add('chriskempson/base16-vim')
 	call dein#add('NLKNguyen/papercolor-theme')
 	call dein#add('nightsense/seabird')
 
 	" matcher
-	call dein#add('nixprime/cpsm', {'build' : 'env PY3=ON ./install.sh'})
+	" call dein#add('nixprime/cpsm', {'build' : 'env PY3=ON ./install.sh'})
 
 	call dein#end()
 	call dein#save_state()
@@ -198,10 +198,10 @@ inoremap <C-k> <Up>
 inoremap <C-h> <Left>
 inoremap <C-l> <Right>
 
-let &t_ti.="\e[1 q"
-let &t_SI.="\e[5 q"
-let &t_EI.="\e[1 q"
-let &t_te.="\e[0 q"
+" let &t_ti.="\e[1 q"
+" let &t_SI.="\e[5 q"
+" let &t_EI.="\e[1 q"
+" let &t_te.="\e[0 q"
 
 set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
 
@@ -262,14 +262,14 @@ nmap <C-_><C-_> <Plug>(caw:hatpos:toggle)
 vmap <C-_><C-_> <Plug>(caw:hatpos:toggle)
 
 " Denite
-call denite#custom#source('file_rec', 'matchers', ['matcher_cpsm'])
 call denite#custom#map('insert', 'jj', '<denite:enter_mode:normal>')
 call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>')
 call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>')
-" call denite#custom#map('insert', '<C-t>', '<denite:do_action:tabopen>')
-" call denite#custom#map('normal', 'v', '<denite:do_action:vsplit>')
 call denite#custom#map('insert', '<C-v>', '<denite:do_action:vsplit>')
 call denite#custom#map('normal', '<C-v>', '<denite:do_action:vsplit>')
+" call denite#custom#source('file_rec', 'matchers', ['matcher_cpsm'])
+" call denite#custom#map('insert', '<C-t>', '<denite:do_action:tabopen>')
+" call denite#custom#map('normal', 'v', '<denite:do_action:vsplit>')
 
 " ctrlp
 nnoremap <silent> <C-p> :<C-u>Denite file_rec<CR>
@@ -297,7 +297,6 @@ let g:ale_open_list = 1
 let g:ale_keep_list_window_open = 1
 let g:ale_list_window_size = 2
 let g:ale_sign_column_always = 1
-
 
 " php
 let php_sql_query = 1
