@@ -85,6 +85,7 @@ if dein#load_state(s:dein_dir)
 	call dein#add('machakann/vim-highlightedyank')
 	call dein#add('mhinz/vim-startify')
 	call dein#add('osyo-manga/vim-over')
+	call dein#add('junegunn/fzf.vim')
 
 	" colorscheme
 	" call dein#add('rhysd/vim-color-spring-night')
