@@ -26,12 +26,22 @@ if [ -d $HOME/.goenv/bin ]
 	. (goenv init -|psub)
 end
 
+if [ -d $HOME/.go/bin ]
+	set -gx PATH $HOME/.go/bin $PATH
+end
+
 # $DISPLAY
 set -x DISPLAY localhost:0.0
 
 function upgrade
-	sudo apt update
-	sudo apt upgrade
+	switch (uname)
+	case Linux
+		sudo apt update
+		sudo apt upgrade
+	case Darwin
+		brew update
+		brew upgrade
+	end
 end
 
 function fish_prompt
