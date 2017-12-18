@@ -120,23 +120,31 @@ let g:UltiSnipsExpandTrigger="<C-j>"
 " deoplete
 set completeopt=longest,preview
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#auto_complete_delay = 0
 let g:deoplete#auto_complete_start_length = 1
+let g:deoplete#enable_camel_case = 0
+let g:deoplete#enable_ignore_case = 0
+let g:deoplete#enable_refresh_always = 0
+let g:deoplete#enable_smart_case = 1
+let g:deoplete#file#enable_buffer_path = 1
 " let g:deoplete#sources = get(g:, 'deoplete#sources', {})
 " let g:deoplete#sources.php = ['phpcd', 'omni']
-" let g:deoplete#auto_complete_delay = 0
-" let g:deoplete#enable_camel_case = 0
-" let g:deoplete#enable_ignore_case = 0
-" let g:deoplete#enable_refresh_always = 0
-" let g:deoplete#enable_smart_case = 1
-" let g:deoplete#file#enable_buffer_path = 1
 " let g:deoplete#max_list = 10000
 " let g:deoplete#ignore_sources = get(g:, 'deoplete#ignore_sources', {})
 " let g:deoplete#ignore_sources.php = ['phpcd', 'omni']
 " let g:deoplete#sources = {}
 " let g:deoplete#sources['javascript'] = ['file', 'ultisnips', 'ternjs']
 "
+"
+let g:deoplete#sources#go#align_class = 1
+let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
+let g:deoplete#sources#go#package_dot = 1
+
+
+"
 let g:tern#command = ['tern']
 let g:tern#arguments = ['--persistent']
+
 
 call deoplete#custom#set('ultisnips', 'matchers', ['matcher_fuzzy'])
 
@@ -165,6 +173,10 @@ endfunction
 function! Multiple_cursors_after()
 	let b:deoplete_disable_auto_complete = 0
 endfunction
+
+" deoplete-go
+
+
 
 " Leader to space key
 let mapleader = "\<Space>"
@@ -305,6 +317,9 @@ let php_sql_query = 1
 "textobj
 nmap s <Nop>
 xmap s <Nop>
+
+"golang
+let g:go_fmt_command = 'goimports'
 
 "" 日本語エンコード関連
 if &encoding !=# 'utf-8'

@@ -26,9 +26,9 @@ if [ -d $HOME/.goenv/bin ]
 	. (goenv init -|psub)
 end
 
-if [ -d $HOME/.go/bin ]
-	set -gx PATH $HOME/.go/bin $PATH
-end
+# if [ -d $HOME/.go/bin ]
+# 	set -gx PATH $HOME/.go/bin $PATH
+# end
 
 # $DISPLAY
 set -x DISPLAY localhost:0.0
