@@ -87,8 +87,6 @@ if dein#load_state(s:dein_dir)
 	call dein#add('osyo-manga/vim-over')
 	call dein#add('junegunn/fzf.vim')
 
-	call dein#add('haya14busa/vim-gtrans', {'build': 'go get github.com/haya14busa/gtrans'})
-
 	" colorscheme
 	" call dein#add('rhysd/vim-color-spring-night')
 	" call dein#add('rakr/vim-one')
