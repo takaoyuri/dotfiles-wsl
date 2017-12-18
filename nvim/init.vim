@@ -200,12 +200,7 @@ inoremap <C-k> <Up>
 inoremap <C-h> <Left>
 inoremap <C-l> <Right>
 
-" let &t_ti.="\e[1 q"
-" let &t_SI.="\e[5 q"
-" let &t_EI.="\e[1 q"
-" let &t_te.="\e[0 q"
-
-set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
+" set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
 
 
 " if has('vim_starting')
@@ -223,10 +218,11 @@ au BufRead,BufNewFile *.ihtml set filetype=html
 " indentLine
 set list lcs=tab:\|\ 
 let g:indentLine_enable = 1
-let g:indentLine_newVersion = 0
-let g:indentLine_faster = 0
+let g:indentLine_newVersion = 1
+let g:indentLine_faster = 1
 let g:indentLine_setColors= 100
-let g:indentLine_concealcursor="nc"
+let g:indentLine_concealcursor = 'inc'
+let g:indentLine_conceallevel = 2
 " let g:indentLine_color_term = 254
 " let g:indentLine_color_term = 111
 " let g:indentLine_color_gui = '#708090'
@@ -295,10 +291,11 @@ nmap <silent> <C-u>- :<C-u>Denite -resume -immediately -select=-1<CR>
 " nnoremap ml :<C-u>call denite#start([{'name': 'file_rec', 'args': [g:memolist_path]}])<CR>
 
 " syntax check
+let g:ale_lint_on_text_changed = 0
 let g:ale_set_loclist = 1
 let g:ale_set_quickfix = 0
 let g:ale_open_list = 1
-let g:ale_keep_list_window_open = 1
+let g:ale_keep_list_window_open = 0
 let g:ale_list_window_size = 2
 let g:ale_sign_column_always = 1
 
