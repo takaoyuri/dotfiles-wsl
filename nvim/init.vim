@@ -87,6 +87,8 @@ if dein#load_state(s:dein_dir)
 	call dein#add('osyo-manga/vim-over')
 	call dein#add('junegunn/fzf.vim')
 
+	call dein#add('haya14busa/vim-gtrans', {'build': 'go get github.com/haya14busa/gtrans'})
+
 	" colorscheme
 	" call dein#add('rhysd/vim-color-spring-night')
 	" call dein#add('rakr/vim-one')
@@ -121,6 +123,8 @@ let g:UltiSnipsExpandTrigger="<C-j>"
 set completeopt=longest,preview
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#auto_complete_start_length = 1
+" let g:deoplete#sources = get(g:, 'deoplete#sources', {})
+" let g:deoplete#sources.php = ['phpcd', 'omni']
 " let g:deoplete#auto_complete_delay = 0
 " let g:deoplete#enable_camel_case = 0
 " let g:deoplete#enable_ignore_case = 0
@@ -139,7 +143,7 @@ let g:tern#arguments = ['--persistent']
 call deoplete#custom#set('ultisnips', 'matchers', ['matcher_fuzzy'])
 
 " <TAB>: completion.
-inoremap <expr> <TAB>
+inoremap <silent><expr> <TAB>
 			\ pumvisible() ? "\<C-n>" :
 			\ <SID>check_back_space() ? "\<TAB>" :
 			\ deoplete#manual_complete()
@@ -150,10 +154,10 @@ function! s:check_back_space() abort "{{{
 endfunction"}}}
 
 " <S-TAB>: completion back.
-inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<C-h>"
+" inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<C-h>"
 
 " <BS>: close popup and delete backword char.
-inoremap <expr><BS> deoplete#smart_close_popup()."\<C-h>"
+" inoremap <expr><BS> deoplete#smart_close_popup()."\<C-h>"
 
 " multiple cursor and deoplete
 function! Multiple_cursors_before()
@@ -294,6 +298,7 @@ nmap <silent> <C-u>- :<C-u>Denite -resume -immediately -select=-1<CR>
 
 " syntax check
 let g:ale_set_loclist = 1
+let g:ale_set_quickfix = 0
 let g:ale_open_list = 1
 let g:ale_keep_list_window_open = 1
 let g:ale_list_window_size = 2
