@@ -305,6 +305,10 @@ let g:ale_sign_column_always = 1
 " php
 let php_sql_query = 1
 
+"textobj
+nmap s <Nop>
+xmap s <Nop>
+
 "" 日本語エンコード関連
 if &encoding !=# 'utf-8'
 	set encoding=japan
