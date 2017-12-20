@@ -7,6 +7,10 @@ endif
 let s:dein_dir = expand('~/.cache/dein')
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
+" python3 path
+let g:python3_host_prog = expand('/usr/bin/python3')
+let g:python_host_prog = expand('/usr/bin/python2')
+
 " set runtimepath+=~/.cache/dein/github.com/nixprime/cpsm
 
 " なければgit clone
@@ -41,7 +45,7 @@ if dein#load_state(s:dein_dir)
 	call dein#add('lambdalisue/gina.vim')
 
 	" syntax check
-	call dein#add('w0rp/ale')
+	call dein#add('w0rp/ale', {'lazy': 1})
 
 	" javascript
 	call dein#add('ternjs/tern_for_vim', {'build': 'npm install', 'on_ft': ['javascript', 'html']})
@@ -58,8 +62,10 @@ if dein#load_state(s:dein_dir)
 	call dein#add('ap/vim-css-color', {'on_ft': ['html', 'css', 'javascript']})
 
 	" golang
-	call dein#add('zchee/deoplete-go', {'build': 'make', 'on_ft': 'go'})
+	call dein#add('zchee/deoplete-go', {'depends': ['deoplete.nvim'],'build': 'make', 'on_ft': 'go'})
 	call dein#add('fatih/vim-go', {'on_ft': 'go'})
+	" call dein#add('zchee/nvim-go', {'build': 'make'})
+
 
 	" fish shell
 	call dein#add('dag/vim-fish', {'on_ft' : 'fish'})
@@ -134,12 +140,11 @@ let g:deoplete#file#enable_buffer_path = 1
 " let g:deoplete#ignore_sources.php = ['phpcd', 'omni']
 " let g:deoplete#sources = {}
 " let g:deoplete#sources['javascript'] = ['file', 'ultisnips', 'ternjs']
-"
-"
-let g:deoplete#sources#go#align_class = 1
-let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
-let g:deoplete#sources#go#package_dot = 1
 
+" let g:deoplete#sources#go#align_class = 1
+" let g:deoplete#sources#go#package_dot = 1
+" let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
+let g:deoplete#sources#go#gocode_binary = $GOPATH . '/bin/gocode'
 
 "
 let g:tern#command = ['tern']
@@ -320,6 +325,7 @@ xmap s <Nop>
 
 "golang
 let g:go_fmt_command = 'goimports'
+let g:go#debug = 0
 
 "" 日本語エンコード関連
 if &encoding !=# 'utf-8'
