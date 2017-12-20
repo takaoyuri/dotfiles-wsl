@@ -8,10 +8,8 @@ let s:dein_dir = expand('~/.cache/dein')
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
 " python3 path
-let g:python3_host_prog = expand('/usr/bin/python3')
-let g:python_host_prog = expand('/usr/bin/python2')
-
-" set runtimepath+=~/.cache/dein/github.com/nixprime/cpsm
+" let g:python3_host_prog = expand('/usr/bin/python3')
+" let g:python_host_prog = expand('/usr/bin/python2')
 
 " なければgit clone
 if !isdirectory(s:dein_repo_dir)
