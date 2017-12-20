@@ -164,9 +164,9 @@ endfunction
 " Leader to space key
 let mapleader = "\<Space>"
 
+" colorscheme
 let g:solarized_termcolors=256
 set background=light
-" set termguicolors
 colorscheme solarized
 
 " allow buffer switching without saving

@@ -26,6 +26,15 @@ if [ -d $HOME/.goenv/bin ]
 	. (goenv init -|psub)
 end
 
+#phpbrew
+# if [ -d $HOME/.phpbrew ]
+# 	set -gx PATH $HOME/.phpbrew/bin PATH
+# 	. $HOME/.phpbrew/phpbrew.fish
+# end
+
+if [ -d $HOME/.phpbrew ]
+	. $HOME/.phpbrew/phpbrew.fish
+end
 # if [ -d $HOME/.go/bin ]
 # 	set -gx PATH $HOME/.go/bin $PATH
 # end
