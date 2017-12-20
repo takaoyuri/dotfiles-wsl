@@ -45,7 +45,7 @@ if dein#load_state(s:dein_dir)
 	call dein#add('lambdalisue/gina.vim')
 
 	" syntax check
-	call dein#add('w0rp/ale', {'lazy': 1})
+	call dein#add('w0rp/ale')
 
 	" javascript
 	call dein#add('ternjs/tern_for_vim', {'build': 'npm install', 'on_ft': ['javascript', 'html']})
@@ -131,8 +131,8 @@ let g:deoplete#enable_ignore_case = 0
 let g:deoplete#enable_refresh_always = 0
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#file#enable_buffer_path = 1
-
-let g:deoplete#sources#go#gocode_binary = $GOPATH . '/bin/gocode'
+" let g:deoplete#sources.javascript = ['file', 'ultisnips', 'ternjs']
+" let g:deoplete#sources#go#gocode_binary = $GOPATH . '/bin/gocode'
 
 call deoplete#custom#set('ultisnips', 'matchers', ['matcher_fuzzy'])
 
