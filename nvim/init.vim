@@ -102,6 +102,7 @@ if dein#load_state(s:dein_dir)
 	" call dein#add('chriskempson/base16-vim')
 	" call dein#add('nightsense/seabird')
 	call dein#add('NLKNguyen/papercolor-theme')
+	call dein#add('altercation/vim-colors-solarized')
 
 	" matcher
 	" call dein#add('nixprime/cpsm', {'build' : 'env PY3=ON ./install.sh'})
@@ -163,9 +164,10 @@ endfunction
 " Leader to space key
 let mapleader = "\<Space>"
 
+let g:solarized_termcolors=256
 set background=light
-set termguicolors
-colorscheme PaperColor
+" set termguicolors
+colorscheme solarized
 
 " allow buffer switching without saving
 set hidden
@@ -218,7 +220,7 @@ let g:lightline#bufferline#show_number  = 1
 let g:lightline#bufferline#shorten_path = 0
 let g:lightline#bufferline#unnamed      = '[No Name]'
 let g:lightline = {
-			\ 'colorscheme': 'PaperColor',
+			\ 'colorscheme': 'solarized',
 			\ 'tabline': {
 			\ 'left': [['buffers']], 'right': [['close']]
 			\},
