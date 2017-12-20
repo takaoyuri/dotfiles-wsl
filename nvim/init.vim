@@ -64,8 +64,6 @@ if dein#load_state(s:dein_dir)
 	" golang
 	call dein#add('zchee/deoplete-go', {'depends': ['deoplete.nvim'],'build': 'make', 'on_ft': 'go'})
 	call dein#add('fatih/vim-go', {'on_ft': 'go'})
-	" call dein#add('zchee/nvim-go', {'build': 'make'})
-
 
 	" fish shell
 	call dein#add('dag/vim-fish', {'on_ft' : 'fish'})
@@ -133,25 +131,14 @@ let g:deoplete#enable_ignore_case = 0
 let g:deoplete#enable_refresh_always = 0
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#file#enable_buffer_path = 1
-" let g:deoplete#sources = get(g:, 'deoplete#sources', {})
-" let g:deoplete#sources.php = ['phpcd', 'omni']
-" let g:deoplete#max_list = 10000
-" let g:deoplete#ignore_sources = get(g:, 'deoplete#ignore_sources', {})
-" let g:deoplete#ignore_sources.php = ['phpcd', 'omni']
-" let g:deoplete#sources = {}
-" let g:deoplete#sources['javascript'] = ['file', 'ultisnips', 'ternjs']
 
-" let g:deoplete#sources#go#align_class = 1
-" let g:deoplete#sources#go#package_dot = 1
-" let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
 let g:deoplete#sources#go#gocode_binary = $GOPATH . '/bin/gocode'
 
-"
+call deoplete#custom#set('ultisnips', 'matchers', ['matcher_fuzzy'])
+
+" tern-vim
 let g:tern#command = ['tern']
 let g:tern#arguments = ['--persistent']
-
-
-call deoplete#custom#set('ultisnips', 'matchers', ['matcher_fuzzy'])
 
 " <TAB>: completion.
 inoremap <silent><expr> <TAB>
@@ -164,12 +151,6 @@ function! s:check_back_space() abort "{{{
 	return !col || getline('.')[col - 1]  =~ '\s'
 endfunction"}}}
 
-" <S-TAB>: completion back.
-" inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<C-h>"
-
-" <BS>: close popup and delete backword char.
-" inoremap <expr><BS> deoplete#smart_close_popup()."\<C-h>"
-
 " multiple cursor and deoplete
 function! Multiple_cursors_before()
 	let b:deoplete_disable_auto_complete = 1
@@ -178,10 +159,6 @@ endfunction
 function! Multiple_cursors_after()
 	let b:deoplete_disable_auto_complete = 0
 endfunction
-
-" deoplete-go
-
-
 
 " Leader to space key
 let mapleader = "\<Space>"
@@ -217,19 +194,14 @@ inoremap <C-k> <Up>
 inoremap <C-h> <Left>
 inoremap <C-l> <Right>
 
-" set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
-
-
-" if has('vim_starting')
 	" インサートモード時に非点滅の縦棒タイプのカーソル
 	let &t_SI .= "\e[6 q"
 	" ノーマルモード時に非点滅のブロックタイプのカーソル
 	let &t_EI .= "\e[2 q"
 	" 置換モード時に非点滅の下線タイプのカーソル
 	let &t_SR .= "\e[4 q"
-" endif
 
-" ihtml
+" html
 au BufRead,BufNewFile *.ihtml set filetype=html
 
 " indentLine
@@ -240,9 +212,6 @@ let g:indentLine_faster = 1
 let g:indentLine_setColors= 100
 let g:indentLine_concealcursor = 'inc'
 let g:indentLine_conceallevel = 2
-" let g:indentLine_color_term = 254
-" let g:indentLine_color_term = 111
-" let g:indentLine_color_gui = '#708090'
 
 " lightline
 let g:lightline#bufferline#show_number  = 1
@@ -300,14 +269,14 @@ nmap <silent> <C-u><C-g> :<C-u>Denite grep<CR>
 nmap <silent> <C-u><C-y> :<C-u>Denite neoyank<CR>
 nmap <silent> <C-u><C-r> :<C-u>Denite -resume<CR>
 nmap <silent> <C-u><C-d> :<C-u>call denite#start([{'name': 'file_rec', 'args': ['~/dotfiles']}])<CR>
+nmap <silent> <C-u>; :<C-u>Denite -resume -immediately -select=+1<CR>
+nmap <silent> <C-u>- :<C-u>Denite -resume -immediately -select=-1<CR>
 " nmap <silent> <C-u><C-p> :<C-u>Denite file_rec<CR>
 " nmap <silent> <C-u><C-j> :<C-u>Denite line<CR>
 " nmap <silent> <C-u><C-u> :<C-u>Denite file_mru<CR>
-nmap <silent> <C-u>; :<C-u>Denite -resume -immediately -select=+1<CR>
-nmap <silent> <C-u>- :<C-u>Denite -resume -immediately -select=-1<CR>
 " nnoremap ml :<C-u>call denite#start([{'name': 'file_rec', 'args': [g:memolist_path]}])<CR>
 
-" syntax check
+" ale syntax check
 let g:ale_lint_on_text_changed = 0
 let g:ale_set_loclist = 1
 let g:ale_set_quickfix = 0
