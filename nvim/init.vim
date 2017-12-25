@@ -101,6 +101,7 @@ if dein#load_state(s:dein_dir)
 	" call dein#add('nightsense/seabird')
 	call dein#add('NLKNguyen/papercolor-theme')
 	call dein#add('altercation/vim-colors-solarized')
+	call dein#add('lifepillar/vim-solarized8')
 
 	" matcher
 	" call dein#add('nixprime/cpsm', {'build' : 'env PY3=ON ./install.sh'})
@@ -163,9 +164,10 @@ endfunction
 let mapleader = "\<Space>"
 
 " colorscheme
-let g:solarized_termcolors=256
+" set termguicolors
+let g:solarized_termtrans=0
 set background=light
-colorscheme solarized
+colorscheme solarized8_high
 
 " allow buffer switching without saving
 set hidden

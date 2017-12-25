@@ -47,6 +47,10 @@ end
 # $DISPLAY
 set -x DISPLAY localhost:0.0
 
+function httpserver
+	python3 -m http.server 3474 &
+end
+
 function upgrade
 	switch (uname)
 	case Linux
