@@ -55,7 +55,7 @@ if dein#load_state(s:dein_dir)
 	call dein#add('lvht/phpcd.vim', {'build': 'composer install', 'on_ft': 'php'})
 
 	" html css
-	call dein#add('mattn/emmet-vim', {'on_ft': ['html', 'php']})
+	call dein#add('mattn/emmet-vim', {'on_ft': ['html', 'xhtml', 'php']})
 	call dein#add('othree/html5.vim', {'on_ft': ['html']})
 	call dein#add('ap/vim-css-color', {'on_ft': ['html', 'css', 'javascript']})
 
@@ -99,9 +99,10 @@ if dein#load_state(s:dein_dir)
 	" call dein#add('nanotech/jellybeans.vim')
 	" call dein#add('chriskempson/base16-vim')
 	" call dein#add('nightsense/seabird')
-	call dein#add('NLKNguyen/papercolor-theme')
-	call dein#add('altercation/vim-colors-solarized')
-	call dein#add('lifepillar/vim-solarized8')
+	" call dein#add('NLKNguyen/papercolor-theme')
+	" call dein#add('altercation/vim-colors-solarized')
+	" call dein#add('lifepillar/vim-solarized8')
+	call dein#add('rafi/awesome-vim-colorschemes')
 
 	" matcher
 	" call dein#add('nixprime/cpsm', {'build' : 'env PY3=ON ./install.sh'})
