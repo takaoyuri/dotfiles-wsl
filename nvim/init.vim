@@ -135,8 +135,8 @@ let g:deoplete#enable_refresh_always = 0
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#file#enable_buffer_path = 1
 let g:deoplete_import_js#bin = 'importjs'
-let g:deoplete#sources = {}
-let g:deoplete#sources.javascript = ['file', 'ultisnips', 'ternjs']
+" let g:deoplete#sources = {}
+" let g:deoplete#sources.javascript = ['file', 'ultisnips', 'ternjs']
 " let g:deoplete#sources#go#gocode_binary = $GOPATH . '/bin/gocode'
 
 call deoplete#custom#set('ultisnips', 'matchers', ['matcher_fuzzy'])
