@@ -50,6 +50,8 @@ if dein#load_state(s:dein_dir)
 	call dein#add('carlitux/deoplete-ternjs', {'depends': ['deoplete.nvim']})
 	call dein#add('othree/jspc.vim', {'on_ft': ['javascript', 'html']})
 	call dein#add('othree/yajs.vim', {'on_ft': ['javascript', 'html']})
+	call dein#add('Galooshi/vim-import-js', { 'build': 'npm install -g import-js' })
+	call dein#add('billyvg/deoplete-import-js')
 
 	" php
 	call dein#add('lvht/phpcd.vim', {'build': 'composer install', 'on_ft': 'php'})
@@ -132,6 +134,10 @@ let g:deoplete#enable_ignore_case = 0
 let g:deoplete#enable_refresh_always = 0
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#file#enable_buffer_path = 1
+<<<<<<< HEAD
+=======
+let g:deoplete_import_js#bin = 'importjs'
+>>>>>>> f04dab5a4d9b963ada12f1678c1dd5f935f23db8
 " let g:deoplete#sources = {}
 " let g:deoplete#sources.javascript = ['file', 'ultisnips', 'ternjs']
 " let g:deoplete#sources#go#gocode_binary = $GOPATH . '/bin/gocode'
