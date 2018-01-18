@@ -46,8 +46,8 @@ if dein#load_state(s:dein_dir)
 	call dein#add('w0rp/ale')
 
 	" javascript
-	call dein#add('ternjs/tern_for_vim', {'build': 'npm install', 'on_ft': ['javascript', 'html']})
-	call dein#add('carlitux/deoplete-ternjs', {'depends': ['deoplete.nvim'], 'on_ft': ['javascript', 'html']})
+	call dein#add('ternjs/tern_for_vim', {'build': 'npm install'})
+	call dein#add('carlitux/deoplete-ternjs', {'depends': ['deoplete.nvim']})
 	call dein#add('othree/jspc.vim', {'on_ft': ['javascript', 'html']})
 	call dein#add('othree/yajs.vim', {'on_ft': ['javascript', 'html']})
 
@@ -132,6 +132,7 @@ let g:deoplete#enable_ignore_case = 0
 let g:deoplete#enable_refresh_always = 0
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#file#enable_buffer_path = 1
+" let g:deoplete#sources = {}
 " let g:deoplete#sources.javascript = ['file', 'ultisnips', 'ternjs']
 " let g:deoplete#sources#go#gocode_binary = $GOPATH . '/bin/gocode'
 
@@ -186,6 +187,7 @@ set smartindent
 set hlsearch
 " use clipboard
 set clipboard=unnamed
+set autoread
 
 "" insertモードrを抜ける
 inoremap <silent> jj <ESC>
@@ -210,11 +212,14 @@ au BufRead,BufNewFile *.ihtml set filetype=html
 " indentLine
 set list lcs=tab:\|\ 
 let g:indentLine_enable = 1
-let g:indentLine_newVersion = 1
-let g:indentLine_faster = 1
-let g:indentLine_setColors= 100
-let g:indentLine_concealcursor = 'inc'
-let g:indentLine_conceallevel = 2
+" let g:indentLine_newVersion = 1
+" let g:indentLine_faster = 1
+" let g:indentLine_setColors= 0
+" let g:indentLine_color_term = 239
+" let g:indentLine_concealcursor = 'inc'
+" let g:indentLine_conceallevel = 2
+" let g:indentLine_color_tty_light = 4 " (default: 4)
+" let g:indentLine_color_dark = 2 " (default: 2)
 
 " lightline
 let g:lightline#bufferline#show_number  = 1
