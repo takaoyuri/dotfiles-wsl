@@ -59,7 +59,7 @@ if dein#load_state(s:dein_dir)
 	" html css
 	call dein#add('mattn/emmet-vim', {'on_ft': ['html', 'xhtml', 'php']})
 	call dein#add('othree/html5.vim', {'on_ft': ['html']})
-	call dein#add('ap/vim-css-color', {'on_ft': ['html', 'css', 'javascript']})
+	call dein#add('ap/vim-css-color', {'on_ft': ['html', 'css', 'javascript', 'sass', 'scss']})
 
 	" golang
 	call dein#add('zchee/deoplete-go', {'depends': ['deoplete.nvim'],'build': 'make', 'on_ft': 'go'})
