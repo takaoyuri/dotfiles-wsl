@@ -195,6 +195,7 @@ set hlsearch
 " use clipboard
 set clipboard=unnamed
 set autoread
+au CursorHold * checktime
 
 "" insertモードrを抜ける
 inoremap <silent> jj <ESC>
