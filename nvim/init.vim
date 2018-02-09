@@ -271,6 +271,12 @@ call denite#custom#map('normal', '<C-v>', '<denite:do_action:vsplit>')
 " call denite#custom#source('file_rec', 'matchers', ['matcher_cpsm'])
 " call denite#custom#map('insert', '<C-t>', '<denite:do_action:tabopen>')
 " call denite#custom#map('normal', 'v', '<denite:do_action:vsplit>')
+"
+if executable('rg')
+	call denite#custom#var('file_rec', 'command',
+				\ ['rg', '--files', '--glob', '!.git'])
+	call denite#custom#var('grep', 'command', ['rg'])
+endif
 
 " ctrlp
 nnoremap <silent> <C-p> :<C-u>Denite file_rec<CR>
