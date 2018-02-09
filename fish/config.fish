@@ -30,6 +30,11 @@ if [ -d $HOME/.goenv/bin ]
 	. (goenv init -|psub)
 end
 
+# rust cargo
+if [ -d $HOME/.cargo/bin ]
+	set -gx PATH $HOME/.cargo/bin $PATH
+end
+
 #phpbrew
 # if [ -d $HOME/.phpbrew ]
 # 	set -gx PATH $HOME/.phpbrew/bin PATH
