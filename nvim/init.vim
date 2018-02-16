@@ -276,6 +276,11 @@ if executable('rg')
 	call denite#custom#var('file_rec', 'command',
 				\ ['rg', '--files', '--glob', '!.git'])
 	call denite#custom#var('grep', 'command', ['rg'])
+	call denite#custom#var('grep', 'recursive_opts', [])
+	call denite#custom#var('grep', 'final_opts', [])
+	call denite#custom#var('grep', 'separator', ['--'])
+	call denite#custom#var('grep', 'default_opts',
+				\ ['--vimgrep', '--no-heading'])
 endif
 
 " ctrlp
@@ -313,6 +318,33 @@ let php_sql_query = 1
 "textobj
 nmap s <Nop>
 xmap s <Nop>
+
+"sandwich
+let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
+let g:sandwich#recipes += [
+			\   {
+			\     'buns'    : ['TagInput(1)', 'TagInput(0)'],
+			\     'expr'    : 1,
+			\     'filetype': ['html'],
+			\     'kind'    : ['add', 'replace'],
+			\     'action'  : ['add'],
+			\     'input'   : ['t'],
+			\   },
+			\ ]
+
+function! TagInput(is_head) abort
+	if a:is_head
+		let s:TagLast = input('Tag: ')
+		if s:TagLast !=# ''
+			let tag = printf('<%s>', s:TagLast)
+		else
+			throw 'OperatorSandwichCancel'
+		endif
+	else
+		let tag = printf('</%s>', matchstr(s:TagLast, '^\a[^[:blank:]>/]*'))
+	endif
+	return tag
+endfunction
 
 "golang
 let g:go_fmt_command = 'goimports'
