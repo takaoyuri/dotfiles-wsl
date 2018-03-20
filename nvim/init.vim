@@ -274,7 +274,7 @@ call denite#custom#map('normal', '<C-v>', '<denite:do_action:vsplit>')
 "
 if executable('rg')
 	call denite#custom#var('file_rec', 'command',
-				\ ['rg', '--files', '--glob', '!.git', '--follow'])
+				\ ['rg', '--files', '--glob', '!.git', '--follow', '--hidden'])
 	call denite#custom#var('grep', 'command', ['rg'])
 	call denite#custom#var('grep', 'recursive_opts', [])
 	call denite#custom#var('grep', 'final_opts', [])
@@ -311,6 +311,7 @@ let g:ale_open_list = 1
 let g:ale_keep_list_window_open = 0
 let g:ale_list_window_size = 2
 let g:ale_sign_column_always = 1
+let g:ale_sass_stylelint_use_global = 1
 
 " php
 let php_sql_query = 1
