@@ -52,13 +52,16 @@ if dein#load_state(s:dein_dir)
 	call dein#add('othree/yajs.vim', {'on_ft': ['javascript', 'html']})
 	call dein#add('Galooshi/vim-import-js', { 'build': 'npm install -g import-js' })
 	call dein#add('billyvg/deoplete-import-js')
+	" vue
+	call dein#add('posva/vim-vue')
 
 	" typescript
 	call dein#add('Quramy/tsuquyomi', {'on_ft': 'typescript'})
 	call dein#add('leafgarland/typescript-vim', {'on_ft': 'typescript'})
 
 	" php
-	call dein#add('lvht/phpcd.vim', {'build': 'composer install', 'on_ft': 'php'})
+	call dein#add('StanAngeloff/php.vim', {'on_ft': 'php'})
+	" call dein#add('lvht/phpcd.vim', {'build': 'composer install', 'on_ft': 'php'})
 
 	" html css
 	call dein#add('mattn/emmet-vim', {'on_ft': ['html', 'xhtml', 'php']})
@@ -115,6 +118,7 @@ if dein#load_state(s:dein_dir)
 
 	call dein#end()
 	call dein#save_state()
+
 endif
 
 if dein#check_install()
@@ -139,11 +143,19 @@ let g:deoplete#enable_refresh_always = 0
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#file#enable_buffer_path = 1
 let g:deoplete_import_js#bin = 'importjs'
+
+let g:deoplete#omni_patterns = {}
+let g:deoplete#omni_patterns.html = '<[^>]*'
+let g:deoplete#omni_patterns.css   = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
+let g:deoplete#omni_patterns.scss   = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
+let g:deoplete#omni_patterns.sass   = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
+let g:deoplete#omni_patterns.javascript = '[^. \t]\.\%(\h\w*\)\?'
+let g:deoplete#omni_patterns.php = '\h\w*\|[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
+
 let g:deoplete#sources = {}
-" let g:deoplete#sources.javascript = ['file', 'ultisnips', 'ternjs']
 let g:deoplete#sources#go#gocode_binary = $GOPATH . '/bin/gocode'
 
-call deoplete#custom#set('ultisnips', 'matchers', ['matcher_fuzzy'])
+call deoplete#custom#source('ultisnips', 'matchers', ['matcher_fuzzy'])
 
 " tern-vim
 let g:tern#command = ['tern']
@@ -175,7 +187,7 @@ let mapleader = "\<Space>"
 " colorscheme
 " set termguicolors
 let g:solarized_termtrans=0
-set background=light
+set background=dark
 colorscheme solarized8_high
 
 " allow buffer switching without saving
@@ -207,12 +219,12 @@ inoremap <C-k> <Up>
 inoremap <C-h> <Left>
 inoremap <C-l> <Right>
 
-	" インサートモード時に非点滅の縦棒タイプのカーソル
-	let &t_SI .= "\e[6 q"
-	" ノーマルモード時に非点滅のブロックタイプのカーソル
-	let &t_EI .= "\e[2 q"
-	" 置換モード時に非点滅の下線タイプのカーソル
-	let &t_SR .= "\e[4 q"
+" インサートモード時に非点滅の縦棒タイプのカーソル
+let &t_SI .= "\e[6 q"
+" ノーマルモード時に非点滅のブロックタイプのカーソル
+let &t_EI .= "\e[2 q"
+" 置換モード時に非点滅の下線タイプのカーソル
+let &t_SR .= "\e[4 q"
 
 " html
 au BufRead,BufNewFile *.ihtml set filetype=html
@@ -289,7 +301,6 @@ nnoremap <silent> <C-p> :<C-u>Denite file_rec<CR>
 nnoremap <silent> ;cg :<C-u>DeniteCursorWord grep -buffer-name=search line<CR><C-R><C-W><CR>
 " grep
 nnoremap <silent> ;g :<C-u>Denite -buffer-name=search -mode=normal grep<CR>
-
 nmap <silent> <C-u><C-t> :<C-u>Denite filetype<CR>
 nmap <silent> <C-u><C-c> :<C-u>DeniteCursorWord grep<CR>
 nmap <silent> <C-u><C-g> :<C-u>Denite grep<CR>
@@ -298,10 +309,6 @@ nmap <silent> <C-u><C-r> :<C-u>Denite -resume<CR>
 nmap <silent> <C-u><C-d> :<C-u>call denite#start([{'name': 'file_rec', 'args': ['~/dotfiles']}])<CR>
 nmap <silent> <C-u>; :<C-u>Denite -resume -immediately -select=+1<CR>
 nmap <silent> <C-u>- :<C-u>Denite -resume -immediately -select=-1<CR>
-" nmap <silent> <C-u><C-p> :<C-u>Denite file_rec<CR>
-" nmap <silent> <C-u><C-j> :<C-u>Denite line<CR>
-" nmap <silent> <C-u><C-u> :<C-u>Denite file_mru<CR>
-" nnoremap ml :<C-u>call denite#start([{'name': 'file_rec', 'args': [g:memolist_path]}])<CR>
 
 " ale syntax check
 let g:ale_lint_on_text_changed = 0
