@@ -17,9 +17,9 @@ if [ -d $HOME/.pyenv/bin/ ]
 	. (pyenv init -l psub)
 end
 
-if [ -d $HOME/.config/fnm/bin/ ]
-	set -x PATH $HOME/.config/fnm/bin/ $PATH
-end
+# if [ -d $HOME/.config/fnm/bin/ ]
+# 	set -x PATH $HOME/.config/fnm/bin/ $PATH
+# end
 
 # goenv
 if [ -d $HOME/.goenv/bin ]
