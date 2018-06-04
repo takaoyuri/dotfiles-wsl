@@ -52,6 +52,8 @@ if dein#load_state(s:dein_dir)
 	call dein#add('othree/yajs.vim', {'on_ft': ['javascript', 'html']})
 	call dein#add('Galooshi/vim-import-js', { 'build': 'npm install -g import-js' })
 	call dein#add('billyvg/deoplete-import-js')
+	call dein#add('sbdchd/neoformat')
+
 	" vue
 	call dein#add('posva/vim-vue')
 
@@ -64,7 +66,7 @@ if dein#load_state(s:dein_dir)
 	" call dein#add('lvht/phpcd.vim', {'build': 'composer install', 'on_ft': 'php'})
 
 	" html css
-	call dein#add('mattn/emmet-vim', {'on_ft': ['html', 'xhtml', 'php']})
+	call dein#add('mattn/emmet-vim', {'on_ft': ['html', 'xhtml', 'php', 'vue']})
 	call dein#add('othree/html5.vim', {'on_ft': ['html']})
 	call dein#add('ap/vim-css-color', {'on_ft': ['html', 'css', 'javascript', 'sass', 'scss']})
 
@@ -311,6 +313,13 @@ nmap <silent> <C-u>; :<C-u>Denite -resume -immediately -select=+1<CR>
 nmap <silent> <C-u>- :<C-u>Denite -resume -immediately -select=-1<CR>
 
 " ale syntax check
+let g:ale_fixers = {}
+
+let g:ale_fixers = {
+\   'javascript': ['prettier'],
+\   'vue': ['prettier'],
+\   'html': ['prettier'],
+\}
 let g:ale_lint_on_text_changed = 0
 let g:ale_set_loclist = 1
 let g:ale_set_quickfix = 0
@@ -319,6 +328,8 @@ let g:ale_keep_list_window_open = 0
 let g:ale_list_window_size = 2
 let g:ale_sign_column_always = 1
 let g:ale_sass_stylelint_use_global = 1
+let g:ale_fix_on_save = 1
+
 
 " php
 let php_sql_query = 1
