@@ -53,6 +53,7 @@ if dein#load_state(s:dein_dir)
 	call dein#add('Galooshi/vim-import-js', { 'build': 'npm install -g import-js' })
 	call dein#add('billyvg/deoplete-import-js')
 	call dein#add('sbdchd/neoformat')
+	call dein#add('heavenshell/vim-jsdoc')
 
 	" vue
 	call dein#add('posva/vim-vue')
@@ -84,7 +85,7 @@ if dein#load_state(s:dein_dir)
 	call dein#add('cohama/lexima.vim')
 	call dein#add('chrisbra/Colorizer')
 	call dein#add('haya14busa/vim-asterisk')
-	call dein#add('haya14busa/incsearch.vim')
+	" call dein#add('haya14busa/incsearch.vim')
 	call dein#add('easymotion/vim-easymotion')
 	call dein#add('thinca/vim-zenspace')
 	call dein#add('ntpeters/vim-better-whitespace')
@@ -159,9 +160,13 @@ let g:deoplete#sources#go#gocode_binary = $GOPATH . '/bin/gocode'
 
 call deoplete#custom#source('ultisnips', 'matchers', ['matcher_fuzzy'])
 
+" javascript
 " tern-vim
 let g:tern#command = ['tern']
 let g:tern#arguments = ['--persistent']
+" jsDoc
+let g:jsdoc_enable_es6 = 1
+let g:jsdoc_allow_input_prompt = 1
 
 " <TAB>: completion.
 inoremap <silent><expr> <TAB>
@@ -205,7 +210,12 @@ set showmatch
 set showtabline=2
 set matchtime=1
 set smartindent
+
+set ignorecase
+set smartcase
+set incsearch
 set hlsearch
+
 " use clipboard
 set clipboard=unnamed
 set autoread
@@ -265,9 +275,9 @@ nnoremap <Left> :bprev<CR>
 nnoremap <Right> :bnext<CR>
 
 " incsearch
-map /  <Plug>(incsearch-forward)
-map ?  <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
+" map /  <Plug>(incsearch-forward)
+" map ?  <Plug>(incsearch-backward)
+" map g/ <Plug>(incsearch-stay)
 
 " vim-asterisk
 map *   <Plug>(asterisk-*)
@@ -330,6 +340,13 @@ let g:ale_sign_column_always = 1
 let g:ale_sass_stylelint_use_global = 1
 let g:ale_fix_on_save = 1
 
+" vue
+autocmd FileType vue syntax sync fromstart
+autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
+
+" css
+"* での検索や text-object 等での選択時に - で切らない
+setlocal iskeyword& iskeyword+=-
 
 " php
 let php_sql_query = 1
