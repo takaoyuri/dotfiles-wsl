@@ -11,6 +11,11 @@ if [ -f $HOME/.config/fish/aliases.fish ]
 	. $HOME/.config/fish/aliases.fish
 end
 
+# $HOME/bin
+if [ -d $HOME/bin ]
+	set -x PATH $HOME/bin/ $PATH
+end
+
 # pyenv
 if [ -d $HOME/.pyenv/bin/ ]
 	set -x PATH $HOME/.pyenv/bin/ $PATH
