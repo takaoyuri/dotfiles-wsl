@@ -53,7 +53,7 @@ if dein#load_state(s:dein_dir)
 	call dein#add('Galooshi/vim-import-js', { 'build': 'npm install -g import-js' })
 	call dein#add('billyvg/deoplete-import-js')
 	call dein#add('sbdchd/neoformat')
-	call dein#add('heavenshell/vim-jsdoc')
+	" call dein#add('heavenshell/vim-jsdoc')
 
 	" vue
 	call dein#add('posva/vim-vue')
@@ -72,8 +72,8 @@ if dein#load_state(s:dein_dir)
 	call dein#add('ap/vim-css-color', {'on_ft': ['html', 'css', 'javascript', 'sass', 'scss']})
 
 	" golang
-	call dein#add('zchee/deoplete-go', {'depends': ['deoplete.nvim'],'build': 'make', 'on_ft': 'go'})
-	call dein#add('fatih/vim-go', {'on_ft': 'go'})
+	" call dein#add('zchee/deoplete-go', {'depends': ['deoplete.nvim'],'build': 'make', 'on_ft': 'go'})
+	" call dein#add('fatih/vim-go', {'on_ft': 'go'})
 
 	" fish shell
 	call dein#add('dag/vim-fish', {'on_ft' : 'fish'})
@@ -91,6 +91,7 @@ if dein#load_state(s:dein_dir)
 	call dein#add('ntpeters/vim-better-whitespace')
 	call dein#add('tyru/caw.vim')
 	call dein#add('terryma/vim-multiple-cursors')
+	" call dein#add('mg979/vim-visual-multi')
 	call dein#add('Yggdroot/indentLine')
 	call dein#add('yuttie/comfortable-motion.vim')
 	call dein#add('rhysd/clever-f.vim')
@@ -156,7 +157,7 @@ let g:deoplete#omni_patterns.javascript = '[^. \t]\.\%(\h\w*\)\?'
 let g:deoplete#omni_patterns.php = '\h\w*\|[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
 
 let g:deoplete#sources = {}
-let g:deoplete#sources#go#gocode_binary = $GOPATH . '/bin/gocode'
+" let g:deoplete#sources#go#gocode_binary = $GOPATH . '/bin/gocode'
 
 call deoplete#custom#source('ultisnips', 'matchers', ['matcher_fuzzy'])
 
@@ -383,8 +384,8 @@ function! TagInput(is_head) abort
 endfunction
 
 "golang
-let g:go_fmt_command = 'goimports'
-let g:go#debug = 0
+" let g:go_fmt_command = 'goimports'
+" let g:go#debug = 0
 
 "" 日本語エンコード関連
 if &encoding !=# 'utf-8'
