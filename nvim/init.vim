@@ -390,14 +390,14 @@ endfunction
 
 if system('uname -a | grep Microsoft') != ""
 	let g:clipboard = {
-				\   'name': 'myClipboard',
+				\   'name': 'win32yank',
 				\   'copy': {
-				\      '+': 'win32yank.exe -i',
-				\      '*': 'win32yank.exe -i',
+				\      '+': 'win32yank -i',
+				\      '*': 'win32yank -i',
 				\    },
 				\   'paste': {
-				\      '+': 'win32yank.exe -o',
-				\      '*': 'win32yank.exe -o',
+				\      '+': 'win32yank -o',
+				\      '*': 'win32yank -o',
 				\   },
 				\   'cache_enabled': 1,
 				\ }
