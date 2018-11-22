@@ -50,9 +50,6 @@ if dein#load_state(s:dein_dir)
 	" syntax check
 	call dein#add('w0rp/ale')
 
-	" C/C++
-	" call dein#add('zchee/deoplete-clang')
-
 	" javascript
 	call dein#add('ternjs/tern_for_vim', {'build': 'npm install'})
 	call dein#add('carlitux/deoplete-ternjs', {'depends': ['deoplete.nvim']})
@@ -72,8 +69,6 @@ if dein#load_state(s:dein_dir)
 
 	" php
 	call dein#add('StanAngeloff/php.vim', {'on_ft': 'php'})
-	" call dein#add('lvht/phpcd.vim', {'build': 'composer install', 'on_ft': 'php'})
-	" call dein#add('padawan-php/deoplete-padawan', {'on_ft': 'php', 'build': 'composer install'})
 
 	" html css
 	call dein#add('mattn/emmet-vim', {'on_ft': ['html', 'xhtml', 'php', 'vue']})

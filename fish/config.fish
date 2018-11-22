@@ -54,9 +54,9 @@ end
 # end
 
 # php composer global
-#if [ -d $HOME/.composer ]
-#	set -g PATH $HOME/.composer/vendor/bin $PATH
-#end
+if [ -d $HOME/.composer/vendor/bin ]
+	set -gx PATH $HOME/.composer/vendor/bin $PATH
+end
 
 # $DISPLAY
 set -x DISPLAY localhost:0.0
