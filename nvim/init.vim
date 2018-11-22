@@ -29,6 +29,11 @@ if dein#load_state(s:dein_dir)
 	call dein#add('Shougo/neco-syntax')
 	call dein#add('thinca/vim-quickrun')
 
+	" call dein#add('autozimu/LanguageClient-neovim', {
+	"			\ 'rev': 'next',
+	"			\ 'build': 'bash install.sh',
+	"			\ })
+
 	" snippets
 	call dein#add('SirVer/ultisnips')
 	call dein#add('honza/vim-snippets')
@@ -44,6 +49,9 @@ if dein#load_state(s:dein_dir)
 
 	" syntax check
 	call dein#add('w0rp/ale')
+
+	" C/C++
+	" call dein#add('zchee/deoplete-clang')
 
 	" javascript
 	call dein#add('ternjs/tern_for_vim', {'build': 'npm install'})
@@ -65,6 +73,7 @@ if dein#load_state(s:dein_dir)
 	" php
 	call dein#add('StanAngeloff/php.vim', {'on_ft': 'php'})
 	" call dein#add('lvht/phpcd.vim', {'build': 'composer install', 'on_ft': 'php'})
+	" call dein#add('padawan-php/deoplete-padawan', {'on_ft': 'php', 'build': 'composer install'})
 
 	" html css
 	call dein#add('mattn/emmet-vim', {'on_ft': ['html', 'xhtml', 'php', 'vue']})
@@ -92,7 +101,7 @@ if dein#load_state(s:dein_dir)
 	call dein#add('tyru/caw.vim')
 	call dein#add('terryma/vim-multiple-cursors')
 	" call dein#add('mg979/vim-visual-multi')
-	call dein#add('Yggdroot/indentLine')
+	" call dein#add('Yggdroot/indentLine')
 	call dein#add('yuttie/comfortable-motion.vim')
 	call dein#add('rhysd/clever-f.vim')
 	call dein#add('itchyny/lightline.vim')
@@ -330,6 +339,7 @@ let g:ale_fixers = {
 \   'javascript': ['prettier'],
 \   'vue': ['prettier'],
 \   'html': ['prettier'],
+\   'c': ['clang-format'],
 \}
 let g:ale_lint_on_text_changed = 0
 let g:ale_set_loclist = 1
@@ -382,6 +392,21 @@ function! TagInput(is_head) abort
 	endif
 	return tag
 endfunction
+
+if system('uname -a | grep Microsoft') != ""
+	let g:clipboard = {
+				\   'name': 'myClipboard',
+				\   'copy': {
+				\      '+': 'win32yank.exe -i',
+				\      '*': 'win32yank.exe -i',
+				\    },
+				\   'paste': {
+				\      '+': 'win32yank.exe -o',
+				\      '*': 'win32yank.exe -o',
+				\   },
+				\   'cache_enabled': 1,
+				\ }
+endif
 
 "golang
 " let g:go_fmt_command = 'goimports'
