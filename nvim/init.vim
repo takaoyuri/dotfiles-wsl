@@ -51,17 +51,17 @@ if dein#load_state(s:dein_dir)
 	call dein#add('w0rp/ale')
 
 	" javascript
-	call dein#add('ternjs/tern_for_vim', {'build': 'npm install'})
-	call dein#add('carlitux/deoplete-ternjs', {'depends': ['deoplete.nvim']})
-	call dein#add('othree/jspc.vim', {'on_ft': ['javascript', 'html']})
-	call dein#add('othree/yajs.vim', {'on_ft': ['javascript', 'html']})
+	call dein#add('ternjs/tern_for_vim', {'build': 'npm install', 'on_ft': ['html', 'javascript', 'vue']})
+	call dein#add('carlitux/deoplete-ternjs', {'depends': ['deoplete.nvim'], 'on_ft': ['html', 'javascript', 'vue']})
+	call dein#add('othree/jspc.vim', {'on_ft': ['javascript', 'html', 'vue']})
+	call dein#add('othree/yajs.vim', {'on_ft': ['javascript', 'html', 'vue']})
 	call dein#add('Galooshi/vim-import-js', { 'build': 'npm install -g import-js' })
 	call dein#add('billyvg/deoplete-import-js')
 	call dein#add('sbdchd/neoformat')
 	" call dein#add('heavenshell/vim-jsdoc')
 
 	" vue
-	call dein#add('posva/vim-vue')
+	call dein#add('posva/vim-vue', {'on_ft': ['javascript', 'vue']})
 
 	" typescript
 	call dein#add('Quramy/tsuquyomi', {'on_ft': 'typescript'})
@@ -73,7 +73,7 @@ if dein#load_state(s:dein_dir)
 	" html css
 	call dein#add('mattn/emmet-vim', {'on_ft': ['html', 'xhtml', 'php', 'vue']})
 	call dein#add('othree/html5.vim', {'on_ft': ['html']})
-	call dein#add('ap/vim-css-color', {'on_ft': ['html', 'css', 'javascript', 'sass', 'scss']})
+	call dein#add('ap/vim-css-color', {'on_ft': ['html', 'css', 'javascript', 'sass', 'scss', 'vue']})
 
 	" golang
 	" call dein#add('zchee/deoplete-go', {'depends': ['deoplete.nvim'],'build': 'make', 'on_ft': 'go'})
@@ -199,7 +199,7 @@ let mapleader = "\<Space>"
 " colorscheme
 " set termguicolors
 let g:solarized_termtrans=0
-set background=dark
+set background=light
 colorscheme solarized8_high
 
 " allow buffer switching without saving

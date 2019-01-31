@@ -6,6 +6,9 @@ set --export EDITOR "nvim"
 # make Vim usable with git
 set --export GIT_EDITOR "nvim"
 
+# Vagrant on wsl
+set --export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS "1"
+
 # alias
 if [ -f $HOME/.config/fish/aliases.fish ]
 	. $HOME/.config/fish/aliases.fish
@@ -56,6 +59,16 @@ end
 # php composer global
 if [ -d $HOME/.composer/vendor/bin ]
 	set -gx PATH $HOME/.composer/vendor/bin $PATH
+end
+
+# pip
+if [ -d $HOME/.local/bin ]
+	set -gx PATH $HOME/.local/bin $PATH
+end
+
+# yarn
+if [ -d $HOME/.yarn/bin ]
+	set -gx PATH $HOME/.yarn/bin $PATH
 end
 
 # $DISPLAY
