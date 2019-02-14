@@ -261,7 +261,7 @@ let g:indentLine_enable = 1
 " lightline
 let g:lightline#bufferline#show_number  = 1
 let g:lightline#bufferline#shorten_path = 0
-let g:lightline#bufferline#unnamed      = '[No Name]'
+let g:lightline#bufferline#unnamed      = '[unnamed]'
 let g:lightline = {
 			\ 'colorscheme': 'solarized',
 			\ 'tabline': {
@@ -274,6 +274,7 @@ let g:lightline = {
 			\ 'buffers': 'tabsel'
 			\}
 			\}
+autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
 
 " remap arrow keys
 nnoremap <Left> :bprev<CR>

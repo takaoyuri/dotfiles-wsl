@@ -50,7 +50,7 @@ end
 # end
 
 if [ -d $HOME/.phpbrew ]
-	. $HOME/.phpbrew/phpbrew.fish
+	set -gx PATH $HOME/.phpbrew/phpbrew.fish
 end
 # if [ -d $HOME/.go/bin ]
 # 	set -gx PATH $HOME/.go/bin $PATH
