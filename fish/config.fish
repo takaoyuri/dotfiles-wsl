@@ -1,5 +1,8 @@
 set fish_greeting ""
 
+set --export FZF_TMUX "1"
+set --export FZF_DEFAULT_OPTS "--extended --cycle --inline-info --ansi"
+
 # make Vim the default editor
 set --export EDITOR "nvim"
 

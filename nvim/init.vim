@@ -197,10 +197,11 @@ endfunction
 let mapleader = "\<Space>"
 
 " colorscheme
-" set termguicolors
+set termguicolors
 let g:solarized_termtrans=0
 set background=light
 colorscheme solarized8_high
+" colorscheme onedark
 
 " allow buffer switching without saving
 set hidden
