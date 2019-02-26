@@ -80,7 +80,7 @@ if dein#load_state(s:dein_dir)
 	" call dein#add('fatih/vim-go', {'on_ft': 'go'})
 
 	" fish shell
-	call dein#add('dag/vim-fish', {'on_ft' : 'fish'})
+	" call dein#add('dag/vim-fish', {'on_ft' : 'fish'})
 
 	" toml
 	call dein#add('cespare/vim-toml', {'on_ft': 'toml'})
@@ -185,13 +185,19 @@ function! s:check_back_space() abort "{{{
 endfunction"}}}
 
 " multiple cursor and deoplete
-function! Multiple_cursors_before()
-	let b:deoplete_disable_auto_complete = 1
-endfunction
-
-function! Multiple_cursors_after()
-	let b:deoplete_disable_auto_complete = 0
-endfunction
+func! Multiple_cursors_before()
+	if deoplete#is_enabled()
+		call deoplete#disable()
+		let g:deoplete_is_enable_before_multi_cursors = 1
+	else
+		let g:deoplete_is_enable_before_multi_cursors = 0
+	endif
+endfunc
+func! Multiple_cursors_after()
+	if g:deoplete_is_enable_before_multi_cursors
+		call deoplete#enable()
+	endif
+endfunc
 
 " Leader to space key
 let mapleader = "\<Space>"
@@ -200,8 +206,8 @@ let mapleader = "\<Space>"
 set termguicolors
 let g:solarized_termtrans=0
 set background=light
-colorscheme solarized8_high
-" colorscheme onedark
+" colorscheme solarized8_high
+colorscheme onedark
 
 " allow buffer switching without saving
 set hidden
