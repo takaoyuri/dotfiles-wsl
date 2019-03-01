@@ -28,6 +28,11 @@ if dein#load_state(s:dein_dir)
 	call dein#add('Shougo/context_filetype.vim')
 	call dein#add('Shougo/neco-syntax')
 	call dein#add('thinca/vim-quickrun')
+	call dein#add('Shougo/defx.nvim')
+	if !has('nvim')
+		call dein#add('roxma/nvim-yarp')
+		call dein#add('roxma/vim-hug-neovim-rpc')
+	endif
 
 	" call dein#add('autozimu/LanguageClient-neovim', {
 	"			\ 'rev': 'next',
@@ -206,8 +211,8 @@ let mapleader = "\<Space>"
 set termguicolors
 let g:solarized_termtrans=0
 set background=light
-" colorscheme solarized8_high
-colorscheme onedark
+colorscheme solarized8_high
+" colorscheme onedark
 
 " allow buffer switching without saving
 set hidden
