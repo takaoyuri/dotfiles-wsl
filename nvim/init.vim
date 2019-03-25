@@ -28,11 +28,11 @@ if dein#load_state(s:dein_dir)
 	call dein#add('Shougo/context_filetype.vim')
 	call dein#add('Shougo/neco-syntax')
 	call dein#add('thinca/vim-quickrun')
-	call dein#add('Shougo/defx.nvim')
-	if !has('nvim')
-		call dein#add('roxma/nvim-yarp')
-		call dein#add('roxma/vim-hug-neovim-rpc')
-	endif
+	" call dein#add('Shougo/defx.nvim')
+	" if !has('nvim')
+	" 	call dein#add('roxma/nvim-yarp')
+	" 	call dein#add('roxma/vim-hug-neovim-rpc')
+	" endif
 
 	" call dein#add('autozimu/LanguageClient-neovim', {
 	"			\ 'rev': 'next',
@@ -60,8 +60,8 @@ if dein#load_state(s:dein_dir)
 	call dein#add('carlitux/deoplete-ternjs', {'depends': ['deoplete.nvim'], 'on_ft': ['html', 'javascript', 'vue']})
 	call dein#add('othree/jspc.vim', {'on_ft': ['javascript', 'html', 'vue']})
 	call dein#add('othree/yajs.vim', {'on_ft': ['javascript', 'html', 'vue']})
-	call dein#add('Galooshi/vim-import-js', { 'build': 'npm install -g import-js' })
-	call dein#add('billyvg/deoplete-import-js')
+	" call dein#add('Galooshi/vim-import-js', { 'build': 'npm install -g import-js' })
+	" call dein#add('billyvg/deoplete-import-js')
 	call dein#add('sbdchd/neoformat')
 	" call dein#add('heavenshell/vim-jsdoc')
 
@@ -155,7 +155,7 @@ let g:deoplete#enable_ignore_case = 0
 let g:deoplete#enable_refresh_always = 0
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#file#enable_buffer_path = 1
-let g:deoplete_import_js#bin = 'importjs'
+" let g:deoplete_import_js#bin = 'importjs'
 
 let g:deoplete#omni_patterns = {}
 let g:deoplete#omni_patterns.html = '<[^>]*'
@@ -165,7 +165,7 @@ let g:deoplete#omni_patterns.sass   = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
 let g:deoplete#omni_patterns.javascript = '[^. \t]\.\%(\h\w*\)\?'
 let g:deoplete#omni_patterns.php = '\h\w*\|[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
 
-let g:deoplete#sources = {}
+" let g:deoplete#sources = {}
 " let g:deoplete#sources#go#gocode_binary = $GOPATH . '/bin/gocode'
 
 call deoplete#custom#source('ultisnips', 'matchers', ['matcher_fuzzy'])
@@ -326,7 +326,7 @@ if executable('rg')
 endif
 
 " ctrlp
-nnoremap <silent> <C-p> :<C-u>Denite file_rec<CR>
+nnoremap <silent> <C-p> :<C-u>Denite file/rec<CR>
 " cursor word grep
 nnoremap <silent> ;cg :<C-u>DeniteCursorWord grep -buffer-name=search line<CR><C-R><C-W><CR>
 " grep
