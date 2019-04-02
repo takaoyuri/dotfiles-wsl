@@ -2,6 +2,7 @@ set fish_greeting ""
 
 set --export FZF_TMUX "1"
 set --export FZF_DEFAULT_OPTS "--extended --cycle --inline-info --ansi"
+set --export FZF_DEFAULT_COMMAND 'rg --files --hidden --follow --glob "!.git/*"'
 
 # make Vim the default editor
 set --export EDITOR "nvim"

@@ -20,13 +20,13 @@ execute 'set runtimepath^=' . s:dein_repo_dir
 if dein#load_state(s:dein_dir)
 	call dein#begin(s:dein_dir)
 	call dein#add('Shougo/dein.vim')
-	call dein#add('Shougo/deoplete.nvim')
+	" call dein#add('Shougo/deoplete.nvim')
 	call dein#add('Shougo/denite.nvim')
 	call dein#add('Shougo/neomru.vim')
 	call dein#add('Shougo/neoyank.vim')
-	call dein#add('Shougo/deol.nvim')
+	" call dein#add('Shougo/deol.nvim')
 	call dein#add('Shougo/context_filetype.vim')
-	call dein#add('Shougo/neco-syntax')
+	" call dein#add('Shougo/neco-syntax')
 	call dein#add('thinca/vim-quickrun')
 	" call dein#add('Shougo/defx.nvim')
 	" if !has('nvim')
@@ -38,6 +38,9 @@ if dein#load_state(s:dein_dir)
 	"			\ 'rev': 'next',
 	"			\ 'build': 'bash install.sh',
 	"			\ })
+	
+	"Autocomplete
+	call dein#add('neoclide/coc.nvim', {'build': 'yarn install'})
 
 	" snippets
 	call dein#add('SirVer/ultisnips')
@@ -56,17 +59,17 @@ if dein#load_state(s:dein_dir)
 	call dein#add('w0rp/ale')
 
 	" javascript
-	call dein#add('ternjs/tern_for_vim', {'build': 'npm install', 'on_ft': ['html', 'javascript', 'vue']})
-	call dein#add('carlitux/deoplete-ternjs', {'depends': ['deoplete.nvim'], 'on_ft': ['html', 'javascript', 'vue']})
+	" call dein#add('ternjs/tern_for_vim', {'build': 'npm install', 'on_ft': ['html', 'javascript', 'vue']})
+	" call dein#add('carlitux/deoplete-ternjs', {'depends': ['deoplete.nvim'], 'on_ft': ['html', 'javascript', 'vue']})
 	call dein#add('othree/jspc.vim', {'on_ft': ['javascript', 'html', 'vue']})
 	call dein#add('othree/yajs.vim', {'on_ft': ['javascript', 'html', 'vue']})
+	call dein#add('sbdchd/neoformat')
 	" call dein#add('Galooshi/vim-import-js', { 'build': 'npm install -g import-js' })
 	" call dein#add('billyvg/deoplete-import-js')
-	call dein#add('sbdchd/neoformat')
 	" call dein#add('heavenshell/vim-jsdoc')
 
 	" vue
-	call dein#add('posva/vim-vue', {'on_ft': ['javascript', 'vue']})
+	" call dein#add('posva/vim-vue', {'on_ft': ['javascript', 'vue']})
 
 	" typescript
 	call dein#add('Quramy/tsuquyomi', {'on_ft': 'typescript'})
@@ -91,9 +94,9 @@ if dein#load_state(s:dein_dir)
 	call dein#add('cespare/vim-toml', {'on_ft': 'toml'})
 
 	" UI etc
-	call dein#add('cohama/lexima.vim')
+	" call dein#add('cohama/lexima.vim')
 	call dein#add('chrisbra/Colorizer')
-	call dein#add('haya14busa/vim-asterisk')
+	" call dein#add('haya14busa/vim-asterisk')
 	" call dein#add('haya14busa/incsearch.vim')
 	call dein#add('easymotion/vim-easymotion')
 	call dein#add('thinca/vim-zenspace')
@@ -146,43 +149,51 @@ syntax enable
 let g:UltiSnipsExpandTrigger="<C-j>"
 
 " deoplete
-set completeopt=longest,preview
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#auto_complete_delay = 0
-let g:deoplete#auto_complete_start_length = 1
-let g:deoplete#enable_camel_case = 0
-let g:deoplete#enable_ignore_case = 0
-let g:deoplete#enable_refresh_always = 0
-let g:deoplete#enable_smart_case = 1
-let g:deoplete#file#enable_buffer_path = 1
-" let g:deoplete_import_js#bin = 'importjs'
-
-let g:deoplete#omni_patterns = {}
-let g:deoplete#omni_patterns.html = '<[^>]*'
-let g:deoplete#omni_patterns.css   = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
-let g:deoplete#omni_patterns.scss   = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
-let g:deoplete#omni_patterns.sass   = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
-let g:deoplete#omni_patterns.javascript = '[^. \t]\.\%(\h\w*\)\?'
-let g:deoplete#omni_patterns.php = '\h\w*\|[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
-
-" let g:deoplete#sources = {}
-" let g:deoplete#sources#go#gocode_binary = $GOPATH . '/bin/gocode'
-
-call deoplete#custom#source('ultisnips', 'matchers', ['matcher_fuzzy'])
-
+" set completeopt=longest,preview
+" let g:deoplete#enable_at_startup = 1
+" let g:deoplete#auto_complete_delay = 0
+" let g:deoplete#auto_complete_start_length = 1
+" let g:deoplete#enable_camel_case = 0
+" let g:deoplete#enable_ignore_case = 0
+" let g:deoplete#enable_refresh_always = 0
+" let g:deoplete#enable_smart_case = 1
+" let g:deoplete#file#enable_buffer_path = 1
+" " let g:deoplete_import_js#bin = 'importjs'
+"
+" let g:deoplete#omni_patterns = {}
+" let g:deoplete#omni_patterns.html = '<[^>]*'
+" let g:deoplete#omni_patterns.css   = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
+" let g:deoplete#omni_patterns.scss   = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
+" let g:deoplete#omni_patterns.sass   = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
+" let g:deoplete#omni_patterns.javascript = '[^. \t]\.\%(\h\w*\)\?'
+" let g:deoplete#omni_patterns.php = '\h\w*\|[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
+"
+" " let g:deoplete#sources = {}
+" " let g:deoplete#sources#go#gocode_binary = $GOPATH . '/bin/gocode'
+"
+" call deoplete#custom#source('ultisnips', 'matchers', ['matcher_fuzzy'])
+"
 " javascript
 " tern-vim
-let g:tern#command = ['tern']
-let g:tern#arguments = ['--persistent']
+" let g:tern#command = ['tern']
+" let g:tern#arguments = ['--persistent']
 " jsDoc
 let g:jsdoc_enable_es6 = 1
 let g:jsdoc_allow_input_prompt = 1
 
 " <TAB>: completion.
+" inoremap <silent><expr> <TAB>
+"			\ pumvisible() ? "\<C-n>" :
+"			\ <SID>check_back_space() ? "\<TAB>" :
+"			\ deoplete#manual_complete()
+"
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>
-			\ pumvisible() ? "\<C-n>" :
-			\ <SID>check_back_space() ? "\<TAB>" :
-			\ deoplete#manual_complete()
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort "{{{
 	let col = col('.') - 1
@@ -190,28 +201,30 @@ function! s:check_back_space() abort "{{{
 endfunction"}}}
 
 " multiple cursor and deoplete
-func! Multiple_cursors_before()
-	if deoplete#is_enabled()
-		call deoplete#disable()
-		let g:deoplete_is_enable_before_multi_cursors = 1
-	else
-		let g:deoplete_is_enable_before_multi_cursors = 0
-	endif
-endfunc
-func! Multiple_cursors_after()
-	if g:deoplete_is_enable_before_multi_cursors
-		call deoplete#enable()
-	endif
-endfunc
+" func! Multiple_cursors_before()
+" 	if deoplete#is_enabled()
+" 		call deoplete#disable()
+" 		let g:deoplete_is_enable_before_multi_cursors = 1
+" 	else
+" 		let g:deoplete_is_enable_before_multi_cursors = 0
+" 	endif
+" endfunc
+" func! Multiple_cursors_after()
+" 	if g:deoplete_is_enable_before_multi_cursors
+" 		call deoplete#enable()
+" 	endif
+" endfunc
 
 " Leader to space key
 let mapleader = "\<Space>"
 
 " colorscheme
-set termguicolors
-let g:solarized_termtrans=0
+" set termguicolors
+" let g:solarized_termtrans=0
 set background=light
 colorscheme solarized8_high
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 " colorscheme onedark
 
 " allow buffer switching without saving
@@ -316,7 +329,7 @@ call denite#custom#map('normal', '<C-v>', '<denite:do_action:vsplit>')
 "
 if executable('rg')
 	call denite#custom#var('file_rec', 'command',
-				\ ['rg', '--files', '--glob', '!.git', '--follow', '--hidden'])
+				\ ['rg', '--files', '--glob', '!{.git,node_modules}', '--follow', '--hidden'])
 	call denite#custom#var('grep', 'command', ['rg'])
 	call denite#custom#var('grep', 'recursive_opts', [])
 	call denite#custom#var('grep', 'final_opts', [])
