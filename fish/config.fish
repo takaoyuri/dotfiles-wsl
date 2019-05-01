@@ -33,6 +33,10 @@ end
 # 	set -x PATH $HOME/.config/fnm/bin/ $PATH
 # end
 
+if [ -d $HOME/.nodebrew ]
+	set -gx PATH $HOME/.nodebrew/current/bin $PATH
+end
+
 # goenv
 if [ -d $HOME/.goenv/bin ]
 	set -gx GOPATH $HOME/go
