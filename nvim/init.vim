@@ -106,13 +106,14 @@ if dein#load_state(s:dein_dir)
 	" call dein#add('mg979/vim-visual-multi')
 	" call dein#add('Yggdroot/indentLine')
 	call dein#add('yuttie/comfortable-motion.vim')
-	call dein#add('rhysd/clever-f.vim')
+	" call dein#add('rhysd/clever-f.vim')
 	call dein#add('itchyny/lightline.vim')
 	call dein#add('mgee/lightline-bufferline')
 	call dein#add('machakann/vim-highlightedyank')
 	call dein#add('mhinz/vim-startify')
 	call dein#add('osyo-manga/vim-over')
 	call dein#add('junegunn/fzf.vim')
+	call dein#add('andymass/vim-matchup')
 
 	" colorscheme
 	" call dein#add('rhysd/vim-color-spring-night')
@@ -262,6 +263,17 @@ command! -nargs=0 Format :call CocAction('format')
 
 " Use `:Fold` for fold current buffer
 command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" press <esc> to cancel.
+nmap f <Plug>(coc-smartf-forward)
+nmap F <Plug>(coc-smartf-backward)
+nmap ; <Plug>(coc-smartf-repeat)
+nmap , <Plug>(coc-smartf-repeat-opposite)
+
+augroup Smartf
+  autocmd User SmartfEnter :hi Conceal ctermfg=220 guifg=#6638F0
+  autocmd User SmartfLeave :hi Conceal ctermfg=239 guifg=#504945
+augroup end
 
 
 " Add diagnostic info for https://github.com/itchyny/lightline.vim
@@ -427,24 +439,76 @@ nmap <C-_><C-_> <Plug>(caw:hatpos:toggle)
 vmap <C-_><C-_> <Plug>(caw:hatpos:toggle)
 
 " Denite
-call denite#custom#map('insert', 'jj', '<denite:enter_mode:normal>')
-call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>')
-call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>')
-call denite#custom#map('insert', '<C-v>', '<denite:do_action:vsplit>')
-call denite#custom#map('normal', '<C-v>', '<denite:do_action:vsplit>')
+let s:denite_winheight = 20
+let s:denite_winrow = &lines > s:denite_winheight ? (&lines - s:denite_winheight) / 2 : 0
+let s:denite_winwidth = &columns > 240 ? &columns / 2 : 120
+let s:denite_wincol = &columns > s:denite_winwidth ? (&columns - s:denite_winwidth) / 2 : 0
+call denite#custom#option('_', {
+			\ 'cached_filter': v:true,
+			\ 'cursor_shape': v:true,
+			\ 'cursor_wrap': v:true,
+			\ 'highlight_filter_background': 'DeniteFilter',
+			\ 'highlight_matched_char': 'Underlined',
+			\ 'matchers': 'matcher/fruzzy',
+			\ 'prompt': '$ ',
+			\ 'split': 'floating',
+			\ 'start_filter': v:true,
+			\ 'statusline': v:false,
+			\ 'wincol': s:denite_wincol,
+			\ 'winheight': s:denite_winheight,
+			\ 'winrow': s:denite_winrow,
+			\ 'winwidth': s:denite_winwidth,
+			\ })
+
+" denite filter buffer
+autocmd FileType denite-filter call s:denite_filter_my_settings()
+function! s:denite_filter_my_settings() abort
+	imap <silent><buffer> jj <Plug>(denite_filter_quit)
+	imap <silent><buffer> <Esc> <Plug>(denite_filter_quit)
+endfunction
+
+" denite select buffer
+autocmd FileType denite call s:denite_my_settings()
+function! s:denite_my_settings() abort
+	let b:dwm_disabled = 1
+	let b:auto_cursorline_disabled = 1
+	nnoremap <silent><buffer> <C-j> j
+	nnoremap <silent><buffer> <C-k> k
+	nnoremap <silent><buffer><expr> <BS>    denite#do_map('move_up_path')
+	nnoremap <silent><buffer><expr> <C-a>   denite#do_map('do_action', 'my_file_rec')
+	nnoremap <silent><buffer><expr> <C-c>   denite#do_map('quit')
+	nnoremap <silent><buffer><expr> <C-g>   denite#do_map('do_action', 'grep')
+	nnoremap <silent><buffer><expr> <C-n>   denite#do_map('do_action', 'dwm_new')
+	nnoremap <silent><buffer><expr> <C-x>   denite#do_map('do_action', 'quick_move')
+	nnoremap <silent><buffer><expr> <C-v>   denite#do_map('do_action', 'vsplit')
+	nnoremap <silent><buffer><expr> <CR>    denite#do_map('do_action')
+	nnoremap <silent><buffer><expr> <Space> denite#do_map('toggle_select).'j'
+	nnoremap <silent><buffer><expr> <Tab>   denite#do_map('choose_action')
+	nnoremap <silent><buffer><expr> a       denite#do_map('open_filter_buffer')
+	nnoremap <silent><buffer><expr> i       denite#do_map('open_filter_buffer')
+	nnoremap <silent><buffer><expr> p       denite#do_map('do_action', 'preview')
+	nnoremap <silent><buffer><expr> q       denite#do_map('quit')
+	nnoremap <silent><buffer><expr> <Esc>   denite#do_map('quit')
+endfunction
+" call denite#custom#map('insert', 'jj', '<denite:enter_mode:normal>')
+" call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>')
+" call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>')
+" call denite#custom#map('insert', '<C-v>', '<denite:do_action:vsplit>')
+" call denite#custom#map('normal', '<C-v>', '<denite:do_action:vsplit>')
 " call denite#custom#source('file_rec', 'matchers', ['matcher_cpsm'])
 " call denite#custom#map('insert', '<C-t>', '<denite:do_action:tabopen>')
 " call denite#custom#map('normal', 'v', '<denite:do_action:vsplit>')
 "
 if executable('rg')
 	call denite#custom#var('file/rec', 'command',
-				\ ['rg', '--files', '--glob', '!.git', '--follow', '--hidden'])
+				\ ['rg', '--files', '--glob', '!.git', '--follow', '--hidden', '--smart-case'])
 	call denite#custom#var('grep', 'command', ['rg'])
-	call denite#custom#var('grep', 'recursive_opts', [])
-	call denite#custom#var('grep', 'final_opts', [])
-	call denite#custom#var('grep', 'separator', ['--'])
 	call denite#custom#var('grep', 'default_opts',
-				\ ['--vimgrep', '--no-heading'])
+			\ ['-i', '--vimgrep', '--no-heading'])
+	call denite#custom#var('grep', 'recursive_opts', [])
+	call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
+	call denite#custom#var('grep', 'separator', ['--'])
+	call denite#custom#var('grep', 'final_opts', [])
 endif
 
 " ctrlp
