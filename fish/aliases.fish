@@ -6,5 +6,5 @@ alias oldvim (which vim)
 # wsl
 alias explorer explorer.exe
 # ls
-alias ls exa
-alias la "exa -al"
+alias ls "exa --icons"
+alias la "exa -al --icons"

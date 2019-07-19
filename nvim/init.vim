@@ -42,6 +42,8 @@ if dein#load_state(s:dein_dir)
 	"Autocomplete
 	call dein#add('neoclide/coc.nvim', {'build': 'yarn install'})
 
+	" call dein#add('liuchengxu/vista.vim')
+
 	" snippets
 	call dein#add('SirVer/ultisnips')
 	call dein#add('honza/vim-snippets')
@@ -112,7 +114,7 @@ if dein#load_state(s:dein_dir)
 	call dein#add('machakann/vim-highlightedyank')
 	call dein#add('mhinz/vim-startify')
 	call dein#add('osyo-manga/vim-over')
-	call dein#add('junegunn/fzf.vim')
+	call dein#add('junegunn/fzf', {'build': './install --all'})
 	call dein#add('andymass/vim-matchup')
 
 	" colorscheme
@@ -131,7 +133,7 @@ if dein#load_state(s:dein_dir)
 	call dein#add('rafi/awesome-vim-colorschemes')
 
 	" matcher
-	" call dein#add('nixprime/cpsm', {'build' : 'env PY3=ON ./install.sh'})
+	call dein#add('nixprime/cpsm', {'build' : 'env PY3=ON ./install.sh'})
 
 	call dein#end()
 	call dein#save_state()
@@ -224,7 +226,7 @@ nmap <silent> gr <Plug>(coc-references)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
-  if &filetype == 'vim'
+  if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
   else
     call CocAction('doHover')
@@ -258,11 +260,19 @@ nmap <leader>ac  <Plug>(coc-codeaction)
 " Fix autofix problem of current line
 nmap <leader>qf  <Plug>(coc-fix-current)
 
+" Use <tab> for select selections ranges, needs server support, like: coc-tsserver, coc-python
+nmap <silent> <TAB> <Plug>(coc-range-select)
+xmap <silent> <TAB> <Plug>(coc-range-select)
+xmap <silent> <S-TAB> <Plug>(coc-range-select-backword)
+
 " Use `:Format` for format current buffer
 command! -nargs=0 Format :call CocAction('format')
 
 " Use `:Fold` for fold current buffer
 command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" use `:OR` for organize import of current buffer
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
 " press <esc> to cancel.
 nmap f <Plug>(coc-smartf-forward)
@@ -284,10 +294,9 @@ let g:lightline = {
       \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
       \ },
       \ 'component_function': {
-      \   'cocstatus': 'coc#status'
+      \   'cocstatus': 'coc#status',
       \ },
       \ }
-
 
 
 " Using CocList
@@ -366,6 +375,11 @@ set shortmess+=c
 
 " always show signcolumns
 set signcolumn=yes
+
+" folding
+" set foldenable
+" set foldmethod=indent
+" let php_folding=1 "PHP
 
 " use clipboard
 set clipboard=unnamed
@@ -501,7 +515,7 @@ endfunction
 "
 if executable('rg')
 	call denite#custom#var('file/rec', 'command',
-				\ ['rg', '--files', '--glob', '!.git', '--follow', '--hidden', '--smart-case'])
+				\ ['rg', '--files', '--vimgrep', '--glob', '!git/*', '--glob', '!node_modules/*', '--follow', '--hidden', '--smart-case'])
 	call denite#custom#var('grep', 'command', ['rg'])
 	call denite#custom#var('grep', 'default_opts',
 			\ ['-i', '--vimgrep', '--no-heading'])
@@ -510,6 +524,9 @@ if executable('rg')
 	call denite#custom#var('grep', 'separator', ['--'])
 	call denite#custom#var('grep', 'final_opts', [])
 endif
+
+	call denite#custom#source(
+	\ 'file/rec', 'matchers', ['matcher/cpsm'])
 
 " ctrlp
 nnoremap <silent> <C-p> :<C-u>Denite file/rec<CR>
@@ -534,6 +551,7 @@ let g:ale_fixers = {
 \   'vue': ['prettier'],
 \   'html': ['prettier'],
 \   'c': ['clang-format'],
+\   'php': ['php_cs_fixer']
 \}
 let g:ale_lint_on_text_changed = 0
 let g:ale_set_loclist = 1
