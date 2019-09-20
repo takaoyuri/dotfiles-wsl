@@ -3,6 +3,10 @@ if &compatible
 	set nocompatible
 endif
 
+let g:dein#auto_recache=0
+let g:dein#install_max_processes = 16
+let g:dein#install_progress_type = 'echo'
+
 " dein.vimのディレクトリ
 let s:dein_dir = expand('~/.cache/dein')
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
@@ -20,25 +24,20 @@ execute 'set runtimepath^=' . s:dein_repo_dir
 if dein#load_state(s:dein_dir)
 	call dein#begin(s:dein_dir)
 	call dein#add('Shougo/dein.vim')
-	" call dein#add('Shougo/deoplete.nvim')
 	call dein#add('Shougo/denite.nvim')
 	call dein#add('Shougo/neomru.vim')
 	call dein#add('Shougo/neoyank.vim')
-	" call dein#add('Shougo/deol.nvim')
 	call dein#add('Shougo/context_filetype.vim')
-	" call dein#add('Shougo/neco-syntax')
 	call dein#add('thinca/vim-quickrun')
+	" call dein#add('Shougo/deoplete.nvim')
+	" call dein#add('Shougo/deol.nvim')
+	" call dein#add('Shougo/neco-syntax')
 	" call dein#add('Shougo/defx.nvim')
 	" if !has('nvim')
 	" 	call dein#add('roxma/nvim-yarp')
 	" 	call dein#add('roxma/vim-hug-neovim-rpc')
 	" endif
 
-	" call dein#add('autozimu/LanguageClient-neovim', {
-	"			\ 'rev': 'next',
-	"			\ 'build': 'bash install.sh',
-	"			\ })
-	
 	"Autocomplete
 	call dein#add('neoclide/coc.nvim', {'build': 'yarn install'})
 
@@ -65,7 +64,7 @@ if dein#load_state(s:dein_dir)
 	" call dein#add('carlitux/deoplete-ternjs', {'depends': ['deoplete.nvim'], 'on_ft': ['html', 'javascript', 'vue']})
 	call dein#add('othree/jspc.vim', {'on_ft': ['javascript', 'html', 'vue']})
 	call dein#add('othree/yajs.vim', {'on_ft': ['javascript', 'html', 'vue']})
-	call dein#add('sbdchd/neoformat')
+	" call dein#add('sbdchd/neoformat')
 	" call dein#add('Galooshi/vim-import-js', { 'build': 'npm install -g import-js' })
 	" call dein#add('billyvg/deoplete-import-js')
 	" call dein#add('heavenshell/vim-jsdoc')
@@ -87,7 +86,7 @@ if dein#load_state(s:dein_dir)
 
 	" golang
 	" call dein#add('zchee/deoplete-go', {'depends': ['deoplete.nvim'],'build': 'make', 'on_ft': 'go'})
-	" call dein#add('fatih/vim-go', {'on_ft': 'go'})
+	call dein#add('fatih/vim-go', {'on_ft': 'go'})
 
 	" fish shell
 	" call dein#add('dag/vim-fish', {'on_ft' : 'fish'})
@@ -104,7 +103,7 @@ if dein#load_state(s:dein_dir)
 	call dein#add('thinca/vim-zenspace')
 	call dein#add('ntpeters/vim-better-whitespace')
 	call dein#add('tyru/caw.vim')
-	call dein#add('terryma/vim-multiple-cursors')
+	" call dein#add('terryma/vim-multiple-cursors')
 	" call dein#add('mg979/vim-visual-multi')
 	" call dein#add('Yggdroot/indentLine')
 	call dein#add('yuttie/comfortable-motion.vim')
@@ -134,6 +133,15 @@ if dein#load_state(s:dein_dir)
 
 	" matcher
 	call dein#add('nixprime/cpsm', {'build' : 'env PY3=ON ./install.sh'})
+
+	" Document generator
+	call dein#add('kkoomen/vim-doge')
+
+	" Ansible
+	call dein#add('pearofducks/ansible-vim')
+
+	" Splitjoin
+	call dein#add('AndrewRadev/splitjoin.vim')
 
 	call dein#end()
 	call dein#save_state()
@@ -180,6 +188,7 @@ let g:UltiSnipsExpandTrigger="<C-j>"
 " tern-vim
 " let g:tern#command = ['tern']
 " let g:tern#arguments = ['--persistent']
+
 " jsDoc
 let g:jsdoc_enable_es6 = 1
 let g:jsdoc_allow_input_prompt = 1
@@ -260,6 +269,13 @@ nmap <leader>ac  <Plug>(coc-codeaction)
 " Fix autofix problem of current line
 nmap <leader>qf  <Plug>(coc-fix-current)
 
+" Create mappings for function text object, requires document symbols feature of languageserver.
+
+xmap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap if <Plug>(coc-funcobj-i)
+omap af <Plug>(coc-funcobj-a)
+
 " Use <tab> for select selections ranges, needs server support, like: coc-tsserver, coc-python
 nmap <silent> <TAB> <Plug>(coc-range-select)
 xmap <silent> <TAB> <Plug>(coc-range-select)
@@ -285,18 +301,33 @@ augroup Smartf
   autocmd User SmartfLeave :hi Conceal ctermfg=239 guifg=#504945
 augroup end
 
+hi CocCursorRange guibg=#b16286 guifg=#ebdbb2
+
+nmap <silent> <C-c> <Plug>(coc-cursors-position)
+nmap <silent> <C-d> <Plug>(coc-cursors-word)
+xmap <silent> <C-d> <Plug>(coc-cursors-range)
+" use normal command like `<leader>xi(`
+nmap <leader>x  <Plug>(coc-cursors-operator)
+
+nmap <expr> <silent> <C-d> <SID>select_current_word()
+function! s:select_current_word()
+  if !get(g:, 'coc_cursors_activated', 0)
+    return "\<Plug>(coc-cursors-word)"
+  endif
+  return "*\<Plug>(coc-cursors-word):nohlsearch\<CR>"
+endfunc
 
 " Add diagnostic info for https://github.com/itchyny/lightline.vim
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'cocstatus': 'coc#status',
-      \ },
-      \ }
+     \ 'colorscheme': 'wombat',
+     \ 'active': {
+     \   'left': [ [ 'mode', 'paste' ],
+     \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
+     \ },
+     \ 'component_function': {
+     \   'cocstatus': 'coc#status',
+     \ },
+     \ }
 
 
 " Using CocList
@@ -364,6 +395,8 @@ set smartcase
 set incsearch
 set hlsearch
 
+set diffopt=internal,filler,algorithm:histogram,indent-heuristic
+
 " Better display for messages
 set cmdheight=2
 
@@ -382,7 +415,7 @@ set signcolumn=yes
 " let php_folding=1 "PHP
 
 " use clipboard
-set clipboard=unnamed
+set clipboard=unnamedplus
 set autoread
 au CursorHold * checktime
 
@@ -551,7 +584,8 @@ let g:ale_fixers = {
 \   'vue': ['prettier'],
 \   'html': ['prettier'],
 \   'c': ['clang-format'],
-\   'php': ['php_cs_fixer']
+\   'php': ['php_cs_fixer'],
+\   'sql': ['pgformatter']
 \}
 let g:ale_lint_on_text_changed = 0
 let g:ale_set_loclist = 1
@@ -561,11 +595,16 @@ let g:ale_keep_list_window_open = 0
 let g:ale_list_window_size = 2
 let g:ale_sign_column_always = 1
 let g:ale_sass_stylelint_use_global = 1
-let g:ale_fix_on_save = 1
+" let g:ale_fix_on_save = 1
+
+" Splitjoin and ALEFix
+noremap <silent> gs :SplitjoinSplit<CR>:ALEFix<CR>
+noremap <silent> gj :SplitjoinJoin<CR>:ALEFix<CR>
 
 " vue
 autocmd FileType vue syntax sync fromstart
-let g:vue_disable_pre_processors=1
+" let g:vue_disable_pre_processors=1
+let g:vue_pre_processors = ['scss']
 " autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
 
 " css
