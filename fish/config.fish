@@ -79,6 +79,13 @@ if [ -d $HOME/.yarn/bin ]
 	set -gx PATH $HOME/.yarn/bin $PATH
 end
 
+# deno
+if [ -d $HOME/.deno ]
+  set -gx DENO_INSTALL $HOME/.deno
+  set -gx PATH $DENO_INSTALL/bin $PATH
+end
+
+
 # $DISPLAY
 set -x DISPLAY localhost:0.0
 
