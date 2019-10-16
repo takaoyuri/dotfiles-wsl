@@ -64,7 +64,7 @@ if dein#load_state(s:dein_dir)
 	" call dein#add('carlitux/deoplete-ternjs', {'depends': ['deoplete.nvim'], 'on_ft': ['html', 'javascript', 'vue']})
 	call dein#add('othree/jspc.vim', {'on_ft': ['javascript', 'html', 'vue']})
 	call dein#add('othree/yajs.vim', {'on_ft': ['javascript', 'html', 'vue']})
-	" call dein#add('sbdchd/neoformat')
+	call dein#add('sbdchd/neoformat')
 	" call dein#add('Galooshi/vim-import-js', { 'build': 'npm install -g import-js' })
 	" call dein#add('billyvg/deoplete-import-js')
 	" call dein#add('heavenshell/vim-jsdoc')
@@ -587,6 +587,7 @@ let g:ale_fixers = {
 \   'php': ['php_cs_fixer'],
 \   'sql': ['pgformatter']
 \}
+
 let g:ale_lint_on_text_changed = 0
 let g:ale_set_loclist = 1
 let g:ale_set_quickfix = 0
