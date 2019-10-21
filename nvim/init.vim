@@ -105,7 +105,7 @@ if dein#load_state(s:dein_dir)
   call dein#add('tyru/caw.vim')
   " call dein#add('terryma/vim-multiple-cursors')
   " call dein#add('mg979/vim-visual-multi')
-  " call dein#add('Yggdroot/indentLine')
+  call dein#add('Yggdroot/indentLine')
   call dein#add('yuttie/comfortable-motion.vim')
   " call dein#add('rhysd/clever-f.vim')
   call dein#add('itchyny/lightline.vim')
@@ -439,10 +439,9 @@ let &t_SR .= "\e[4 q"
 au BufRead,BufNewFile *.ihtml set filetype=html
 
 " indentLine
-set list lcs=tab:\|\ 
+" set list lcs=tab:\|\ 
 let g:indentLine_enable = 1
-" let g:indentLine_newVersion = 1
-" let g:indentLine_faster = 1
+let g:indentLine_faster = 1
 " let g:indentLine_setColors= 0
 " let g:indentLine_color_term = 239
 " let g:indentLine_concealcursor = 'inc'
@@ -547,7 +546,7 @@ endfunction
 "
 if executable('rg')
   call denite#custom#var('file/rec', 'command',
-        \ ['rg', '--files', '--vimgrep', '--glob', '!git/*', '--glob', '!node_modules/*', '--follow', '--hidden', '--smart-case'])
+        \ ['rg', '--files', '--vimgrep', '--glob', '!.git/*', '--glob', '!node_modules/*', '--follow', '--hidden'])
   call denite#custom#var('grep', 'command', ['rg'])
   call denite#custom#var('grep', 'default_opts',
         \ ['-i', '--vimgrep', '--no-heading'])
@@ -584,7 +583,8 @@ let g:ale_fixers = {
       \   'html': ['prettier'],
       \   'c': ['clang-format'],
       \   'php': ['php_cs_fixer'],
-      \   'sql': ['pgformatter']
+      \   'sql': ['pgformatter'],
+      \   'scss': ['prettier']
       \}
 
 let g:ale_lint_on_text_changed = 0
@@ -669,7 +669,7 @@ if has('iconv')
 
   " Does iconv support JIS X 0213 ?
   if iconv("\x87\x64\x87\x6a", 'cp932', 'euc-jisx0213') ==# "\xad\xc5\xad\xcb"
-    let s:enc_euc = 'euc-jisx0213,euc-jp'
+    let s:enc_euc = 'euc-jp,euc-jisx0213'
     let s:enc_jis = 'iso-2022-jp-3'
   endif
 
