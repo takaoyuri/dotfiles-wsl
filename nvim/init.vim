@@ -348,6 +348,23 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
+let g:coc_global_extensions = [
+      \'coc-yank',
+      \'coc-highlight',
+      \'coc-lists',
+      \'coc-omni',
+      \'coc-pairs',
+      \'coc-ultisnips',
+      \'coc-vetur',
+      \'coc-json',
+      \'coc-smartf',
+      \'coc-css',
+      \'coc-html',
+      \'coc-yaml',
+      \'coc-docker',
+      \'coc-phpls'
+      \]
+
 
 " multiple cursor and deoplete
 " func! Multiple_cursors_before()
