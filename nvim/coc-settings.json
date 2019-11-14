@@ -1,0 +1,9 @@
+{
+  "codeLens.enable": true,
+  "coc.preferences.formatOnType": true,
+  "coc.preferences.hoverTarget": "preview",
+
+  "suggest.noselect": false,
+  "suggest.preferCompleteThanJumpPlaceholder": true,
+  "suggest.enablePreview": true
+}
