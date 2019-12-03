@@ -1,0 +1,33 @@
+#!/bin/bash
+
+echo ".exports start"
+
+export EDITOR=nvim;
+
+# Larger bash history (allow 32³ entries; default is 500)
+export HISTSIZE=50000000;
+export HISTFILESIZE=$HISTSIZE;
+
+# ignoredups: 直前と同じコマンドは保存しない
+# erasedups: 重複するコマンドは最新のみ
+# 「:」で複数つなげることができる
+export HISTCONTROL=ignoredups:erasedupes
+
+# Make some commands not show up in history
+export HISTIGNORE=" *:ls:cd:cd -:pwd:exit:date:* --help:* ls *";
+
+# Prefer US English and use UTF-8
+export LANG="en_US.UTF-8";
+export LC_ALL="en_US.UTF-8";
+
+# Don’t clear the screen after quitting a manual page
+export MANPAGER="less -X";
+
+# term color setting
+export TERM=xterm-256color
+
+# OPENSSL DIR
+export OPENSSL_LIB_DIR=/usr/lib/x86_64-linux-gnu/
+export OPENSSL_INCLUDE_DIR=/usr/include/openssl/
+
+echo ".exports end"

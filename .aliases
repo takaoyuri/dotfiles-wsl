@@ -1,0 +1,32 @@
+#!/bin/bash
+echo ".aliases start"
+
+# vim
+alias v="nvim"
+
+# nav
+alias ~="cd ~";
+alias ..="cd ..";
+alias ...="cd ../..";
+alias ....="cd ../../..";
+alias .....="cd ../../../..";
+alias -- -="cd -"
+
+# confirm overwrite
+alias cp="cp -i"
+
+# comfirm overwrite
+alias mv="mv -i"
+
+# confirm rm
+alias rm="rm -i"
+
+# exa -> ls
+if type "exa" > /dev/null 2>&1
+then
+  alias ls="exa"
+  alias ll="exa -l"
+  alias la="exa -la"
+fi
+
+echo ".aliases end"
