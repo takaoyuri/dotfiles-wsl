@@ -1,0 +1,8 @@
+tap "homebrew/bundle"
+tap "homebrew/core"
+brew "neovim"
+brew "nkf"
+brew "pngquant"
+brew "tmux"
+brew "unzip"
+brew "zip"
