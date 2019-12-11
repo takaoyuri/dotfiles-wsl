@@ -132,7 +132,7 @@ if dein#load_state(s:dein_dir)
   call dein#add('rafi/awesome-vim-colorschemes')
 
   " matcher
-  call dein#add('nixprime/cpsm', {'build' : 'env PY3=ON ./install.sh'})
+  " call dein#add('nixprime/cpsm', {'build' : 'env PY3=ON ./install.sh'})
 
   " Document generator
   call dein#add('kkoomen/vim-doge')
@@ -511,7 +511,7 @@ call denite#custom#option('_', {
       \ 'cursor_wrap': v:true,
       \ 'highlight_filter_background': 'DeniteFilter',
       \ 'highlight_matched_char': 'Underlined',
-      \ 'matchers': 'matcher/fruzzy',
+      \ 'matchers': 'matcher/fuzzy',
       \ 'prompt': '$ ',
       \ 'split': 'floating',
       \ 'start_filter': v:true,

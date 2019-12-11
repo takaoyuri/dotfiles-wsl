@@ -166,4 +166,10 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 [ -d $HOME/bin ] && export PATH="$HOME/bin:$PATH"
 [ -d $HOME/.config/composer/vendor/bin ] && export PATH="$HOME/.config/composer/vendor/bin:$PATH"
 
+# TMUX
+if which tmux >/dev/null 2>&1; then
+  #if not inside a tmux session, and if no session is started, start a new session
+  test -z "$TMUX" && (tmux attach || tmux new-session)
+fi
+
 echo ".bashrc end"
