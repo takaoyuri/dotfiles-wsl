@@ -11,7 +11,7 @@ export HISTFILESIZE=$HISTSIZE;
 # ignoredups: 直前と同じコマンドは保存しない
 # erasedups: 重複するコマンドは最新のみ
 # 「:」で複数つなげることができる
-export HISTCONTROL=ignoredups:erasedupes
+export HISTCONTROL=ignoredups:erasedups
 
 # Make some commands not show up in history
 export HISTIGNORE=" *:ls:cd:cd -:pwd:exit:date:* --help:* ls *";
