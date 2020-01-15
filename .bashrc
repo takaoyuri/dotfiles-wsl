@@ -174,5 +174,3 @@ if which tmux >/dev/null 2>&1; then
 fi
 
 echo ".bashrc end"
-
-source /home/yuri/.config/broot/launcher/bash/br
