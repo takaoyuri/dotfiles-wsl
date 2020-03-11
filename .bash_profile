@@ -5,5 +5,3 @@ if [[ -r "${HOME}/.bashrc" ]]; then
 fi
 
 echo ".bash_profile end"
-
-export PATH="$HOME/.cargo/bin:$PATH"

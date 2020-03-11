@@ -29,4 +29,7 @@ then
   alias la="exa -la"
 fi
 
+# explorer
+alias open="/mnt/c/Windows/explorer.exe"
+
 echo ".aliases end"

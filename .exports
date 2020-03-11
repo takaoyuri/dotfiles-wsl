@@ -11,7 +11,10 @@ export HISTFILESIZE=$HISTSIZE;
 # ignoredups: 直前と同じコマンドは保存しない
 # erasedups: 重複するコマンドは最新のみ
 # 「:」で複数つなげることができる
-export HISTCONTROL=ignoredups:erasedups
+# サブプロセスから見れなくてよいので 、HISTCONTROL, PROMPT_COMMAND は exportする必要がない
+HISTCONTROL=ignoredups:erasedups
+shopt -s histappend
+PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
 
 # Make some commands not show up in history
 export HISTIGNORE=" *:ls:cd:cd -:pwd:exit:date:* --help:* ls *";

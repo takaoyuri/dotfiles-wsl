@@ -39,7 +39,8 @@ if dein#load_state(s:dein_dir)
   " endif
 
   "Autocomplete
-  call dein#add('neoclide/coc.nvim', {'build': 'yarn install'})
+  call dein#add('neoclide/coc.nvim', {'merged':0, 'rev': 'release'})
+  call dein#add('wellle/tmux-complete.vim')
 
   " call dein#add('liuchengxu/vista.vim')
 
@@ -52,6 +53,7 @@ if dein#load_state(s:dein_dir)
   call dein#add('machakann/vim-textobj-delimited')
   call dein#add('kana/vim-operator-user')
   call dein#add('machakann/vim-sandwich')
+  call dein#add('sgur/vim-textobj-parameter')
 
   " git
   call dein#add('lambdalisue/gina.vim')
@@ -103,8 +105,8 @@ if dein#load_state(s:dein_dir)
   call dein#add('thinca/vim-zenspace')
   call dein#add('ntpeters/vim-better-whitespace')
   call dein#add('tyru/caw.vim')
-  call dein#add('terryma/vim-multiple-cursors')
-  " call dein#add('mg979/vim-visual-multi')
+  " call dein#add('terryma/vim-multiple-cursors')
+  call dein#add('mg979/vim-visual-multi')
   call dein#add('Yggdroot/indentLine')
   call dein#add('yuttie/comfortable-motion.vim')
   " call dein#add('rhysd/clever-f.vim')
@@ -114,6 +116,7 @@ if dein#load_state(s:dein_dir)
   call dein#add('mhinz/vim-startify')
   call dein#add('osyo-manga/vim-over')
   call dein#add('junegunn/fzf', {'build': './install --all'})
+  call dein#add('junegunn/fzf.vim')
   call dein#add('andymass/vim-matchup')
 
   " colorscheme
@@ -143,6 +146,9 @@ if dein#load_state(s:dein_dir)
   " Splitjoin
   call dein#add('AndrewRadev/splitjoin.vim')
 
+  " vista.vim
+  call dein#add('liuchengxu/vista.vim')
+
   call dein#end()
   call dein#save_state()
 
@@ -156,34 +162,12 @@ endif
 filetype plugin indent on
 syntax enable
 
+" Leader to space key
+let mapleader = "\<Space>"
+
 " Ultisnip
 let g:UltiSnipsExpandTrigger="<C-j>"
 
-" deoplete
-" set completeopt=longest,preview
-" let g:deoplete#enable_at_startup = 1
-" let g:deoplete#auto_complete_delay = 0
-" let g:deoplete#auto_complete_start_length = 1
-" let g:deoplete#enable_camel_case = 0
-" let g:deoplete#enable_ignore_case = 0
-" let g:deoplete#enable_refresh_always = 0
-" let g:deoplete#enable_smart_case = 1
-" let g:deoplete#file#enable_buffer_path = 1
-" " let g:deoplete_import_js#bin = 'importjs'
-"
-" let g:deoplete#omni_patterns = {}
-" let g:deoplete#omni_patterns.html = '<[^>]*'
-" let g:deoplete#omni_patterns.css   = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
-" let g:deoplete#omni_patterns.scss   = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
-" let g:deoplete#omni_patterns.sass   = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
-" let g:deoplete#omni_patterns.javascript = '[^. \t]\.\%(\h\w*\)\?'
-" let g:deoplete#omni_patterns.php = '\h\w*\|[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
-"
-" " let g:deoplete#sources = {}
-" " let g:deoplete#sources#go#gocode_binary = $GOPATH . '/bin/gocode'
-"
-" call deoplete#custom#source('ultisnips', 'matchers', ['matcher_fuzzy'])
-"
 " javascript
 " tern-vim
 " let g:tern#command = ['tern']
@@ -381,8 +365,6 @@ let g:coc_global_extensions = [
 " 	endif
 " endfunc
 
-" Leader to space key
-let mapleader = "\<Space>"
 
 " colorscheme
 " set termguicolors
@@ -573,8 +555,8 @@ if executable('rg')
   call denite#custom#var('grep', 'final_opts', [])
 endif
 
-call denite#custom#source(
-      \ 'file/rec', 'matchers', ['matcher/cpsm'])
+" call denite#custom#source(
+"      \ 'file/rec', 'matchers', ['matcher/cpsm'])
 
 " ctrlp
 nnoremap <silent> <C-p> :<C-u>Denite file/rec<CR>
@@ -601,7 +583,8 @@ let g:ale_fixers = {
       \   'c': ['clang-format'],
       \   'php': ['php_cs_fixer'],
       \   'sql': ['pgformatter'],
-      \   'scss': ['prettier']
+      \   'scss': ['prettier'],
+      \   'css': ['prettier']
       \}
 
 let g:ale_lint_on_text_changed = 0
@@ -676,6 +659,19 @@ if system('uname -a | grep Microsoft') != ""
         \   'cache_enabled': 1,
         \ }
 endif
+
+" vista.vim
+function! NearestMethodOrFunction() abort
+  return get(b:, 'vista_nearest_method_or_function', '')
+endfunction
+
+set statusline+=%{NearestMethodOrFunction()}
+
+" By default vista.vim never run if you don't call it explicitly.
+"
+" If you want to show the nearest function in your statusline automatically,
+" you can add the following line to your vimrc 
+autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
 
 "" encoding 
 set encoding=utf-8
