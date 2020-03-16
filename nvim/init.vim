@@ -449,9 +449,10 @@ let g:indentLine_faster = 1
 " let g:indentLine_color_dark = 2 " (default: 2)
 
 " lightline
+let g:lightline#bufferline#filename_modifier = ':t'
 let g:lightline#bufferline#show_number  = 1
 let g:lightline#bufferline#shorten_path = 0
-let g:lightline#bufferline#unnamed      = '[unnamed]'
+let g:lightline#bufferline#unnamed      = '[]'
 let g:lightline = {
       \ 'colorscheme': 'solarized',
       \ 'tabline': {
