@@ -1,0 +1,11 @@
+deno () {
+  docker run \
+    --interactive \
+    --tty \
+    --rm \
+    --volume $PWD:/app \
+    --volume $HOME/.deno:/deno-dir \
+    --workdir /app \
+    hayd/alpine-deno:1.2.2 \
+    "$@"
+}

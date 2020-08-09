@@ -1,7 +1,6 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
-echo ".bashrc start"
 
 # If not running interactively, don't do anything
 case $- in
@@ -150,7 +149,9 @@ done
 
 for file in ~/.{bash_prompt,aliases,functions,path,dockerfunc,extra,exports}; do
   if [[ -r "$file" ]] && [[ -f "$file" ]]; then
+    echo "start load $file"
     source "$file"
+    echo "end load $file"
   fi
 done
 
@@ -180,5 +181,3 @@ if [[ $TERM_PROGRAM != 'vscode' ]]; then
     test -z "$TMUX" && (tmux attach || tmux new-session)
   fi
 fi
-
-echo ".bashrc end"

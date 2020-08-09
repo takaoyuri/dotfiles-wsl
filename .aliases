@@ -1,5 +1,4 @@
 #!/bin/bash
-echo ".aliases start"
 
 # vim
 alias v="nvim"
@@ -31,5 +30,3 @@ fi
 
 # explorer
 alias open="/mnt/c/Windows/explorer.exe"
-
-echo ".aliases end"
