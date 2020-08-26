@@ -9,3 +9,12 @@ deno () {
     hayd/alpine-deno:1.2.2 \
     "$@"
 }
+
+go() {
+  docker run \
+    --interactive \
+    --tty \
+    --rm \
+    golang:latest \
+    go "$@"
+}
