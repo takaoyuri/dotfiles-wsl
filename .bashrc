@@ -147,7 +147,7 @@ done
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 [ -f $HOME/.cargo/env ] && source $HOME/.cargo/env
 
-for file in ~/.{bash_prompt,aliases,functions,path,dockerfunc,extra,exports}; do
+for file in ~/.{aliases,functions,path,dockerfunc,extra,exports}; do
   if [[ -r "$file" ]] && [[ -f "$file" ]]; then
     echo "start load $file"
     source "$file"
@@ -173,6 +173,14 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 [ -d $HOME/bin ] && export PATH="$HOME/bin:$PATH"
 [ -d $HOME/.config/composer/vendor/bin ] && export PATH="$HOME/.config/composer/vendor/bin:$PATH"
+
+# add docker desktop path
+export PATH="$PATH:/mnt/c/Program Files/Docker/Docker/resources/bin:/mnt/c/ProgramData/DockerDesktop/version-bin"
+
+# starship
+if hash starship 2>/dev/null; then
+  eval "$(starship init bash)"
+fi
 
 # TMUX
 if [[ $TERM_PROGRAM != 'vscode' ]]; then
