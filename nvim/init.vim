@@ -42,8 +42,6 @@ if dein#load_state(s:dein_dir)
   call dein#add('neoclide/coc.nvim', {'merged':0, 'rev': 'release'})
   call dein#add('wellle/tmux-complete.vim')
 
-  " call dein#add('liuchengxu/vista.vim')
-
   " snippets
   call dein#add('SirVer/ultisnips')
   call dein#add('honza/vim-snippets')
@@ -77,6 +75,7 @@ if dein#load_state(s:dein_dir)
   " typescript
   call dein#add('Quramy/tsuquyomi', {'on_ft': 'typescript'})
   call dein#add('leafgarland/typescript-vim', {'on_ft': 'typescript'})
+  call dein#add('peitalin/vim-jsx-typescript')
 
   " php
   call dein#add('StanAngeloff/php.vim', {'on_ft': 'php'})
@@ -147,7 +146,7 @@ if dein#load_state(s:dein_dir)
   call dein#add('AndrewRadev/splitjoin.vim')
 
   " vista.vim
-  call dein#add('liuchengxu/vista.vim')
+  " call dein#add('liuchengxu/vista.vim')
 
   call dein#end()
   call dein#save_state()
@@ -301,17 +300,6 @@ function! s:select_current_word()
   return "*\<Plug>(coc-cursors-word):nohlsearch\<CR>"
 endfunc
 
-" Add diagnostic info for https://github.com/itchyny/lightline.vim
-let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'cocstatus': 'coc#status',
-      \ },
-      \ }
 
 
 " Using CocList
@@ -436,6 +424,8 @@ let &t_SR .= "\e[4 q"
 
 " html
 au BufRead,BufNewFile *.ihtml set filetype=html
+" tsx
+au BufRead,BufNewFile *.tsx set filetype=typescript
 
 " indentLine
 " set list lcs=tab:\|\ 
@@ -455,6 +445,10 @@ let g:lightline#bufferline#shorten_path = 0
 let g:lightline#bufferline#unnamed      = '[]'
 let g:lightline = {
       \ 'colorscheme': 'solarized',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
+      \ },
       \ 'tabline': {
       \ 'left': [['buffers']], 'right': [['close']]
       \},
@@ -463,8 +457,17 @@ let g:lightline = {
       \},
       \ 'component_type' : {
       \ 'buffers': 'tabsel'
+      \},
+      \ 'component_function': {
+      \   'cocstatus': 'coc#status',
+      \ },
       \}
-      \}
+
+" Add diagnostic info for https://github.com/itchyny/lightline.vim
+" let g:lightline = {
+"      \ 'colorscheme': 'wombat',
+"      \ }
+
 autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
 
 " remap arrow keys
@@ -535,6 +538,7 @@ function! s:denite_my_settings() abort
   nnoremap <silent><buffer><expr> q       denite#do_map('quit')
   nnoremap <silent><buffer><expr> <Esc>   denite#do_map('quit')
 endfunction
+
 " call denite#custom#map('insert', 'jj', '<denite:enter_mode:normal>')
 " call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>')
 " call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>')
@@ -543,10 +547,10 @@ endfunction
 " call denite#custom#source('file_rec', 'matchers', ['matcher_cpsm'])
 " call denite#custom#map('insert', '<C-t>', '<denite:do_action:tabopen>')
 " call denite#custom#map('normal', 'v', '<denite:do_action:vsplit>')
-"
+
 if executable('rg')
   call denite#custom#var('file/rec', 'command',
-        \ ['rg', '--files', '--vimgrep', '--glob', '!.git/*', '--glob', '!node_modules/*', '--follow', '--hidden'])
+        \ ['rg', '--files', '--vimgrep', '--glob', '!.git/*', '--glob', '!node_modules/*', '--follow', '--hidden', '--color', 'never'])
   call denite#custom#var('grep', 'command', ['rg'])
   call denite#custom#var('grep', 'default_opts',
         \ ['-i', '--vimgrep', '--no-heading'])
@@ -585,7 +589,9 @@ let g:ale_fixers = {
       \   'php': ['php_cs_fixer'],
       \   'sql': ['pgformatter'],
       \   'scss': ['prettier'],
-      \   'css': ['prettier']
+      \   'css': ['prettier'],
+      \   'sh' : ['shfmt'],
+      \   'yaml': ['prettier']
       \}
 
 let g:ale_lint_on_text_changed = 0
@@ -662,17 +668,17 @@ if system('uname -a | grep Microsoft') != ""
 endif
 
 " vista.vim
-function! NearestMethodOrFunction() abort
-  return get(b:, 'vista_nearest_method_or_function', '')
-endfunction
-
-set statusline+=%{NearestMethodOrFunction()}
+" function! NearestMethodOrFunction() abort
+"   return get(b:, 'vista_nearest_method_or_function', '')
+" endfunction
+" 
+" set statusline+=%{NearestMethodOrFunction()}
 
 " By default vista.vim never run if you don't call it explicitly.
 "
 " If you want to show the nearest function in your statusline automatically,
 " you can add the following line to your vimrc 
-autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
+" autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
 
 "" encoding 
 set encoding=utf-8
