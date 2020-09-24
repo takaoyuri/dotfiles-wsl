@@ -8,7 +8,7 @@ deno() {
     --volume $PWD:/app \
     --volume $HOME/.deno:/deno-dir \
     --workdir /app \
-    hayd/alpine-deno:1.2.2 \
+    hayd/alpine-deno:1.4.0 \
     "$@"
 }
 
