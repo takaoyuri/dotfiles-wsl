@@ -1,6 +1,6 @@
 #!/bin/bash
 
-deno () {
+deno() {
   docker run \
     --interactive \
     --tty \
@@ -10,7 +10,7 @@ deno () {
     --workdir /app \
     hayd/alpine-deno:1.2.2 \
     "$@"
-  }
+}
 
 go() {
   docker run \
@@ -21,12 +21,14 @@ go() {
     --env GOPATH= \
     golang:latest \
     go "$@"
-  }
+}
 
 aws() {
   docker run -it --rm \
     -v "${HOME}/.aws:/root/.aws" \
+    --volume $PWD:/aws \
     --log-driver none \
     --name aws \
     amazon/aws-cli "$@"
-  }
+}
+
