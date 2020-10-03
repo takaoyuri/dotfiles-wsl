@@ -32,3 +32,11 @@ aws() {
     amazon/aws-cli "$@"
 }
 
+dphp() {
+  docker run -it --rm \
+    --volume $PWD:/usr/src/myapp \
+    -w /usr/src/myapp \
+    --name php \
+    php:7.4-cli -f "$@"
+}
+
