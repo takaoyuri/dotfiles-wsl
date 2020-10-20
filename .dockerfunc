@@ -1,6 +1,6 @@
 #!/bin/bash
 
-deno() {
+deno(){
   docker run \
     --interactive \
     --tty \
@@ -40,3 +40,9 @@ dphp() {
     php:7.4-cli -f "$@"
 }
 
+
+yq() {
+  docker run --rm -i \
+    -v ${PWD}:/workdir \
+    mikefarah/yq yq $@
+}

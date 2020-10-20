@@ -137,7 +137,7 @@ if dein#load_state(s:dein_dir)
   " call dein#add('nixprime/cpsm', {'build' : 'env PY3=ON ./install.sh'})
 
   " Document generator
-  call dein#add('kkoomen/vim-doge')
+  call dein#add('kkoomen/vim-doge', {'rev': 'v2.8.0'})
 
   " Ansible
   call dein#add('pearofducks/ansible-vim')
@@ -594,15 +594,8 @@ let g:ale_fixers = {
       \   'yaml': ['prettier']
       \}
 
-let g:ale_lint_on_text_changed = 0
-let g:ale_set_loclist = 1
-let g:ale_set_quickfix = 0
-let g:ale_open_list = 1
-let g:ale_keep_list_window_open = 0
-let g:ale_list_window_size = 2
 let g:ale_sign_column_always = 1
 let g:ale_sass_stylelint_use_global = 1
-" let g:ale_fix_on_save = 1
 
 " Splitjoin and ALEFix
 noremap <silent> gs :SplitjoinSplit<CR>:ALEFix<CR>
@@ -694,7 +687,7 @@ if has('iconv')
   endif
 
   " Make fileencodings
-  let &fileencodings = 'ucs-bom'
+  let &fileencodings = 'utf-8,ucs-bom'
   if &encoding !=# 'utf-8'
     let &fileencodings = &fileencodings . ',' . 'ucs-2le'
     let &fileencodings = &fileencodings . ',' . 'ucs-2'
