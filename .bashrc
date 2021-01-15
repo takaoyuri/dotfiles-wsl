@@ -167,6 +167,10 @@ if [[ -f $HOME/.linuxbrew/bin/brew ]]; then
   eval $($HOME/.linuxbrew/bin/brew shellenv)
 fi
 
+if [[ -f /opt/homebrew/bin/brew ]]; then
+  eval $(/opt/homebrew/bin/brew shellenv)
+fi
+
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 # export PATH="$HOME/.cargo/bin:$PATH"
@@ -178,7 +182,7 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="$PATH:/mnt/c/Program Files/Docker/Docker/resources/bin:/mnt/c/ProgramData/DockerDesktop/version-bin"
 
 # starship
-if hash starship 2>/dev/null; then
+if type starship >/dev/null 2>&1; then
   eval "$(starship init bash)"
 fi
 
