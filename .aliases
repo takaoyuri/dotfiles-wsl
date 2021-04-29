@@ -29,4 +29,7 @@ then
 fi
 
 # explorer
-alias open="/mnt/c/Windows/explorer.exe"
+if type "/mnt/c/Windows/explorer.exe" > /dev/null 2>&1
+then
+  alias open="/mnt/c/Windows/explorer.exe"
+fi
