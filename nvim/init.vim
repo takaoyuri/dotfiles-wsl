@@ -511,8 +511,9 @@ call denite#custom#option('_', {
 " denite filter buffer
 autocmd FileType denite-filter call s:denite_filter_my_settings()
 function! s:denite_filter_my_settings() abort
-  imap <silent><buffer> jj <Plug>(denite_filter_quit)
-  imap <silent><buffer> <Esc> <Plug>(denite_filter_quit)
+  imap <silent><buffer> jj <Plug>(denite_filter_update)
+  imap <silent><buffer> <Esc> <Plug>(denite_filter_update)
+  imap <silent><buffer> <CR> <Esc><CR>
 endfunction
 
 " denite select buffer
