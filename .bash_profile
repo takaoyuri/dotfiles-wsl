@@ -5,3 +5,4 @@ if [[ -r "${HOME}/.bashrc" ]]; then
 fi
 
 echo ".bash_profile end"
+source "$HOME/.cargo/env"

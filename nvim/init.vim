@@ -137,7 +137,7 @@ if dein#load_state(s:dein_dir)
   " call dein#add('nixprime/cpsm', {'build' : 'env PY3=ON ./install.sh'})
 
   " Document generator
-  call dein#add('kkoomen/vim-doge', {'rev': 'v2.8.0'})
+  call dein#add('kkoomen/vim-doge')
 
   " Ansible
   call dein#add('pearofducks/ansible-vim')

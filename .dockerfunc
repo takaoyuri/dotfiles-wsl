@@ -1,6 +1,6 @@
 #!/bin/bash
 
-deno(){
+ddeno(){
   docker run \
     --interactive \
     --tty \
