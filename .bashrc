@@ -180,6 +180,7 @@ fi
 
 if [[ -f /opt/homebrew/bin/brew ]]; then
   eval $(/opt/homebrew/bin/brew shellenv)
+  export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
 fi
 
 [[ -e ~/.phpbrew/bashrc ]] && source ~/.phpbrew/bashrc
@@ -192,7 +193,9 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 [ -d $HOME/.config/composer/vendor/bin ] && export PATH="$HOME/.config/composer/vendor/bin:$PATH"
 
 # add docker desktop path
-export PATH="$PATH:/mnt/c/Program Files/Docker/Docker/resources/bin:/mnt/c/ProgramData/DockerDesktop/version-bin"
+if [[ -d "/mnt/c/Program Files/Docker/Docker/resources/bin/" ]]; then
+  export PATH="$PATH:/mnt/c/Program Files/Docker/Docker/resources/bin:/mnt/c/ProgramData/DockerDesktop/version-bin"
+fi
 
 # starship
 if type starship >/dev/null 2>&1; then
