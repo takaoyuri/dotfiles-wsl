@@ -185,8 +185,8 @@ fi
 
 [[ -e ~/.phpbrew/bashrc ]] && source ~/.phpbrew/bashrc
 
-[ -d /opt/homebrew/opt/php@5.6/bin ] export PATH="/opt/homebrew/opt/php@5.6/bin:$PATH"
-[ -d /opt/homebrew/opt/php@5.6/sbin ] export PATH="/opt/homebrew/opt/php@5.6/sbin:$PATH"
+[ -d /opt/homebrew/opt/php@5.6/bin ] && export PATH="/opt/homebrew/opt/php@5.6/bin:$PATH"
+[ -d /opt/homebrew/opt/php@5.6/sbin ] && export PATH="/opt/homebrew/opt/php@5.6/sbin:$PATH"
 
 [ -d $HOME/.yarn/bin ] && export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
