@@ -21,11 +21,24 @@ return {
     font_size = 18,
     use_ime = true,
     enable_scroll_bar = true,
-    mi_scroll_bar_height = '2cell',
+    min_scroll_bar_height = '2cell',
     window_background_opacity = 0.9,
     text_background_opacity = 0.5,
     window_frame = {
       font = wez.font(font_name),
       font_size = 18
-    }
+    },
+    window_decorations = "RESIZE",
+    window_padding = {
+      left = 0,
+      right = 0,
+      top = 0,
+      bottom = 0
+    },
+    unix_domains = {
+      {
+        name = 'unix'
+      }
+    },
+    default_gui_startup_args = {'connect', 'unix'},
 }

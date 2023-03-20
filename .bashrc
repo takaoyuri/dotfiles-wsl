@@ -1,3 +1,5 @@
+# Fig pre block. Keep at the top of this file.
+[[ -f "$HOME/.fig/shell/bashrc.pre.bash" ]] && builtin source "$HOME/.fig/shell/bashrc.pre.bash"
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -109,6 +111,7 @@ if [[ -d /etc/bash_completion.d/ ]]; then
   done
 fi
 
+: '
 if [ "`uname`" == "Linux" ]; then
   # Start the gpg-agent if not already running
   if ! pgrep -x -u "${USER}" gpg-agent >/dev/null 2>&1; then
@@ -137,6 +140,7 @@ else
     . ~/.ssh-agent
   fi
 fi
+'
 
 # Case-insensitive globbing (used in pathname expansion)
 shopt -s nocaseglob
@@ -217,3 +221,13 @@ source "$HOME/.cargo/env"
 # deno
 [ -d $HOME/.deno/bin ] && export PATH="$HOME/.deno/bin:$PATH"
 
+# gcloud
+if [[ -d /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc ]]; then
+  source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc"
+fi
+if [[ -d /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc ]]; then
+  source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc"
+fi
+
+# Fig post block. Keep at the bottom of this file.
+[[ -f "$HOME/.fig/shell/bashrc.post.bash" ]] && builtin source "$HOME/.fig/shell/bashrc.post.bash"
