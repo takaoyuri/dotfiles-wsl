@@ -229,5 +229,13 @@ if [[ -d /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.ba
   source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc"
 fi
 
+# pnpm
+export PNPM_HOME="/Users/user/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
 # Fig post block. Keep at the bottom of this file.
 [[ -f "$HOME/.fig/shell/bashrc.post.bash" ]] && builtin source "$HOME/.fig/shell/bashrc.post.bash"
