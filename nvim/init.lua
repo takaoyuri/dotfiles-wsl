@@ -1,6 +1,35 @@
 print('init lua')
 print('okok')
 
+--
+-- moving around, searching and patterns
+--
+vim.opt.wrapscan = true
+-- vim.opt.ignorecase = true
+vim.opt.incsearch = true
+vim.opt.smartcase = true
+
+--
+-- display
+--
+vim.opt.scrolloff = 5
+vim.opt.cmdheight = 2
+vim.opt.list = true
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.numberwidth = 4
+
+--
+-- syntax, hilight
+--
+vim.opt.background = "dark"
+vim.opt.termguicolors = true
+vim.opt.syntax = "enable"
+vim.opt.showmatch = true
+vim.opt.hlsearch = true
+vim.opt.hidden = true
+vim.opt.cursorcolumn = false
+vim.opt.cursorline = true
 
 -- リーダーキー
 vim.g.mapleader = " "
@@ -22,3 +51,82 @@ vim.api.nvim_set_keymap("n", "<leader><CR>", "<cmd>lua ReloadConfig()<CR>", {
     silent = false
 })
 -- END コンフィグ再読み込みのキーマップ　リーダー+Enter
+
+--- 
+--- packer.nvim 
+---
+local ensure_packer = function()
+    local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+
+    if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+        print("Installing packer.nvim")
+        vim.fn.system({"git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path})
+        vim.api.nvim_command("packadd packer.nvim")
+        return true
+    end
+
+    return false
+end
+
+local packer_bootstrap = ensure_packer()
+
+return require("packer").startup(function(use)
+    use("wbthomason/packer.nvim")
+    use("neovim/nvim-lspconfig")
+
+    use 'williamboman/mason.nvim'
+    use 'williamboman/mason-lspconfig.nvim'
+
+    require("mason").setup()
+    require("mason-lspconfig").setup()
+
+    -- nvim-cmp
+    use "hrsh7th/nvim-cmp"
+    use "hrsh7th/cmp-path"
+    use "hrsh7th/cmp-buffer"
+    use "hrsh7th/cmp-cmdline"
+    use "hrsh7th/cmp-nvim-lsp"
+    use "hrsh7th/vim-vsnip"
+
+    local cmp = require("cmp")
+    cmp.setup({
+        snippet = {
+            -- REQUIRED - you must specify a snippet engine
+            expand = function(args)
+                vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+                -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+                -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
+                -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+            end
+        },
+        window = {
+            -- completion = cmp.config.window.bordered(),
+            -- documentation = cmp.config.window.bordered(),
+        },
+        mapping = cmp.mapping.preset.insert({
+            ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+            ['<C-f>'] = cmp.mapping.scroll_docs(4),
+            ['<C-Space>'] = cmp.mapping.complete(),
+            ['<C-e>'] = cmp.mapping.abort(),
+            ['<CR>'] = cmp.mapping.confirm({
+                select = true
+            }) -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+        }),
+        sources = cmp.config.sources({{
+            name = 'nvim_lsp'
+        }, {
+            name = 'vsnip'
+        } -- For vsnip users.
+        -- { name = 'luasnip' }, -- For luasnip users.
+        -- { name = 'ultisnips' }, -- For ultisnips users.
+        -- { name = 'snippy' }, -- For snippy users.
+        }, {{
+            name = 'buffer'
+        }})
+    })
+
+    if packer_bootstrap then
+        require("packer").sync()
+    end
+end)
+
