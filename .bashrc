@@ -1,5 +1,3 @@
-# Fig pre block. Keep at the top of this file.
-[[ -f "$HOME/.fig/shell/bashrc.pre.bash" ]] && builtin source "$HOME/.fig/shell/bashrc.pre.bash"
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -229,6 +227,10 @@ if [[ -d /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.ba
   source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc"
 fi
 
+if type github-copilot-cli >/dev/null 2>&1; then
+  eval "$(github-copilot-cli alias -- "$0")"
+fi
+
 # pnpm
 export PNPM_HOME="/Users/user/Library/pnpm"
 case ":$PATH:" in
@@ -236,6 +238,3 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
-
-# Fig post block. Keep at the bottom of this file.
-[[ -f "$HOME/.fig/shell/bashrc.post.bash" ]] && builtin source "$HOME/.fig/shell/bashrc.post.bash"

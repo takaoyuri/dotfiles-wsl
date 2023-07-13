@@ -1,6 +1,3 @@
-print('init lua')
-print('okok')
-
 --
 -- moving around, searching and patterns
 --
@@ -23,6 +20,7 @@ vim.opt.numberwidth = 4
 -- syntax, hilight
 --
 vim.opt.background = "dark"
+-- true colorを有効にする
 vim.opt.termguicolors = true
 vim.opt.syntax = "enable"
 vim.opt.showmatch = true
@@ -51,10 +49,28 @@ vim.api.nvim_set_keymap("n", "<leader><CR>", "<cmd>lua ReloadConfig()<CR>", {
     silent = false
 })
 -- END コンフィグ再読み込みのキーマップ　リーダー+Enter
+--
+
+
+--- Lazy.nvim
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+require('lazy').setup 'plugins'
 
 --- 
 --- packer.nvim 
 ---
+--[[
 local ensure_packer = function()
     local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 
@@ -130,3 +146,5 @@ return require("packer").startup(function(use)
     end
 end)
 
+--]]
+--
