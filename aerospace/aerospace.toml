@@ -69,7 +69,7 @@ inner.horizontal = 20
 inner.vertical =   20
 outer.left =       15
 outer.bottom =     15
-outer.top =        50
+outer.top =        60
 outer.right =      15
 
 # ワークスペースとモニターを紐付けする 1: dell, 2: built-in
