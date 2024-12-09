@@ -13,6 +13,6 @@ else
 fi
 
 for sid in $(aerospace list-workspaces --all); do
-    apps=$(aerospace list-windows --workspace $sid --format '%{app-name} ')
+    apps=$(aerospace list-windows --workspace $sid --format '%{app-name} ' | uniq)
     sketchybar --set space.$sid label="$sid $apps" 
 done
