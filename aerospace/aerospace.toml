@@ -211,3 +211,7 @@ run = 'move-node-to-workspace S'
 [[on-window-detected]]
 if.app-id = 'com.DanPristupov.Fork'
 run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.microsoft.rdc.macos'
+run = 'layout floating'
