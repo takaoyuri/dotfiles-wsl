@@ -203,3 +203,7 @@ run = 'move-node-to-workspace T'
 [[on-window-detected]]
 if.app-id = 'com.termius.mac'
 run = 'move-node-to-workspace T'
+
+[[on-window-detected]]
+if.app-id = 'com.tinyspeck.slackmacgap'
+run = 'move-node-to-workspace S'
