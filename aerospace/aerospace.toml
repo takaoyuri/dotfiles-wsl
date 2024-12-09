@@ -45,7 +45,6 @@ default-root-container-orientation = 'auto'
 # See https://nikitabobko.github.io/AeroSpace/commands#move-mouse
 # Fallback value (if you omit the key): on-focused-monitor-changed = []
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
-on-focus-changed = ['move-mouse monitor-lazy-center']
 
 # You can effectively turn off macOS "Hide application" (cmd-h) feature by toggling this flag
 # Useful if you don't use this macOS feature, but accidentally hit cmd-h or cmd-alt-h key
@@ -82,7 +81,8 @@ outer.right =      15
 A = ['secondary']
 S = ['secondary']
 D = ['secondary']
-F = ['secondary']
+B = ['secondary', 'main']
+T = ['secondary', 'main']
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -143,7 +143,8 @@ alt-5 = 'workspace 5'
 alt-a = 'workspace A'
 alt-s = 'workspace S'
 alt-d = 'workspace D'
-alt-f = 'workspace F'
+alt-b = 'workspace B'
+alt-t = 'workspace T'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 alt-shift-1 = 'move-node-to-workspace 1'
@@ -154,7 +155,8 @@ alt-shift-5 = 'move-node-to-workspace 5'
 alt-shift-a = 'move-node-to-workspace A'
 alt-shift-s = 'move-node-to-workspace S'
 alt-shift-d = 'move-node-to-workspace D'
-alt-shift-f = 'move-node-to-workspace F'
+alt-shift-b = 'move-node-to-workspace B'
+alt-shift-t = 'move-node-to-workspace T'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 alt-tab = 'workspace-back-and-forth'
@@ -183,3 +185,21 @@ alt-shift-l = ['join-with right', 'mode main']
 down = 'volume down'
 up = 'volume up'
 shift-down = ['volume set 0', 'mode main']
+
+# app auto move to workspace
+# Browser is workspace B
+[[on-window-detected]]
+if.app-id = 'com.apple.Safari'
+run = 'move-node-to-workspace B'
+
+[[on-window-detected]]
+if.app-id = 'company.thebrowser.Browser'
+run = 'move-node-to-workspace B'
+
+[[on-window-detected]]
+if.app-id = 'com.github.wez.wezterm'
+run = 'move-node-to-workspace T'
+
+[[on-window-detected]]
+if.app-id = 'com.termius.mac'
+run = 'move-node-to-workspace T'
