@@ -85,5 +85,6 @@ done
 sketchybar --add event aerospace_workspace_change 
 
 ##### Force all scripts to run the first time (never do this in a script) #####
+sketchybar --hotload true
 sketchybar --update
 
