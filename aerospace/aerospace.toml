@@ -9,14 +9,24 @@ after-login-command = []
 # You can use it to add commands that run after AeroSpace startup.
 # 'after-startup-command' is run after 'after-login-command'
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
- after-startup-command = [
-	'exec-and-forget sketchybar --reload', # add reload flag
-	'exec-and-forget borders active_color=0xffd79921 inactive_color=0xff282828 width=20.0',
- ]
+#  after-startup-command = [
+# 	'exec-and-forget sketchybar --reload', # add reload flag
+# 	# 'exec-and-forget borders active_color=0xffd79921 inactive_color=0xff282828 width=20.0',
+#  ]
  
- # Notify Sketchybar about workspace change
-exec-on-workspace-change = ['/bin/bash', '-c',
-    'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE'
+#  # Notify Sketchybar about workspace change
+# exec-on-workspace-change = ['/bin/bash', '-c',
+#     'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE'
+# ]
+
+on-focus-changed = [
+  "exec-and-forget osascript -e 'tell application id \"tracesOf.Uebersicht\" to refresh widget id \"simple-bar-index-jsx\"'",
+]
+
+exec-on-workspace-change = [
+  '/bin/zsh',
+  '-c',
+  '/usr/bin/osascript -e "tell application id \"tracesOf.Uebersicht\" to refresh widget id \"simple-bar-index-jsx\""',
 ]
 
 # Start AeroSpace at login
@@ -73,16 +83,16 @@ outer.right =      15
 
 # ワークスペースとモニターを紐付けする 1: dell, 2: built-in
 [workspace-to-monitor-force-assignment]
-1 = 'main'
-2 = 'main'
-3 = 'main'
-4 = 'main'
-5 = 'main'
-A = ['secondary']
-S = ['secondary']
-D = ['secondary']
-B = ['secondary', 'main']
-T = ['secondary', 'main']
+A = 'main'
+S = 'main'
+D = 'main'
+B = 'main'
+T = 'main'
+1 = ['secondary', "main"]
+2 = ['secondary', "main"]
+3 = ['secondary', "main"]
+4 = ['secondary', 'main']
+5 = ['secondary', 'main']
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
