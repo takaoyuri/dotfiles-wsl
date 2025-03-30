@@ -107,35 +107,35 @@ if [[ -d /etc/bash_completion.d/ ]]; then
   done
 fi
 
-if [ "$(uname)" == "Linux" ]; then
-  # Start the gpg-agent if not already running
-  if ! pgrep -x -u "${USER}" gpg-agent >/dev/null 2>&1; then
-    gpg-connect-agent /bye >/dev/null 2>&1
-  fi
-  gpg-connect-agent updatestartuptty /bye >/dev/null
-  # use a tty for gpg
-  # solves error: "gpg: signing failed: Inappropriate ioctl for device"
-  GPG_TTY=$(tty)
-  export GPG_TTY
-  # Set SSH to use gpg-agent
-  unset SSH_AGENT_PID
-  if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
-    if [[ -z "$SSH_AUTH_SOCK" ]] || [[ "$SSH_AUTH_SOCK" == *"apple.launchd"* ]]; then
-      SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
-      export SSH_AUTH_SOCK
-    fi
-  fi
-else
-  # Setup ssh-agent
-  if [ -f ~/.ssh-agent ]; then
-    . ~/.ssh-agent
-  fi
-  if [ -z "$SSH_AGENT_PID" ] || ! kill -0 $SSH_AGENT_PID; then
-    ssh-agent >~/.ssh-agent
-    . ~/.ssh-agent
-  fi
-fi
-'
+# if [ "$(uname)" == "Linux" ]; then
+#   # Start the gpg-agent if not already running
+#   if ! pgrep -x -u "${USER}" gpg-agent >/dev/null 2>&1; then
+#     gpg-connect-agent /bye >/dev/null 2>&1
+#   fi
+#   gpg-connect-agent updatestartuptty /bye >/dev/null
+#   # use a tty for gpg
+#   # solves error: "gpg: signing failed: Inappropriate ioctl for device"
+#   GPG_TTY=$(tty)
+#   export GPG_TTY
+#   # Set SSH to use gpg-agent
+#   unset SSH_AGENT_PID
+#   if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
+#     if [[ -z "$SSH_AUTH_SOCK" ]] || [[ "$SSH_AUTH_SOCK" == *"apple.launchd"* ]]; then
+#       SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+#       export SSH_AUTH_SOCK
+#     fi
+#   fi
+# else
+#   # Setup ssh-agent
+#   if [ -f ~/.ssh-agent ]; then
+#     . ~/.ssh-agent
+#   fi
+#   if [ -z "$SSH_AGENT_PID" ] || ! kill -0 $SSH_AGENT_PID; then
+#     ssh-agent >~/.ssh-agent
+#     . ~/.ssh-agent
+#   fi
+# fi
+
 
 # Case-insensitive globbing (used in pathname expansion)
 shopt -s nocaseglob
