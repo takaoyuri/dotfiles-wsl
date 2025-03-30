@@ -107,8 +107,7 @@ if [[ -d /etc/bash_completion.d/ ]]; then
   done
 fi
 
-: '
-if [ "`uname`" == "Linux" ]; then
+if [ "$(uname)" == "Linux" ]; then
   # Start the gpg-agent if not already running
   if ! pgrep -x -u "${USER}" gpg-agent >/dev/null 2>&1; then
     gpg-connect-agent /bye >/dev/null 2>&1
@@ -132,7 +131,7 @@ else
     . ~/.ssh-agent
   fi
   if [ -z "$SSH_AGENT_PID" ] || ! kill -0 $SSH_AGENT_PID; then
-    ssh-agent > ~/.ssh-agent
+    ssh-agent >~/.ssh-agent
     . ~/.ssh-agent
   fi
 fi
@@ -156,6 +155,8 @@ done
 
 [ -f ~/.profile ] && source ~/.profile
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+# Set up fzf key bindings and fuzzy completion
+eval "$(fzf --bash)"
 [ -f $HOME/.cargo/env ] && source $HOME/.cargo/env
 
 for file in ~/.{aliases,functions,path,dockerfunc,extra,exports}; do
@@ -256,3 +257,7 @@ function y() {
 [[ -f "$HOME/fig-export/dotfiles/dotfile.bash" ]] && source "$HOME/fig-export/dotfiles/dotfile.bash"
 
 # Q post block. Keep at the bottom of this file.
+# fnmがあった場合のみ実行
+eval "$(fnm env --use-on-cd --shell bash)"
+
+eval "$(zoxide init bash)"
