@@ -4,11 +4,11 @@
 alias v="nvim"
 
 # nav
-alias ~="cd ~";
-alias ..="cd ..";
-alias ...="cd ../..";
-alias ....="cd ../../..";
-alias .....="cd ../../../..";
+alias ~="cd ~"
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
 alias -- -="cd -"
 
 # confirm overwrite
@@ -20,16 +20,14 @@ alias mv="mv -i"
 # confirm rm
 alias rm="rm -i"
 
-# exa -> ls
-if type "exa" > /dev/null 2>&1
-then
-  alias ls="exa"
-  alias ll="exa -l"
-  alias la="exa -la"
+# eza -> ls
+if type "eza" >/dev/null 2>&1; then
+	alias ls="eza"
+	alias ll="eza -l"
+	alias la="eza -la"
 fi
 
 # explorer
-if type "/mnt/c/Windows/explorer.exe" > /dev/null 2>&1
-then
-  alias open="/mnt/c/Windows/explorer.exe"
+if type "/mnt/c/Windows/explorer.exe" >/dev/null 2>&1; then
+	alias open="/mnt/c/Windows/explorer.exe"
 fi
