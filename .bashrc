@@ -157,6 +157,8 @@ done
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 # Set up fzf key bindings and fuzzy completion
 eval "$(fzf --bash)"
+
+# rust
 [ -f $HOME/.cargo/env ] && source $HOME/.cargo/env
 
 for file in ~/.{aliases,functions,path,dockerfunc,extra,exports}; do
@@ -211,9 +213,6 @@ fi
 #    test -z "$TMUX" && (tmux attach || tmux new-session)
 #  fi
 # fi
-
-# rust cargo
-source "$HOME/.cargo/env"
 
 # deno
 [ -d $HOME/.deno/bin ] && export PATH="$HOME/.deno/bin:$PATH"
